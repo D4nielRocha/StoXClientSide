@@ -1,0 +1,74 @@
+$primary-color: rgb(255, 174, 24);  
+
+
+.container{
+    max-width: 1440px;
+    max-height: 100vh;
+}
+
+nav{
+    font-size: 1.25rem;
+
+    .navbar-brand{
+        font-size: 2rem;
+
+        span{
+            color: $primary-color;
+        }
+    }
+}
+
+
+#title{
+    background-color: lightgray;
+    text-align: center;
+}
+
+
+#search{
+    margin-top: 2rem;
+    
+        input[type=input]{
+            width: 50%;
+            outline: none;
+            appearance: none;
+            border: none;
+            box-shadow: 0px 0px 10px lightgray;
+            // margin-left: 2rem;
+        }
+
+    #right-search{
+        // background-color: lightgreen;
+        text-align: end;
+    }
+    
+}
+
+
+#search-result{
+    // background-color: lightskyblue;
+    height: 80vh;
+    margin-top: 2rem;
+    text-align: center;
+
+    #right-result, #left-result{
+        // background-color: lightskyblue;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+    }
+
+    #buttons{
+        // background-color: lightsalmon;
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 50%;
+    }
+}
+
+
+

@@ -1,0 +1,217 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container {
+  max-width: 1440px;
+  max-height: 100vh;
+}
+
+nav {
+  font-size: 1.25rem;
+}
+
+nav .navbar-brand {
+  font-size: 2rem;
+}
+
+nav .navbar-brand span {
+  color: #ffae18;
+}
+
+#content {
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#content #mainRow {
+  height: 100%;
+}
+
+#content #mainRow #comparison_link {
+  position: relative;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ff9d2f), to(#ff6126));
+  background-image: linear-gradient(#ff9d2f, #ff6126);
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#content #mainRow #comparison_link h1, #content #mainRow #comparison_link a {
+  z-index: 1;
+}
+
+#content #mainRow #comparison_link a {
+  font-size: 9rem;
+  font-weight: 300;
+  color: black;
+}
+
+#content #mainRow #comparison_link a:hover {
+  color: #ffae18;
+  text-decoration: none;
+}
+
+#content #mainRow svg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 24vw;
+}
+
+#content #mainRow #table {
+  height: 40%;
+}
+
+#sideBar {
+  height: 100vh;
+}
+
+#sideBar div {
+  height: 40%;
+}
+
+.table-responsive {
+  max-height: 100vh;
+}
+
+.negative {
+  color: red;
+}
+
+#displayNews {
+  height: 100%;
+}
+
+#displayNews .carousel-inner {
+  height: 100vh;
+}
+
+#displayNews .carousel-inner .carousel-item {
+  -webkit-transition: opacity 8s ease-out, -webkit-transform 8s ease;
+  transition: opacity 8s ease-out, -webkit-transform 8s ease;
+  transition: transform 8s ease, opacity 8s ease-out;
+  transition: transform 8s ease, opacity 8s ease-out, -webkit-transform 8s ease;
+}
+
+#displayNews .carousel-inner .carousel-item .carousel-caption {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#displayNews .carousel-inner .carousel-item .carousel-caption a {
+  color: white;
+  text-decoration: none;
+  outline: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+#displayNews .carousel-inner .carousel-item .carousel-caption a:hover {
+  color: #ffae18;
+  outline: none;
+}
+
+#displayNews img {
+  width: 100%;
+  height: 80%;
+}
+
+#displayNews .mask {
+  height: 80%;
+}
+
+#myCarousel {
+  height: 3rem;
+}
+
+#loginRememberMeDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .body {
+    overflow: scroll;
+  }
+  #mainRow {
+    height: 50vh;
+  }
+  #mainRow #comparison_link {
+    height: 100%;
+  }
+  #mainRow #comparison_link svg {
+    height: 48vw;
+  }
+  #mainRow #comparison_link div {
+    height: auto;
+  }
+  #mainRow #table {
+    display: none;
+  }
+  #sidebar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  #mainRow {
+    height: 100%;
+  }
+  #mainRow #comparison-link {
+    height: 100%;
+  }
+  #mainRow #comparison-link svg {
+    height: 50vw;
+  }
+  #mainRow div {
+    height: 100%;
+  }
+  #mainRow #table {
+    display: none;
+  }
+}
+/*# sourceMappingURL=style.css.map */
