@@ -127,6 +127,6 @@ let saveStox = () => {
     console.log(err);
   })
 
-
+  location.reload();
 
 }
