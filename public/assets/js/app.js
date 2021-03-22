@@ -1,3 +1,4 @@
+// import * as url from './url.js'
 
 let text = document.querySelector('#inputText');
 const tableDiv = document.getElementById('tableBody');

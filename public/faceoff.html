@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Google Fonts -->
@@ -50,7 +50,6 @@
     </div>
     <!-- ====================NAVBAR=================== -->
 
-
     <!-- ====================MAIN CONTENT=================== -->
 
     <section id="faceoff">
@@ -64,7 +63,7 @@
                 <div class="col-sm-12 col-lg-6" id="left-search">
                     <label><b>Search Asset #1</b></label><br>
                         <input type="input" class="input" id="left-input" /><br><br>
-                        <input type="checkbox" name="invested"> Are you invested in this asset?
+                        <!-- <input type="checkbox" name="invested" data-bs-target="#ProductFormDialog" data-bs-toggle="modal" id="investedCheckbox1" > Are you invested in this asset? -->
                         <div class="dropdown">
                             <div class="dropdown-menu">
                                 <div class="dropdown-content results"></div>
@@ -74,7 +73,7 @@
                 <div class="col-sm-12 col-lg-6" id="right-search">
                     <label><b>Search Asset #2</b></label><br>
                         <input type="input" class="input" id="right-input" /><br><br>
-                        <input type="checkbox" name="invested"> Are you invested in this asset?
+                        <!-- <input type="checkbox" name="invested" data-bs-target="#ProductFormDialog" data-bs-toggle="modal" id="investedCheckbox2" > Are you invested in this asset? -->
 
                         <div class="dropdown">
                             <div class="dropdown-menu">
@@ -88,8 +87,8 @@
 
                 </div>
                 <div class="col-md-2" id="buttons">
-                    <input type="button" class="btn btn-md btn-primary" value="Save Comparison" id="saveButton" onclick="saveStox()">
-                    <input type="button" class="btn btn-md btn-danger" value="Reset Comparison" id="resetButton">
+                    <input type="button" class="btn btn-md btn-primary" value="Save Comparison" id="saveButton" data-bs-target="#ProductFormDialog" data-bs-toggle="modal">
+                    <input type="button" class="btn btn-md btn-danger" value="Reset Comparison" id="resetContent">
                 </div>
                 <div class="col-sm-12 col-md-5" id="right-result">
 
@@ -98,15 +97,115 @@
         </div>
     </section>
     
+    
     <!-- ====================MAIN CONTENT=================== -->
+
+
+    <!-- ====================USER INPUT MODAL =================== -->
+
+
+
+
+
+
+    <div class="modal fade" id="ProductFormDialog">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+    
+                <div class="modal-header text-center">
+                    <h4 class="modal-title col-11" id="productFormTitle">My StoX</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+    
+                
+                <div class="modal-body">
+                    <div class="row">
+                        <form id="productForm" class="d-flex flex-column">
+                            <div class="formWrapper d-flex">
+                            <div class="asset1 form-left col-6">
+                                <div class="form-group">
+                                    <label for="asset1_name">Asset1 Name</label>
+                                    <input type="text" name="asset1_name" id="asset1_name" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="asset1_invested">Is in my portfolio</label>
+                                    <input type="checkbox" id="asset1_invested" name="asset1_invested">
+                                </div>
+                                <div class="form-group d-none ifChecked1">
+                                    <label for="asset1_amount">Amount invested</label>
+                                    <input type="number" step="0.01" id="asset1_amount" class="form-control" name="asset1_amount">
+                                </div>
+                                <div class="form-group d-none ifChecked1">
+                                    <label for="asset1_price">Buying Price</label>
+                                    <input type="number" id="asset1_price" class="form-control" name="asset1_price">
+                                </div>
+                                <div class="form-group d-none ifChecked1">
+                                    <label for="asset1_shares">Shares</label>
+                                    <input type="number" step="0.1"  id="asset1_shares" class="form-control" name="asset1_shares">
+                                </div>
+                                <div class="form-group">
+                                    <label for="asset1_closing">Closing Price</label>
+                                    <input type="number" id="asset1_closing" class="form-control" name="asset1_closing">
+                                </div>
+                            </div>
+                            <div class="asset2 form-right col-6">
+                                <div class="form-group">
+                                    <label for="asset2_name">Asset2 Name</label>
+                                    <input type="text" name="asset2_name" id="asset2_name" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="asset2_invested">Is in my portfolio</label>
+                                    <input type="checkbox" id="asset2_invested" name="asset2_invested">
+                                </div>
+                                <div class="form-group d-none ifChecked2">
+                                    <label for="asset2_amount">Amount invested</label>
+                                    <input type="number" step="0.01" id="asset2_amount" class="form-control" name="asset2_amount">
+                                </div>
+                                <div class="form-group d-none ifChecked2">
+                                    <label for="asset2_price">Buying Price</label>
+                                    <input type="number" id="asset2_price" class="form-control" name="asset2_price">
+                                </div>
+                                <div class="form-group d-none ifChecked2">
+                                    <label for="asset2_shares">Shares</label>
+                                    <input type="number" id="asset2_shares" step="0.1" class="form-control" name="asset2_shares">
+                                </div>
+                                <div class="form-group">
+                                    <label for="asset2_closing">Closing Price</label>
+                                    <input type="number" id="asset2_closing" class="form-control" name="asset2_closing">
+                                </div>
+                                <input id="_id" type="hidden" name="_id" value="0">
+                            </div>
+                        </div>
+                            <div class="form container">
+                                <label for="comment">Comments</label>
+                                <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+    
+                <div class="modal-footer">
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-warning" id="saveStox">Save</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
 
     
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -116,8 +215,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
-    <script src="./assets/js/url.js"></script>
-    <script src="./assets/js/events.js"></script>
+    <!-- <script src="./assets/js/url.js"></script> -->
+    <script src="./assets/js/events.js" type="module"></script>
     <!-- <script src="./assets/js/app.js"></script> -->
 
   </body>
