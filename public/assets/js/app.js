@@ -1,4 +1,4 @@
-// import * as url from './url.js'
+import * as url from './url.js'
 
 let text = document.querySelector('#inputText');
 const tableDiv = document.getElementById('tableBody');
@@ -13,28 +13,32 @@ window.onload = () => {
 // Function to fetch url and get data parsed 
 async function getDataAsync(){
 
-    if(!localStorage.getItem('news') || !localStorage.getItem('table')){
+    if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider')){
         
         try{
             
-            const news = fetch(NEWS_API);
-            const table = fetch(url1, headers);
-            const results = Promise.all([news, table]).then( async ([news, table]) => {
+            const news = fetch(url.NEWS_API);
+            const table = fetch(url.trendURL, url.headers);
+            const trending = fetch(url.trendURL, url.headers);
+            const results = Promise.all([news, table,trending]).then( async ([news, table, trending]) => {
                 const newsJson = await news.json();
                 const tableJson = await table.json();
-                return [newsJson, tableJson];
+                const trendingJson = await trending.json();
+                return [newsJson, tableJson, trendingJson];
             }).then( dataApi => {
                 console.log(dataApi);
-
+                localStorage.setItem('slider', JSON.stringify(dataApi[2].finance.result[0].quotes));
                 localStorage.setItem('news', JSON.stringify(dataApi[0].articles));
                 localStorage.setItem('table', JSON.stringify(dataApi[1].finance.result[0].quotes));   
             })
 
             let newsLocal = JSON.parse(localStorage.getItem('news'));
             let tableLocal = JSON.parse(localStorage.getItem('table'));
+            let trendingSlider = JSON.parse(localStorage.getItem('slider'));
 
             displayNews(newsLocal);
             createIndexYahooTable(tableLocal);
+            populateSlider(trendingSlider)
             negativeNumber();
 
             }catch(err){
@@ -44,9 +48,12 @@ async function getDataAsync(){
 
         let newsLocal = JSON.parse(localStorage.getItem('news'));
         let tableLocal = JSON.parse(localStorage.getItem('table'));
+        let trendingSlider = JSON.parse(localStorage.getItem('slider'));
+
 
         displayNews(newsLocal);
         createIndexYahooTable(tableLocal);
+        populateSlider(trendingSlider)
         negativeNumber();
 
         console.log('LocalStorage is already Up To Date!');
@@ -65,12 +72,12 @@ async function negativeNumber(){
     let table = document.querySelectorAll(`#tableBody > tr`);
 
     for(let i = 1; i < table.length; i++){
-       
             let row = document.querySelectorAll(`#tableBody > tr:nth-child(${i})`);
             array.push(row[0]);
             // console.log(array)
     }
 
+    
     console.log(array);
     for(let j = 0; j < array.length; j++){
         let percentage = array[j].cells[4];
@@ -87,17 +94,28 @@ async function negativeNumber(){
 } 
 
 
+let populateSlider = (trending) => {
 
-// async function getDataFromMarketStack(){
 
-//     axios.get('http://api.marketstack.com/v1/eod?access_key=8ab519ff412561125ca0729e24df2b3c&symbols=AAPL')
-//     .then(response => {
-//         const apiResponse = response.data;
-//         console.log(apiResponse);
-//     }).catch(error => {
-//         console.log(error);
-//     })
-// }
+    const items = trending.map( trend => {
+
+        let item = `<div class="ticker-item">
+                        <div class="ticker-title mx-2" id="ticker-title">${trend.shortName.slice(0,18)}</div>
+                        <div id="inner-display">
+                            <div class="ticker-price mx-2">$${trend.regularMarketPrice}</div>
+                            <div class="ticker-change mx-2" id="changePercentage">${trend.regularMarketChangePercent}%</div>
+                        </div>
+                    </div>`
+
+        return item;
+
+    })
+    
+    document.getElementById('sliderDisplay').innerHTML = items.join('');
+
+
+}
+
 
 
 async function displayNews(data){

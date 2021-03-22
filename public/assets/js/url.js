@@ -5,7 +5,7 @@
     // const init = {method: 'GET', headers: `${headers}`, mode: 'cors', cache: 'default'};
 
     //trending tickers
-    const url1 = `https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-trending-tickers?region=US`;
+    const trendURL = `https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-trending-tickers?region=US`;
     //summary 
     const url = `https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-summary?region=US"`;
 
@@ -70,17 +70,17 @@
 
 
 
-      // export { 
+      export { 
 
-      //   API_KEY,
-      //   API_KEY_2,
-      //   url1,
-      //   url,
-      //   urlNews,
-      //   urlCharts,
-      //   headers,
-      //   marketURL,
-      //   NEWS_API,
-      //   ALPHA_API_KEY,
-      //   ALPHA_DAILY_URL
-      // }
+        API_KEY,
+        API_KEY_2,
+        trendURL,
+        url,
+        urlNews,
+        urlCharts,
+        headers,
+        marketURL,
+        NEWS_API,
+        ALPHA_API_KEY,
+        ALPHA_DAILY_URL
+      }
