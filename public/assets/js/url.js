@@ -22,21 +22,7 @@
 
 
       //charts
-      const urlCharts = {
-        method: 'GET',
-        url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-charts',
-        params: {
-          symbol: '^GSPC',
-          interval: '5m',
-          range: '1d',
-          region: 'US',
-          comparisons: '^GDAXI,^FCHI'
-        },
-        headers: {
-          'x-rapidapi-key': '8f6042bc97msha003fe69e6bb4f4p105aabjsna64480f53e4c',
-          'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
-        }
-      };
+      const urlCharts = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=%5EGSPC&range=1y&region=US";
 
 
       //generic header

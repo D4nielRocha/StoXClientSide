@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,500;0,600;1,400&display=swap");
+body {
+  overflow-x: hidden;
+  font-family: 'Fira Sans Condensed', sans-serif;
+}
+
 .container {
   max-width: 1440px;
   max-height: 100vh;

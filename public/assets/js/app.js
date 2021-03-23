@@ -13,32 +13,37 @@ window.onload = () => {
 // Function to fetch url and get data parsed 
 async function getDataAsync(){
 
-    if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider')){
+    if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider') || !localStorage.getItem('chart')){
         
         try{
             
             const news = fetch(url.NEWS_API);
             const table = fetch(url.trendURL, url.headers);
             const trending = fetch(url.trendURL, url.headers);
-            const results = Promise.all([news, table,trending]).then( async ([news, table, trending]) => {
+            const spChart = fetch(url.urlCharts, url.headers);
+            const results = Promise.all([news, table,trending,spChart]).then( async ([news, table, trending, spChart]) => {
                 const newsJson = await news.json();
                 const tableJson = await table.json();
                 const trendingJson = await trending.json();
-                return [newsJson, tableJson, trendingJson];
+                const chartJson = await spChart.json();
+                return [newsJson, tableJson, trendingJson, chartJson];
             }).then( dataApi => {
-                console.log(dataApi);
                 localStorage.setItem('slider', JSON.stringify(dataApi[2].finance.result[0].quotes));
                 localStorage.setItem('news', JSON.stringify(dataApi[0].articles));
                 localStorage.setItem('table', JSON.stringify(dataApi[1].finance.result[0].quotes));   
+                localStorage.setItem('chart', JSON.stringify(dataApi[3].result[0].timestamp));   
             })
 
             let newsLocal = JSON.parse(localStorage.getItem('news'));
             let tableLocal = JSON.parse(localStorage.getItem('table'));
             let trendingSlider = JSON.parse(localStorage.getItem('slider'));
+            let chart = JSON.parse(localStorage.getItem('chart'));
+            console.log(chart);
 
             displayNews(newsLocal);
             createIndexYahooTable(tableLocal);
             populateSlider(trendingSlider)
+            // createChart(chart.chart.result[0]);
             negativeNumber();
 
             }catch(err){
@@ -49,11 +54,14 @@ async function getDataAsync(){
         let newsLocal = JSON.parse(localStorage.getItem('news'));
         let tableLocal = JSON.parse(localStorage.getItem('table'));
         let trendingSlider = JSON.parse(localStorage.getItem('slider'));
+        let chart = JSON.parse(localStorage.getItem('chart'));
+        console.log(tableLocal);
 
 
         displayNews(newsLocal);
         createIndexYahooTable(tableLocal);
-        populateSlider(trendingSlider)
+        populateSlider(trendingSlider);
+        // createChart(chart.chart.result[0]);
         negativeNumber();
 
         console.log('LocalStorage is already Up To Date!');
@@ -88,10 +96,21 @@ async function negativeNumber(){
         }
 
     }
-
-   
-    
 } 
+
+
+let sliderNegativeChanges = (slider) => {
+
+
+   for(let i = 0; i < slider.length; i++) {{
+    //    console.log(Number(dailyChange[i].innerText.replace('%','')));
+       if(Number(slider[i].innerText.replace('%', '')) < 0){
+           slider[i].style.color = "red";
+       }
+   }}
+}
+
+
 
 
 let populateSlider = (trending) => {
@@ -100,48 +119,49 @@ let populateSlider = (trending) => {
     const items = trending.map( trend => {
 
         let item = `<div class="ticker-item">
-                        <div class="ticker-title mx-2" id="ticker-title">${trend.shortName.slice(0,18)}</div>
+                        <div class="ticker-title mx-2" id="ticker-title">${trend.symbol.toUpperCase()}</div>
                         <div id="inner-display">
-                            <div class="ticker-price mx-2">$${trend.regularMarketPrice}</div>
-                            <div class="ticker-change mx-2" id="changePercentage">${trend.regularMarketChangePercent}%</div>
+                            <div class="ticker-price mx-2">$${trend.regularMarketPrice.toFixed(2)}</div>
+                            <div class="ticker-change mx-2" id="changePercentage">${trend.regularMarketChangePercent.toFixed(1)}<span>%</span></div>
                         </div>
                     </div>`
 
+                  
         return item;
 
     })
+   
     
     document.getElementById('sliderDisplay').innerHTML = items.join('');
 
+    let dailyChange = document.getElementsByClassName('ticker-change');
+
+    sliderNegativeChanges(dailyChange);
 
 }
 
 
 
+
+
 async function displayNews(data){
 
-    const display_carousel = document.getElementById('carousel-inner');
+    const newsSidebar = document.getElementById('news');
 
-    const news = data;
 
-    for(let i = 1; i < 5; i++){
-        const news_carousel = ` <div class="carousel-item">
-        <div class="view h-100">
-        <img class="d-block h-100" src="${news[i].urlToImage}"
-        alt="First slide">
-        <div class="mask rgba-black-strong h-100"></div>
-        </div>
-        <div class="carousel-caption h-100">
-        <a href="${news[i].url}"><h3 class="h3-responsive">${news[i].title.slice(0,40)}</h3></a>
-        <p>${news[i].description.slice(0.10)}...</p>
-        </div>
-    </div>` 
+    for(let i = 0; i < data.length ;i++){
+        newsSidebar.innerHTML += `<div class="news-wrapper">
+                                    <div class="news-image col-3">
+                                    <img src="${data[i].urlToImage}" alt="${data[i].title.slice(0,15)}">
+                                    </div>
+                                    <div class="news-content col-9">
+                                        <a href="${data[i].url}">${data[i].title}</a>
+                                        <hr class="my-2">
+                                    </div>
+                                </div>
+                                <hr>`
+    } 
 
-    display_carousel.innerHTML += news_carousel;
-
-    }
-
-    display_carousel.firstElementChild.classList.add('active');
 
 
 };
@@ -158,8 +178,9 @@ function createIndexYahooTable(tableData){
 
             tr.innerHTML = `    <th scope="row">${tableData[i].symbol}</th>
                                 <td>${tableData[i].shortName}</td>
-                                <td>${tableData[i].regularMarketPrice}</td>
-                                <td>${tableData[i].regularMarketChange}</td>
+                                <td>${tableData[i].regularMarketPreviousClose.toFixed(2)}</td>
+                                <td>${tableData[i].regularMarketPrice.toFixed(2)}</td>
+                                <td>${tableData[i].regularMarketChange.toFixed(2)}</td>
                                 <td id="percentage${i}">${tableData[i].regularMarketChangePercent.toFixed(2)}</td>`
 
         tableDiv.appendChild(tr); 
@@ -178,3 +199,33 @@ function createIndexYahooTable(tableData){
 $('.carousel').carousel({
     interval: 500
 });
+
+
+
+
+
+//===========================CHART =======================================
+
+
+
+
+function getTime(data){
+
+    let dateObj = new Date(data); 
+ 
+    // Get hours from the timestamp 
+    let hours = dateObj.getUTCHours(); 
+     
+    // Get minutes part from the timestamp 
+    let minutes = dateObj.getUTCMinutes(); 
+     
+    // Get seconds part from the timestamp 
+    let seconds = dateObj.getUTCSeconds(); 
+     
+    return          hours.toString().padStart(2, '0') + ':' +  
+                    minutes.toString().padStart(2, '0') + ':' +  
+                    seconds.toString().padStart(2, '0'); 
+
+}
+
+
