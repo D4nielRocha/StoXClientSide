@@ -43,7 +43,7 @@ async function getDataAsync(){
             displayNews(newsLocal);
             createIndexYahooTable(tableLocal);
             populateSlider(trendingSlider)
-            // createChart(chart.chart.result[0]);
+            createChart(chart.chart.result[0].timestamp);
             negativeNumber();
 
             }catch(err){
@@ -55,13 +55,13 @@ async function getDataAsync(){
         let tableLocal = JSON.parse(localStorage.getItem('table'));
         let trendingSlider = JSON.parse(localStorage.getItem('slider'));
         let chart = JSON.parse(localStorage.getItem('chart'));
-        console.log(tableLocal);
+        console.log(chart);
 
 
         displayNews(newsLocal);
         createIndexYahooTable(tableLocal);
         populateSlider(trendingSlider);
-        // createChart(chart.chart.result[0]);
+        createChart(chart.chart.result[0]);
         negativeNumber();
 
         console.log('LocalStorage is already Up To Date!');
@@ -195,10 +195,87 @@ function createIndexYahooTable(tableData){
 
 
 
+function createChart(data){
 
-$('.carousel').carousel({
-    interval: 500
-});
+    
+    let timestamp= [];
+    let close = []; 
+    let xAxys;
+   
+
+    data.timestamp.forEach( time => {
+        xAxys = getTime(time);
+        timestamp.push(xAxys);
+    })
+
+    data.indicators.quote[0].close.forEach( price => {
+        close.push(Number(price.toFixed(0)));
+    })
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: timestamp,
+            datasets: [{
+                label: 'SP-500',
+                data: close,
+                backgroundColor: [
+                    'rgba(255, 255, 255, 1)',
+                ],
+                borderColor: [
+                    'rgba(255, 0, 0, 1)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            legend: {
+                labels: {
+                    boxWidth: 0
+                }
+            },
+            elements: {
+                point: {
+                    radius: 0
+                }
+            },
+            scales: {
+                xAxes: [{
+                  display: false,
+                  gridLines: {
+                    display: false
+                  },
+                  scaleLabel: {
+                    display: false
+                  }
+                }],
+                yAxes: [{
+                  display: true,
+                  gridLines: {
+                    display: false
+                  },
+                  scaleLabel: {
+                    display: true                  }
+                }]
+              },
+            responsive: true,
+        }
+    });
+
+    
+
+
+    console.log(myChart.data.datasets[0].data);
+
+
+   
+
+
+
+
+}
 
 
 
@@ -220,12 +297,19 @@ function getTime(data){
     let minutes = dateObj.getUTCMinutes(); 
      
     // Get seconds part from the timestamp 
-    let seconds = dateObj.getUTCSeconds(); 
+    // let seconds = dateObj.getUTCSeconds(); 
      
     return          hours.toString().padStart(2, '0') + ':' +  
-                    minutes.toString().padStart(2, '0') + ':' +  
-                    seconds.toString().padStart(2, '0'); 
+                    minutes.toString().padStart(2, '0') 
+                    // seconds.toString().padStart(2, '0'); 
 
 }
+
+
+
+
+
+
+
 
 
