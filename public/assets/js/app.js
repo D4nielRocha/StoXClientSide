@@ -182,10 +182,10 @@ async function displayNews(data){
 
     for(let i = 0; i < data.length ;i++){
         newsSidebar.innerHTML += `<div class="news-wrapper">
-                                    <div class="news-image col-3">
+                                    <div class="news-image col-5">
                                     <img src="${data[i].urlToImage}" alt="${data[i].title.slice(0,15)}">
                                     </div>
-                                    <div class="news-content col-9">
+                                    <div class="news-content col-7">
                                         <a href="${data[i].url}">${data[i].title}</a>
                                         <hr class="my-2">
                                     </div>

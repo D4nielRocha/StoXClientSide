@@ -129,9 +129,9 @@ hr {
 }
 
 #sideBar #news .news-wrapper a {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   text-align: left;
-  font-weight: 600;
+  font-weight: 400;
   text-decoration: none;
   color: black;
 }
@@ -151,7 +151,7 @@ hr {
 
 #sideBar #news .news-wrapper .news-image img {
   width: 60%;
-  height: 60%;
+  height: 80%;
 }
 
 #sideBar #news .news-wrapper .news-content {

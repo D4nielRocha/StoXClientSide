@@ -1,0 +1,37 @@
+.user-content{
+    height: 100vh;
+
+    #stoxs{
+        // background-color: lightcoral;
+        height: 100%;
+        margin: 1rem;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+
+
+        .stox-item{
+            background-color: aqua;
+            height: 45%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 0.5rem;
+
+
+        }
+    }
+
+
+    
+}
+
+
+
+footer{
+    position: relative;
+    bottom: 0;
+    width: 100vw;
+}
