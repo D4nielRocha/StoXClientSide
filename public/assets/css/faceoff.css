@@ -1,7 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,500;0,600;1,400&display=swap");
 body {
+  scroll-behavior: smooth;
   overflow-x: hidden;
   font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .container {
@@ -11,6 +16,7 @@ body {
 
 nav {
   font-size: 1.25rem;
+  height: 6vh;
 }
 
 nav .navbar-brand {
@@ -83,5 +89,13 @@ nav .navbar-brand span {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   height: 50%;
+}
+
+#footer-icons a {
+  font-size: 1rem;
+}
+
+.stox-footer span {
+  color: #ffae18;
 }
 /*# sourceMappingURL=faceoff.css.map */

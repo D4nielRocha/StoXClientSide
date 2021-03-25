@@ -172,6 +172,9 @@ let saveStox = async () => {
     resetSearch();
   }
 
+  document.getElementById('productForm').reset()
+
+
 }
 
 

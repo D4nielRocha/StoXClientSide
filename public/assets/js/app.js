@@ -1,8 +1,11 @@
 import * as url from './url.js'
+import * as chartJS from './chart/chart.js'
 
 let text = document.querySelector('#inputText');
 const tableDiv = document.getElementById('tableBody');
 const newsDiv = document.getElementById('displayNews');
+
+// window.localStorage.clear();
 
 
 window.onload = () => {
@@ -13,37 +16,45 @@ window.onload = () => {
 // Function to fetch url and get data parsed 
 async function getDataAsync(){
 
-    if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider') || !localStorage.getItem('chart')){
+    
+
+    if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider') || !localStorage.getItem('chart') || !localStorage.getItem('movers')){
         
         try{
             
-            const news = fetch(url.NEWS_API);
-            const table = fetch(url.trendURL, url.headers);
-            const trending = fetch(url.trendURL, url.headers);
-            const spChart = fetch(url.urlCharts, url.headers);
-            const results = Promise.all([news, table,trending,spChart]).then( async ([news, table, trending, spChart]) => {
+            const news =  fetch(url.NEWS_API);
+            const table =  fetch(url.trendURL, url.headers);
+            const trending =  fetch(url.trendURL, url.headers);
+            const spChart =  fetch(url.urlCharts, url.headers);
+            const movers = fetch(url.urlMovers, url.headers);
+            const results = Promise.all([news, table,trending,spChart, movers]).then( async ([news, table, trending, spChart, movers]) => {
                 const newsJson = await news.json();
                 const tableJson = await table.json();
                 const trendingJson = await trending.json();
                 const chartJson = await spChart.json();
-                return [newsJson, tableJson, trendingJson, chartJson];
+                const moversJson = await movers.json();
+                return [newsJson, tableJson, trendingJson, chartJson, moversJson];
             }).then( dataApi => {
+                console.log(dataApi);
                 localStorage.setItem('slider', JSON.stringify(dataApi[2].finance.result[0].quotes));
                 localStorage.setItem('news', JSON.stringify(dataApi[0].articles));
                 localStorage.setItem('table', JSON.stringify(dataApi[1].finance.result[0].quotes));   
-                localStorage.setItem('chart', JSON.stringify(dataApi[3].result[0].timestamp));   
+                localStorage.setItem('chart', JSON.stringify(dataApi[3].chart.result[0])); 
+                localStorage.setItem('movers', JSON.stringify(dataApi[4])); 
+
             })
 
             let newsLocal = JSON.parse(localStorage.getItem('news'));
             let tableLocal = JSON.parse(localStorage.getItem('table'));
             let trendingSlider = JSON.parse(localStorage.getItem('slider'));
             let chart = JSON.parse(localStorage.getItem('chart'));
-            console.log(chart);
+            let localMovers = JSON.parse(localStorage.getItem('movers'));
+            console.log(localMovers);
 
             displayNews(newsLocal);
             createIndexYahooTable(tableLocal);
             populateSlider(trendingSlider)
-            createChart(chart.chart.result[0].timestamp);
+            chartJS.createChart(chart);
             negativeNumber();
 
             }catch(err){
@@ -55,13 +66,17 @@ async function getDataAsync(){
         let tableLocal = JSON.parse(localStorage.getItem('table'));
         let trendingSlider = JSON.parse(localStorage.getItem('slider'));
         let chart = JSON.parse(localStorage.getItem('chart'));
-        console.log(chart);
+        let movers = JSON.parse(localStorage.getItem('movers'));
+        console.log(movers);
+
+        // console.log(`this is the chart`);
+        // console.log(chart);
 
 
         displayNews(newsLocal);
         createIndexYahooTable(tableLocal);
         populateSlider(trendingSlider);
-        createChart(chart.chart.result[0]);
+        chartJS.createChart(chart);
         negativeNumber();
 
         console.log('LocalStorage is already Up To Date!');
@@ -79,22 +94,38 @@ async function negativeNumber(){
 
     let table = document.querySelectorAll(`#tableBody > tr`);
 
-    for(let i = 1; i < table.length; i++){
+    for(let i = 1; i <= table.length; i++){
             let row = document.querySelectorAll(`#tableBody > tr:nth-child(${i})`);
             array.push(row[0]);
-            // console.log(array)
     }
+
+    // console.log(row);
+
 
     
     console.log(array);
-    for(let j = 0; j < array.length; j++){
+    for(let j = 0; j <= array.length; j++){
         let percentage = array[j].cells[4];
-        console.log(percentage.innerText);
-        if(Number(percentage.innerText) < 0){
+        let change = array[j].cells[5];
+        let previousClose = array[j].cells[2];
+        let dayClose = array[j].cells[3]; 
+        // console.log(percentage.innerText);
+        if(Number(percentage.innerText).toFixed(2) < 0){
             percentage.style.color = "red";
-        console.log(percentage.innerText);
+            change.style.color = "red";
+            
+        // console.log(percentage.innerText);
+        } else if (Number(percentage.innerText).toFixed(2) > 0) {
+            percentage.style.color = "green";
+            change.style.color = "green";
+
         }
 
+        if(Number(dayClose.innerText) < Number(previousClose.innerText)){
+            dayClose.style.color = "red"
+        } else if (Number(dayClose.innerText) > Number(previousClose.innerText)){
+            dayClose.style.color = "green"
+        } 
     }
 } 
 
@@ -195,115 +226,14 @@ function createIndexYahooTable(tableData){
 
 
 
-function createChart(data){
-
-    
-    let timestamp= [];
-    let close = []; 
-    let xAxys;
-   
-
-    data.timestamp.forEach( time => {
-        xAxys = getTime(time);
-        timestamp.push(xAxys);
-    })
-
-    data.indicators.quote[0].close.forEach( price => {
-        close.push(Number(price.toFixed(0)));
-    })
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    const myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: timestamp,
-            datasets: [{
-                label: 'SP-500',
-                data: close,
-                backgroundColor: [
-                    'rgba(255, 255, 255, 1)',
-                ],
-                borderColor: [
-                    'rgba(255, 0, 0, 1)',
-                ],
-                borderWidth: 2
-            }]
-        },
-        options: {
-            legend: {
-                labels: {
-                    boxWidth: 0
-                }
-            },
-            elements: {
-                point: {
-                    radius: 0
-                }
-            },
-            scales: {
-                xAxes: [{
-                  display: false,
-                  gridLines: {
-                    display: false
-                  },
-                  scaleLabel: {
-                    display: false
-                  }
-                }],
-                yAxes: [{
-                  display: true,
-                  gridLines: {
-                    display: false
-                  },
-                  scaleLabel: {
-                    display: true                  }
-                }]
-              },
-            responsive: true,
-        }
-    });
-
-    
-
-
-    console.log(myChart.data.datasets[0].data);
-
-
-   
-
-
-
-
-}
 
 
 
 
 
-//===========================CHART =======================================
 
 
 
-
-function getTime(data){
-
-    let dateObj = new Date(data); 
- 
-    // Get hours from the timestamp 
-    let hours = dateObj.getUTCHours(); 
-     
-    // Get minutes part from the timestamp 
-    let minutes = dateObj.getUTCMinutes(); 
-     
-    // Get seconds part from the timestamp 
-    // let seconds = dateObj.getUTCSeconds(); 
-     
-    return          hours.toString().padStart(2, '0') + ':' +  
-                    minutes.toString().padStart(2, '0') 
-                    // seconds.toString().padStart(2, '0'); 
-
-}
 
 
 

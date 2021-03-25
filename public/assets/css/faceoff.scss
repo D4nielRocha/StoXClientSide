@@ -2,10 +2,16 @@ $primary-color: rgb(255, 174, 24);
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,500;0,600;1,400&display=swap');
 
+
 body{
+    scroll-behavior: smooth; 
     overflow-x: hidden;
     // font-family: 'Merriweather', serif;
     font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+::-webkit-scrollbar{
+    display: none;
 }
 
 
@@ -16,6 +22,7 @@ body{
 
 nav{
     font-size: 1.25rem;
+    height: 6vh;
 
     .navbar-brand{
         font-size: 2rem;
@@ -78,3 +85,17 @@ nav{
     }
 }
 
+
+
+#footer-icons{
+    a{
+        font-size: 1rem;
+    }
+}
+
+.stox-footer{
+    span{
+        color: $primary-color;
+    }
+
+}    

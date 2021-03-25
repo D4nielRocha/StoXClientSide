@@ -3,6 +3,9 @@
 $primary-color: rgb(255, 174, 24);  
 // $carousel-transition: transform 4s ease, opacity .5s ease-out;
 
+//Video Aspect Ratios
+
+
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,500;0,600;1,400&display=swap');
 
@@ -304,7 +307,7 @@ hr{
     }
   
     100% {
-      transform: translate3d(-150%, 0, 0);
+      transform: translate3d(-80%, 0, 0);
     }
   }
 
@@ -313,17 +316,40 @@ hr{
 
 
 .chart{
+    // background-color: lightcoral;
     position: relative;
     width: 100%;
-    height: 80vh;
+    height: 40vh;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
 
     #chart-row{
         width: 100%;
     }
 
+    
+    #video-row{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-end;
+        // background-color: aqua;
+        width: 50%;
+        text-align: center;
+
+        #video{
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+
+
+.stox-footer{
+    span{
+        color: $primary-color;
+    }
 }
 
 

@@ -22,7 +22,10 @@
 
 
       //charts
-      const urlCharts = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=%5EGSPC&range=1y&region=US";
+      const urlCharts = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=%5EGSPC&range=1mo&region=US";
+
+      const urlMovers = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-movers?region=US&lang=en-US&start=0";
+       
 
 
       //generic header
@@ -68,5 +71,6 @@
         marketURL,
         NEWS_API,
         ALPHA_API_KEY,
-        ALPHA_DAILY_URL
+        ALPHA_DAILY_URL,
+        urlMovers
       }
