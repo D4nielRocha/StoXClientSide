@@ -1,24 +1,81 @@
+::-webkit-scrollbar{
+    display: none;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,500;0,600;1,400&display=swap');
+
+
+body{
+    scroll-behavior: smooth; 
+    overflow-x: hidden;
+    // font-family: 'Merriweather', serif;
+    font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+.container{
+    max-width: 1440px;
+    max-height: 100vh;
+}
+
+nav{
+    font-size: 1.25rem;
+    height: 6vh;
+
+    .navbar-brand{
+        font-size: 2rem;
+
+        span{
+            color: rgb(255, 174, 24);
+        }
+    }
+}
+
 .user-content{
-    height: 100vh;
+    display: flex;
+    height: auto;
+    overflow: auto;
 
     #stoxs{
         // background-color: lightcoral;
-        height: 100%;
-        margin: 1rem;
+        // height: 100%;
+        // margin: 1rem;
         padding: 1rem;
-        display: flex;
+        // display: flex;
         justify-content: center;
 
 
         .stox-item{
-            background-color: aqua;
-            height: 45%;
+            // border: 2px solid rgba(0, 0, 0, 0.596);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            // background-color: rgb(255, 174, 24);
+            // height: 45%;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            margin: 0 0.5rem;
+            margin: 1% 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            
+
+            #buttons{
+                // background-color: bisque;
+                width: 100%;
+                // height: 25%;
+                display: flex;
+                justify-content: space-around;
+                // align-items: flex-end;
+                margin-bottom: 0.5rem;
+            }
+
+            .stox-content{
+            //   background-color: aquamarine;
+            //   width: 100%;
+            //   height: 100%;
+              display: flex;
+              align-items: center;
+            }
 
 
         }
@@ -34,4 +91,5 @@ footer{
     position: relative;
     bottom: 0;
     width: 100vw;
+    // margin-top: 1%;
 }

@@ -9,9 +9,13 @@ body {
   display: none;
 }
 
+span {
+  color: #ffae18;
+}
+
 .container {
   max-width: 1440px;
-  max-height: 100vh;
+  max-height: auto;
 }
 
 nav {
@@ -21,10 +25,6 @@ nav {
 
 nav .navbar-brand {
   font-size: 2rem;
-}
-
-nav .navbar-brand span {
-  color: #ffae18;
 }
 
 #title {
@@ -88,7 +88,52 @@ nav .navbar-brand span {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  height: 50%;
+  height: 40%;
+}
+
+#productFormTitle {
+  color: white;
+}
+
+.modal-body {
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.modal-body label {
+  margin-top: 3%;
+}
+
+.modal-body #commentDiv {
+  width: 100%;
+  margin: 2% 0;
+}
+
+.modal-body input[type="checkbox"] {
+  margin: 3% 0;
+}
+
+.modal-body input[type="text"], .modal-body input[type="number"] {
+  width: 95%;
+  border-radius: 5px;
+}
+
+.modal-body .formWrapper {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modal-body .form-right {
+  -webkit-transform: translateX(5%);
+          transform: translateX(5%);
 }
 
 #footer-icons a {

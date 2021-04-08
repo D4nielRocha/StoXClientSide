@@ -16,8 +16,6 @@ window.onload = () => {
 // Function to fetch url and get data parsed 
 async function getDataAsync(){
 
-    
-
     if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider') || !localStorage.getItem('chart') || !localStorage.getItem('movers')){
         
         try{
@@ -132,7 +130,6 @@ async function negativeNumber(){
 
 let sliderNegativeChanges = (slider) => {
 
-
    for(let i = 0; i < slider.length; i++) {{
     //    console.log(Number(dailyChange[i].innerText.replace('%','')));
        if(Number(slider[i].innerText.replace('%', '')) < 0){
@@ -190,16 +187,14 @@ async function displayNews(data){
                                         <hr class="my-2">
                                     </div>
                                 </div>
-                                <hr>`
+                                `
     } 
-
-
 
 };
 
 
 function createIndexYahooTable(tableData){ 
-
+    console.log(tableData);
     
         for(let i = 0; i < tableData.length ; i++){
             let tr = document.createElement('tr');
@@ -218,10 +213,7 @@ function createIndexYahooTable(tableData){
         // console.log(tr);
 
         }   
-
-    }
-
-    
+    }    
 }
 
 

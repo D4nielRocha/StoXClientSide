@@ -14,10 +14,14 @@ body{
     display: none;
 }
 
+span{
+    color: $primary-color;
+}
+
 
 .container{
     max-width: 1440px;
-    max-height: 100vh;
+    max-height: auto;
 }
 
 nav{
@@ -27,9 +31,9 @@ nav{
     .navbar-brand{
         font-size: 2rem;
 
-        span{
-            color: $primary-color;
-        }
+        // span{
+        //     color: $primary-color;
+        // }
     }
 }
 
@@ -81,8 +85,60 @@ nav{
         align-self: center;
         align-items: center;
         justify-content: space-evenly;
-        height: 50%;
+        height: 40%;
     }
+}
+
+
+#productFormTitle{
+    color: white;
+}
+
+
+.modal-body{
+    // background-color:lightcoral;
+    width: 100%;
+    font-size: 1.2rem;
+
+    label{
+        margin-top: 3%;
+    }
+
+    #commentDiv{
+        width: 100%;
+        margin: 2% 0;
+    }
+
+    input[type="checkbox"]{
+        margin: 3% 0;
+    }
+
+    input[type="text"], input[type="number"]{
+        width: 95%;
+        // margin: 0;
+        // border: none;
+        border-radius: 5px;
+    }
+
+    // .form-left{
+    //    margin-right: 0.2rem;
+    // }
+
+
+    .formWrapper{
+        // background-color: lawngreen;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+    }
+
+    .form-right{
+        transform: translateX(5%);
+        
+    }
+  
 }
 
 

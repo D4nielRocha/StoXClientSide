@@ -39,7 +39,7 @@
                     <a class="nav-link active" href="faceoff.html">FaceOff</a>
                 </li>
                 <li class="nav-item mx-3">
-                    <a class="nav-link" id="login" href="account.html">Login</a>
+                    <a class="nav-link" id="login" href="account.html">My StoX</a>
                 </li>
                 </ul>
             </div>
@@ -60,7 +60,14 @@
             <div class="row" id="search">
                 <div class="col-sm-12 col-lg-6" id="left-search">
                     <label><b>Search Asset #1</b></label><br>
-                        <input type="input" class="input" id="left-input" /><br><br>
+                        <input type="input" class="input" id="left-input" /><br>
+                        <select class="my-3" name="region" id="left-region">
+                            <option value="0">Choose Region</option>
+                            <option value="US">US - NYSE - NASDAQ - S&P500</option>
+                            <option value="SAO">BR - B3 - BOVESPA</option>
+                            <option value="LON">LON - LONDON - FTSE-100</option>
+                        </select><br>
+                        <input type="button" class="btn btn-md btn-light my-2" value="Search Asset" id="left-button">
                         <!-- <input type="checkbox" name="invested" data-bs-target="#ProductFormDialog" data-bs-toggle="modal" id="investedCheckbox1" > Are you invested in this asset? -->
                         <div class="dropdown">
                             <div class="dropdown-menu">
@@ -70,7 +77,14 @@
                 </div>
                 <div class="col-sm-12 col-lg-6" id="right-search">
                     <label><b>Search Asset #2</b></label><br>
-                        <input type="input" class="input" id="right-input" /><br><br>
+                    <input type="input" class="input" id="right-input" /><br>
+                    <select name="region" class="my-3" id="right-region">
+                        <option value="0">Choose Region</option>
+                        <option value="US">US - NYSE - NASDAQ - S&P500</option>
+                        <option value="SAO">BR - B3 - BOVESPA</option>
+                        <option value="LON">LON - LONDON - FTSE-100</option>
+                    </select><br>
+                        <input type="button" class="btn btn-md btn-light my-2" value="Search Asset" id="right-button"><br>
                         <!-- <input type="checkbox" name="invested" data-bs-target="#ProductFormDialog" data-bs-toggle="modal" id="investedCheckbox2" > Are you invested in this asset? -->
 
                         <div class="dropdown">
@@ -107,21 +121,7 @@
         <div class="container p-4 pb-0">
           <!-- Section: Social media -->
           <section class="mb-4" id="footer-icons">
-            <!-- Facebook -->
-            <a class="btn btn-outline-light btn-sm btn-floating m-1" href="#!" role="button"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
-      
-            <!-- Twitter -->
-            <a class="btn btn-outline-light btn-sm btn-floating m-1" href="#!" role="button"
-              ><i class="fab fa-twitter"></i
-            ></a>
-      
-            <!-- Google -->
-            <a class="btn btn-outline-light btn-sm btn-floating m-1" href="#!" role="button"
-              ><i class="fab fa-google"></i
-            ></a>
-      
+                
             <!-- Instagram -->
             <a class="btn btn-outline-light btn-sm btn-floating m-1" href="#!" role="button"
               ><i class="fab fa-instagram"></i
@@ -154,20 +154,20 @@
 
     <!-- ====================USER INPUT MODAL =================== -->
 
-    <div class="modal fade" id="ProductFormDialog">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
+<div class="modal fade" id="ProductFormDialog">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
     
-                <div class="modal-header text-center">
-                    <h4 class="modal-title col-11" id="productFormTitle">My StoX</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <div class="modal-header text-center bg-dark">
+                    <h4 class="modal-title col-11" id="productFormTitle">My Sto<span>X</span> - Personal Investment Details</h4>
+                    <button type="button" class="btn-close btn-light" data-bs-dismiss="modal"></button>
                 </div>
     
                 
-                <div class="modal-body">
+                <div class="modal-body container">
                     <div class="row">
-                        <form id="productForm" class="d-flex flex-column">
-                            <div class="formWrapper d-flex">
+                        <form id="productForm" class="d-flex flex-column ">
+                            <div class="formWrapper">
                             <div class="asset1 form-left col-6">
                                 <div class="form-group">
                                     <label for="asset1_name">Asset1 Name</label>
@@ -222,21 +222,21 @@
                                 <input id="_id" type="hidden" name="_id" value="0">
                             </div>
                         </div>
-                            <div class="form container">
-                                <label for="comment">Comments</label>
-                                <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
-                            </div>
-                        </form>
-                    </div>
+                        <div id="commentDiv">
+                            <label for="comment">Comments</label>
+                            <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
+                        </div>
+                    </form>
                 </div>
+            </div>
     
-                <div class="modal-footer">
-                    <button type="button" data-bs-dismiss="modal" class="btn btn-warning" id="saveStox">Save</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
+            <div class="modal-footer">
+                <button type="button" data-bs-dismiss="modal" class="btn btn-lg btn-primary" id="saveStox">Save</button>
+                <button type="button" class="btn btn-lg btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
 
 

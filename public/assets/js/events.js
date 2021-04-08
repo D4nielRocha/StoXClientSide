@@ -1,78 +1,115 @@
 import {Stox} from '../js/model/stoxModel.js';
 import * as dataFetch from '../js/fetchData.js';
+import * as url from './url.js'
+import * as formEvent from './formEvents/form.js';
 
 // get elements 
 const leftInput = document.getElementById('left-input');
 const rightInput = document.getElementById('right-input');
 const leftResult = document.getElementById('left-result');
 const rightResult = document.getElementById('right-result');
+const rightBtn = document.getElementById('right-button');
+const leftBtn = document.getElementById('left-button');
+const leftRegion = document.getElementById('left-region');
+const rightRegion = document.getElementById('right-region');
 
 
 // console.log(leftInput);
 
 //functin to fetch data from API 
-const fetchData = (ticker, side) => {
+const fetchData = async (ticker, side, region = '') => {
     let id;
-    axios.get(`http://api.marketstack.com/v1/eod?access_key=8ab519ff412561125ca0729e24df2b3c&symbols=${ticker}`).then( res => {
-        // console.log(res.data.data);
+    try{
+      const dailyData = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}${region}&apikey=${url.ALPHA_API_KEY}`);
+      const companySummary = await fetch(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${url.ALPHA_API_KEY}`);
+      const dailyDataJson = await dailyData.json();
+      const companySummaryJson = await companySummary.json();
+       //Access Key values in json object 
+       let fData = dailyDataJson['Time Series (Daily)'];
+       let data = dailyDataJson['Meta Data'];
+       //Convert objects into Array
+       fData = Object.values(fData)[0];
+       data = Object.values(data);
+       let summary = Object.values(companySummaryJson);
+      //  console.log(`this is the data`, data[1], data[2]);
+      console.log(summary);
+       //Convert first key of financial data object into Array
+       let financeArray = Object.values(fData);
+
     if(side == 'left'){
         id = 1; 
-        leftResult.innerHTML = displayResult(res.data.data, id);
-        prepareSaveForm(res.data.data, id);  
+        console.log(`this is the financeArray`,financeArray);
+        leftResult.innerHTML = displayResult(financeArray, data, id);
+        formEvent.prepareSaveForm(financeArray, data, id);
+        if(region == ''){
+          leftResult.innerHTML += displaySummary(summary); 
+        }
     } else if( side == 'right') {
         id = 2;
-        rightResult.innerHTML = displayResult(res.data.data, id);
-        prepareSaveForm(res.data.data, id);  
-    }
-         
-    }).catch( err => {
-        console.log('ERRORRRRRR' + err);
-    });
-
-}
-
-
-//debouce function to delay fetch function until user stops typing 
-
-//debounce
-const debounce = (func, delay) => {
-    let timeoutId;
-    return (...args) => {
-        if(timeoutId){
-            clearTimeout(timeoutId);
+        // console.log(json);
+        rightResult.innerHTML = displayResult(financeArray, data, id);
+        formEvent.prepareSaveForm(financeArray, data, id);  
+        if(region == ''){
+          rightResult.innerHTML += displaySummary(summary); 
         }
-        timeoutId = setTimeout( () => {
-            func.apply(null, args);
-        }, delay);
-    }
-};
-
-
-const onSearchLeft = event => {
-    // console.log(event.target.value);
-    fetchData(event.target.value, 'left' );
+    }}catch(err){
+        console.log('ERRORRRRRR' + err);
+    };
 }
 
-const onSearchRight = event => {
+
+
+const onSearchLeft = (value, region = '') => {
+  console.log(value, region);
     // console.log(event.target.value);
-    fetchData(event.target.value, 'right' );
+    fetchData(value, 'left', region);
+}
+
+const onSearchRight = (value, region = '') => {
+  console.log(value, region);
+
+    // console.log(event.target.value);
+    fetchData(value, 'right', region);
 }
 
 
 //event listener with debounce function
-leftInput.addEventListener('input', debounce(onSearchLeft, 1000));
-rightInput.addEventListener('input', debounce(onSearchRight, 1000));
+rightBtn.addEventListener('click', () => {
+  if(rightRegion.value == "US"){
+    onSearchRight(rightInput.value.toUpperCase());
+  } else if (rightRegion.value == "SAO"){
+    onSearchRight(rightInput.value.toUpperCase(), '.SAO');
+  } else if (rightRegion.value == "LON"){
+    onSearchRight(rightInput.value.toUpperCase(), '.LON');
+  } else {
+    rightRegion.focus();
+    alert('Please enter a valid Region');
+  }
+})
+
+leftBtn.addEventListener('click', () => {
+  if(leftRegion.value == 'US'){
+    onSearchLeft(leftInput.value.toUpperCase());
+  } else if (leftRegion.value == "SAO"){
+    onSearchLeft(leftInput.value.toUpperCase(), '.SAO');
+  } else if (leftRegion.value == "LON"){
+    onSearchLeft(leftInput.value.toUpperCase(), '.LON');
+  } else {
+    leftRegion.focus();
+    alert('Please enter a valid Region');
+  }
+})
 
 
-const displayResult = (data, id) => {
+const displayResult = (data, meta, id) => {
     console.log(data);
-    return `<h1 id="asset${id}">${data[0].symbol}</h1>
-                  <h1>${data[0].date.substring(0,10)}</h1>
-                  <div class="card text-white bg-dark mb-3">
+    return `<h1 id="asset${id}">${meta[1]}</h1>
+                  <h1>${data[2]}</h1>
+                  <div class="card text-black bg-light mb-3">
                   <div class="card-body">
                     <h5 class="card-title">VOLUME</h5>
                     <p class="card-text">
-                      ${data[0].volume}
+                      $${data[5]}
                     </p>
                   </div>
                 </div>
@@ -80,7 +117,7 @@ const displayResult = (data, id) => {
                   <div class="card-body">
                     <h5 class="card-title">OPEN</h5>
                     <p class="card-text">
-                      ${data[0].open}
+                      ${data[0]}
                     </p>
                   </div>
                 </div>
@@ -88,7 +125,7 @@ const displayResult = (data, id) => {
                   <div class="card-body">
                     <h5 class="card-title">CLOSE</h5>
                     <p class="card-text">
-                      ${data[0].close}
+                      ${data[4]}
                     </p>
                   </div>
                 </div>
@@ -96,7 +133,7 @@ const displayResult = (data, id) => {
                   <div class="card-body">
                     <h5 class="card-title">HIGH</h5>
                     <p class="card-text">
-                      ${data[0].high}
+                      ${data[2]}
                     </p>
                   </div>
                 </div>
@@ -104,72 +141,24 @@ const displayResult = (data, id) => {
                   <div class="card-body">
                     <h5 class="card-title">LOW</h5>
                     <p class="card-text">
-                      ${data[0].low}
+                      ${data[3]}
                     </p>
                   </div>
                 </div>`
 }
 
 
-//update form with data from searched assets
-function prepareSaveForm(data,id){
-
-  document.getElementById(`asset${id}_name`).value = data[0].symbol;
-  document.getElementById(`asset${id}_closing`).value = data[0].close;
-
-}
-
-//resets stox search
-let resetSearch = () => {
-  leftInput.value = '';
-  rightInput.value = '';
-  leftResult.innerHTML = '';
-  rightResult.innerHTML = '';
-}
-
-
-
-//creates new stox Object 
-
-let getFormValues = () => {
-
-    let time = Date.now();
-    let today = new Date(time);
-    let date = today.toISOString().slice(0,10);
-    let author = 'Daniel';
-
-  return new Stox(
-      document.getElementById('_id').value,
-      document.getElementById('asset1_name').value,
-      document.getElementById('asset1_invested').checked,
-      document.getElementById('asset1_amount').value,
-      document.getElementById('asset1_price').value,
-      document.getElementById('asset1_shares').value,
-      document.getElementById('asset1_closing').value,
-      document.getElementById('asset2_name').value,
-      document.getElementById('asset2_invested').checked,
-      document.getElementById('asset2_amount').value,
-      document.getElementById('asset2_price').value,
-      document.getElementById('asset2_shares').value,
-      document.getElementById('asset2_closing').value,
-      document.getElementById('comment').value,
-      date,
-      author
-  )
-
-}
-
 
 
 let saveStox = async () => {
 
-  let newStox = getFormValues();
+  let newStox = formEvent.getFormValues();
 
   if(newStox){
 
     const result = await createNewStox(newStox);
     console.log(result);
-    resetSearch();
+    formEvent.resetSearch();
   }
 
   document.getElementById('productForm').reset()
@@ -206,74 +195,27 @@ let createNewStox = async (stox) => {
 
 
 
-
-
-//=============FORM CONTENT EVENTS ====================================
-
-const asset1Checkbox = document.getElementById('asset1_invested');
-const asset2Checkbox = document.getElementById('asset2_invested');
-
-asset1Checkbox.addEventListener('change', invested);
-asset2Checkbox.addEventListener('change', invested);
-
-
-
-function invested(){
-
-  let isInvested;
-  let assetPrice;
-  let assetAmount;
-  let shares;
-
-
-    //cheks if user is invested in asset1
-    if(this.id == 'asset1_invested'){
-
-        isInvested = document.getElementsByClassName('ifChecked1');
-        assetAmount = document.getElementById('asset1_amount');
-        assetPrice = document.getElementById('asset1_price');
-        shares = document.getElementById('asset1_shares');
-
-        if(this.checked){
-          isInvested.forEach( item => {
-            item.classList.remove('d-none');
-            item.addEventListener('input', () => {
-              let total = assetAmount.value / assetPrice.value;
-              shares.value = total.toFixed(2);
-        });
-      });
-
-        }else{
-          isInvested.forEach( item => {
-            item.classList.add('d-none');
-          })
-        }
-
-    
-        //cheks if user is invested in asset2
-    } else {
-        isInvested = document.getElementsByClassName('ifChecked2');
-        assetAmount = document.getElementById('asset2_amount');
-        assetPrice = document.getElementById('asset2_price');
-        shares = document.getElementById('asset2_shares')
-      //displays input field
-        if(this.checked){
-          isInvested.forEach( item => {
-            item.classList.remove('d-none');
-            item.addEventListener('input', () => {
-              let total = assetAmount.value / assetPrice.value;
-              shares.value = total.toFixed(2);
-            })
-          });
-      
-        }else{
-          isInvested.forEach( item => {
-            item.classList.add('d-none');
-          })
-        }
-    }
+let displaySummary = (data) => {
+  console.log(data);
+  return `<div class="card text-black bg-light mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Address</h5>
+              <p class="card-text">
+                ${data[10]}
+              </p>
+            </div>
+          </div>`
 
 }
+
+
+
+
+
+
+
+
+
 
 //Calls saveStox function to make a POST request and create a new StoX 
 document.getElementById('saveStox').addEventListener('click', () => {
@@ -283,7 +225,7 @@ document.getElementById('saveStox').addEventListener('click', () => {
 
 //Calls resetSearch function to clear faceoff page input fields and content
 document.getElementById('resetContent').addEventListener('click', () => {
-  resetSearch();
+  formEvent.resetSearch();
 })
 
 
@@ -294,15 +236,13 @@ document.getElementById('resetContent').addEventListener('click', () => {
 
 
 export {
-
 fetchData,
-debounce,
 onSearchLeft,
 onSearchRight,
 displayResult,
-prepareSaveForm,
-resetSearch,
-getFormValues,
 saveStox,
-invested
+leftInput,
+rightInput,
+leftResult,
+rightResult
 }
