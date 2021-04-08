@@ -31,8 +31,13 @@ const fetchData = async (ticker, side, region = '') => {
        fData = Object.values(fData)[0];
        data = Object.values(data);
        let summary = Object.values(companySummaryJson);
+       console.log(`this is the object.entries`,  Object.entries(companySummaryJson));
       //  console.log(`this is the data`, data[1], data[2]);
-      console.log(summary);
+      // console.log(`this is the companySummaryJson`, companySummaryJson);
+      for(let [key, value] of Object.entries(companySummaryJson)){
+        console.log(`${key}: ${value}`);
+      }
+      // console.log(summary);
        //Convert first key of financial data object into Array
        let financeArray = Object.values(fData);
 
@@ -40,18 +45,21 @@ const fetchData = async (ticker, side, region = '') => {
         id = 1; 
         console.log(`this is the financeArray`,financeArray);
         leftResult.innerHTML = displayResult(financeArray, data, id);
+        backgroundComparison(id);
         formEvent.prepareSaveForm(financeArray, data, id);
         if(region == ''){
-          leftResult.innerHTML += displaySummary(summary); 
+          leftResult.innerHTML += createSummaryButton(id); 
+          overviewModal(companySummaryJson, id);
         }
     } else if( side == 'right') {
         id = 2;
-        // console.log(json);
         rightResult.innerHTML = displayResult(financeArray, data, id);
+        backgroundComparison(id);
         formEvent.prepareSaveForm(financeArray, data, id);  
-        if(region == ''){
-          rightResult.innerHTML += displaySummary(summary); 
-        }
+          if(region == ''){
+            rightResult.innerHTML += createSummaryButton(id);
+            overviewModal(companySummaryJson, id);
+          }
     }}catch(err){
         console.log('ERRORRRRRR' + err);
     };
@@ -104,8 +112,8 @@ leftBtn.addEventListener('click', () => {
 const displayResult = (data, meta, id) => {
     console.log(data);
     return `<h1 id="asset${id}">${meta[1]}</h1>
-                  <h1>${data[2]}</h1>
-                  <div class="card text-black bg-light mb-3">
+                  <h1>${meta[2]}</h1>
+                  <div class="card text-black bg-stox mb-3">
                   <div class="card-body">
                     <h5 class="card-title">VOLUME</h5>
                     <p class="card-text">
@@ -113,23 +121,23 @@ const displayResult = (data, meta, id) => {
                     </p>
                   </div>
                 </div>
-                <div class="card text-white bg-dark mb-3">
+                <div class="card text-black bg-stox mb-3">
                   <div class="card-body">
                     <h5 class="card-title">OPEN</h5>
-                    <p class="card-text">
+                    <p class="card-text" id="open${id}">
                       ${data[0]}
                     </p>
                   </div>
                 </div>
-                <div class="card text-white bg-dark mb-3">
+                <div class="card text-black mb-3" id="closeDiv${id}">
                   <div class="card-body">
                     <h5 class="card-title">CLOSE</h5>
-                    <p class="card-text">
+                    <p class="card-text" id="close${id}">
                       ${data[4]}
                     </p>
                   </div>
                 </div>
-                <div class="card text-white bg-dark mb-3">
+                <div class="card text-black bg-stox mb-3">
                   <div class="card-body">
                     <h5 class="card-title">HIGH</h5>
                     <p class="card-text">
@@ -137,7 +145,7 @@ const displayResult = (data, meta, id) => {
                     </p>
                   </div>
                 </div>
-                <div class="card text-white bg-dark mb-3">
+                <div class="card text-black bg-stox mb-3">
                   <div class="card-body">
                     <h5 class="card-title">LOW</h5>
                     <p class="card-text">
@@ -145,8 +153,28 @@ const displayResult = (data, meta, id) => {
                     </p>
                   </div>
                 </div>`
+
 }
 
+
+let backgroundComparison = (id) => {
+
+  const open = document.getElementById(`open${id}`);
+  const close = document.getElementById(`close${id}`);
+  const closeDiv = document.getElementById(`closeDiv${id}`);
+
+  console.log(`this is the open.value`, open.innerText);
+
+  if(close.innerText < open.innerText){
+    // closeDiv.classList.remove('bg-light') 
+    closeDiv.classList.add('bg-danger') 
+  } else if (close.innerText > open.innerText){
+    // closeDiv.classList.remove('bg-light') 
+    closeDiv.classList.add('bg-success');
+  } else {
+    closeDiv.classList.add(`bg-light`);
+  }
+}
 
 
 
@@ -195,18 +223,21 @@ let createNewStox = async (stox) => {
 
 
 
-let displaySummary = (data) => {
-  console.log(data);
-  return `<div class="card text-black bg-light mb-3">
-            <div class="card-body">
-              <h5 class="card-title">Address</h5>
-              <p class="card-text">
-                ${data[10]}
-              </p>
-            </div>
-          </div>`
-
+let createSummaryButton = (id) => {
+  console.log(id);
+  return `<button type="button" class="btn btn-md btn-light" data-bs-toggle="modal" data-bs-target="#financialOverview${id}">Financial Overview</button>`
 }
+
+
+function overviewModal(data, id){
+    const title = document.getElementById(`financialOverviewTitle${id}`);
+    const body = document.getElementById(`financialOverviewBody${id}`);
+    title.innerText = Object.entries(data)[2][1];
+    for(let [key, value] of Object.entries(data)){
+      body.innerHTML += `<p>${key}: ${value}</p><br>`
+    }
+};
+
 
 
 
@@ -241,8 +272,21 @@ onSearchLeft,
 onSearchRight,
 displayResult,
 saveStox,
+overviewModal,
 leftInput,
 rightInput,
 leftResult,
 rightResult
 }
+
+
+
+
+{/* <div class="card text-black bg-light mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Address</h5>
+              <p class="card-text">
+                ${data[10]}
+              </p>
+            </div>
+          </div> */}

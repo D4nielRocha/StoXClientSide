@@ -3,6 +3,10 @@ $primary-color: rgb(255, 174, 24);
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,500;0,600;1,400&display=swap');
 
 
+.bg-stox{
+    background-color: rgb(247, 247, 247);
+}
+
 body{
     scroll-behavior: smooth; 
     overflow-x: hidden;
@@ -23,6 +27,7 @@ span{
     max-width: 1440px;
     max-height: auto;
 }
+
 
 nav{
     font-size: 1.25rem;
@@ -46,6 +51,7 @@ nav{
 
 #search{
     margin-top: 2rem;
+    // background-color: rgb(197, 197, 197);
     
         input[type=input]{
             width: 50%;
@@ -65,6 +71,7 @@ nav{
 
 
 #search-result{
+    // background-color: rgb(197, 197, 197);
     // background-color: lightskyblue;
     height: 80vh;
     margin-top: 2rem;
@@ -155,3 +162,8 @@ nav{
     }
 
 }    
+
+
+.card{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
