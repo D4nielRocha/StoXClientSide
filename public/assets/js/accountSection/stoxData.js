@@ -1,4 +1,4 @@
-import * as api from '../fetchData.js';
+import * as api from '../generalData/fetchData.js';
 
 let deleteStox = async (id) => {
 

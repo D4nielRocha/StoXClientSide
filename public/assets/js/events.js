@@ -1,7 +1,13 @@
 import {Stox} from '../js/model/stoxModel.js';
-import * as dataFetch from '../js/fetchData.js';
-import * as url from './url.js'
+import * as dataFetch from './generalData/fetchData.js';
+import * as url from './generalData/url.js'
 import * as formEvent from './formEvents/form.js';
+import { displayUser } from './login/login.js';
+import { auth0WebAuth, auth0Authentication } from './auth/auth0-variables.js';
+import * as chartJS from './chart/chart.js';
+
+
+
 
 // get elements 
 const leftInput = document.getElementById('left-input');
@@ -20,36 +26,47 @@ const rightRegion = document.getElementById('right-region');
 const fetchData = async (ticker, side, region = '') => {
     let id;
     try{
+      //Fetch Data
       const dailyData = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}${region}&apikey=${url.ALPHA_API_KEY}`);
       const companySummary = await fetch(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${url.ALPHA_API_KEY}`);
+      // const chart = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=${ticker}&range=1mo&region=US`, url.headers);
+
+      //Parsing Data (JSON)
       const dailyDataJson = await dailyData.json();
       const companySummaryJson = await companySummary.json();
+      // const chartJson = await chart.json();
+      // console.log(`this is the chartJson`, chartJson);
+      //Preparing data for chart function
+      // const chartData = chartJson.chart.result[0];
+      // console.log(`this is the chartData`, chartData);
        //Access Key values in json object 
        let fData = dailyDataJson['Time Series (Daily)'];
        let data = dailyDataJson['Meta Data'];
        //Convert objects into Array
        fData = Object.values(fData)[0];
        data = Object.values(data);
-       let summary = Object.values(companySummaryJson);
-       console.log(`this is the object.entries`,  Object.entries(companySummaryJson));
+      //  let summary = Object.values(companySummaryJson);
+      //  console.log(`this is the object.entries`,  Object.entries(companySummaryJson));
       //  console.log(`this is the data`, data[1], data[2]);
       // console.log(`this is the companySummaryJson`, companySummaryJson);
-      for(let [key, value] of Object.entries(companySummaryJson)){
-        console.log(`${key}: ${value}`);
-      }
+      // for(let [key, value] of Object.entries(companySummaryJson)){
+      //   // console.log(`${key}: ${value}`);
+      // }
       // console.log(summary);
        //Convert first key of financial data object into Array
        let financeArray = Object.values(fData);
 
     if(side == 'left'){
         id = 1; 
-        console.log(`this is the financeArray`,financeArray);
+        // console.log(`this is the financeArray`,financeArray);
         leftResult.innerHTML = displayResult(financeArray, data, id);
         backgroundComparison(id);
         formEvent.prepareSaveForm(financeArray, data, id);
         if(region == ''){
           leftResult.innerHTML += createSummaryButton(id); 
           overviewModal(companySummaryJson, id);
+          // leftResult.innerHTML += `<canvas id="myChart${id}"></canvas>`
+          // chartJS.createChart(chartData, id, ticker);
         }
     } else if( side == 'right') {
         id = 2;
@@ -59,6 +76,8 @@ const fetchData = async (ticker, side, region = '') => {
           if(region == ''){
             rightResult.innerHTML += createSummaryButton(id);
             overviewModal(companySummaryJson, id);
+            // rightResult.innerHTML += `<canvas id="myChart${id}"></canvas>`
+            // chartJS.createChart(chartData, id, ticker);
           }
     }}catch(err){
         console.log('ERRORRRRRR' + err);
@@ -68,13 +87,13 @@ const fetchData = async (ticker, side, region = '') => {
 
 
 const onSearchLeft = (value, region = '') => {
-  console.log(value, region);
+  // console.log(value, region);
     // console.log(event.target.value);
     fetchData(value, 'left', region);
 }
 
 const onSearchRight = (value, region = '') => {
-  console.log(value, region);
+  // console.log(value, region);
 
     // console.log(event.target.value);
     fetchData(value, 'right', region);
@@ -83,6 +102,7 @@ const onSearchRight = (value, region = '') => {
 
 //event listener with debounce function
 rightBtn.addEventListener('click', () => {
+    showSpinner(rightResult);
   if(rightRegion.value == "US"){
     onSearchRight(rightInput.value.toUpperCase());
   } else if (rightRegion.value == "SAO"){
@@ -96,6 +116,7 @@ rightBtn.addEventListener('click', () => {
 })
 
 leftBtn.addEventListener('click', () => {
+  showSpinner(leftResult);
   if(leftRegion.value == 'US'){
     onSearchLeft(leftInput.value.toUpperCase());
   } else if (leftRegion.value == "SAO"){
@@ -110,20 +131,21 @@ leftBtn.addEventListener('click', () => {
 
 
 const displayResult = (data, meta, id) => {
+    hideSpinner();
     console.log(data);
     return `<h1 id="asset${id}">${meta[1]}</h1>
                   <h1>${meta[2]}</h1>
                   <div class="card text-black bg-stox mb-3">
                   <div class="card-body">
-                    <h5 class="card-title">VOLUME</h5>
+                    <h5 class="card-title">DAILY VOLUME</h5>
                     <p class="card-text">
-                      $${data[5]}
+                      ${data[5]}
                     </p>
                   </div>
                 </div>
                 <div class="card text-black bg-stox mb-3">
                   <div class="card-body">
-                    <h5 class="card-title">OPEN</h5>
+                    <h5 class="card-title">DAILY OPEN</h5>
                     <p class="card-text" id="open${id}">
                       ${data[0]}
                     </p>
@@ -131,7 +153,7 @@ const displayResult = (data, meta, id) => {
                 </div>
                 <div class="card text-black mb-3" id="closeDiv${id}">
                   <div class="card-body">
-                    <h5 class="card-title">CLOSE</h5>
+                    <h5 class="card-title">DAILY CLOSE</h5>
                     <p class="card-text" id="close${id}">
                       ${data[4]}
                     </p>
@@ -139,7 +161,7 @@ const displayResult = (data, meta, id) => {
                 </div>
                 <div class="card text-black bg-stox mb-3">
                   <div class="card-body">
-                    <h5 class="card-title">HIGH</h5>
+                    <h5 class="card-title">INTRADAY - HIGH</h5>
                     <p class="card-text">
                       ${data[2]}
                     </p>
@@ -147,7 +169,7 @@ const displayResult = (data, meta, id) => {
                 </div>
                 <div class="card text-black bg-stox mb-3">
                   <div class="card-body">
-                    <h5 class="card-title">LOW</h5>
+                    <h5 class="card-title">INTRADAY - LOW</h5>
                     <p class="card-text">
                       ${data[3]}
                     </p>
@@ -225,20 +247,56 @@ let createNewStox = async (stox) => {
 
 let createSummaryButton = (id) => {
   console.log(id);
-  return `<button type="button" class="btn btn-md btn-light" data-bs-toggle="modal" data-bs-target="#financialOverview${id}">Financial Overview</button>`
+  return `<button type="button" class="btn btn-md btn-light" data-bs-toggle="modal" data-bs-target="#financialOverview${id}">Financial Overview</button>
+          <canvas id="myChart${id}"></canvas>`
 }
 
 
 function overviewModal(data, id){
     const title = document.getElementById(`financialOverviewTitle${id}`);
     const body = document.getElementById(`financialOverviewBody${id}`);
-    title.innerText = Object.entries(data)[2][1];
-    for(let [key, value] of Object.entries(data)){
-      body.innerHTML += `<p>${key}: ${value}</p><br>`
+    const table = document.getElementById(`financialOverviewTable${id}`);
+    title.innerText = '';
+    body.innerHTML = '';
+    let object = Object.entries(data);
+    title.innerText = object[2][1].toUpperCase();
+    table.innerHTML = `<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Financial</th>
+        <th scope="col">Value</th>
+      </tr>
+    </thead><br>
+    <tbody id="tableBody${id}"></tbody>
+  </table>`
+    // for(let [key, value] of Object.entries(data)){
+    //   body.innerHTML += `<p>${key}: ${value}</p>`
+    // }
+
+    for(let i = 0; i < 4; i++){
+      let [key, value] = object[i];
+      body.innerHTML += `<p><strong>${key}</strong>: ${value}</p>`
+    }
+
+    for(let i = 4; i < object.length; i++){
+      let tableBody = document.getElementById(`tableBody${id}`);
+      let [key, value] = object[i];
+      tableBody.innerHTML += `<tr>
+                                <td>${key}</td>
+                                <td>${value}</td>
+                              </tr>`
     }
 };
 
+let showSpinner = (element) => {
+  element.innerHTML = `<div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>`
+}
 
+let hideSpinner = () => {
+  document.querySelector('.spinner-border').style.display = 'none';
+}
 
 
 
@@ -257,6 +315,10 @@ document.getElementById('saveStox').addEventListener('click', () => {
 //Calls resetSearch function to clear faceoff page input fields and content
 document.getElementById('resetContent').addEventListener('click', () => {
   formEvent.resetSearch();
+})
+
+window.addEventListener('load', ()=>{
+  document.getElementById('profileBtn').innerText = `${sessionStorage.getItem('email')}`;
 })
 
 
@@ -281,12 +343,3 @@ rightResult
 
 
 
-
-{/* <div class="card text-black bg-light mb-3">
-            <div class="card-body">
-              <h5 class="card-title">Address</h5>
-              <p class="card-text">
-                ${data[10]}
-              </p>
-            </div>
-          </div> */}

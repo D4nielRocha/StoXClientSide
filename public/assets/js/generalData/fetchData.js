@@ -7,7 +7,8 @@ let getHeaders = () => {
 
     return new Headers ({
         "Accept": "application/json", 
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + sessionStorage.getItem('accessToken')
     });
 };
 

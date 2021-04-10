@@ -39,7 +39,16 @@
                     <a class="nav-link active" href="faceoff.html">FaceOff</a>
                 </li>
                 <li class="nav-item mx-3">
-                    <a class="nav-link" id="login" href="account.html">My StoX</a>
+                    <a class="nav-link" href="account.html">MyStox</a>
+                </li>
+                <li class="nav-item mx-3">
+                  <a class="nav-link" href="#" id="loginBtn">Login</a>
+                </li>
+                <li class="nav-item mx-3">
+                  <a class="nav-link" href="#" id="logoutBtn">Logout</a>
+                </li>
+                <li class="nav-item mx-3">
+                  <a class="nav-link" href="#" id="profileBtn">Profile</a>
                 </li>
                 </ul>
             </div>
@@ -60,43 +69,43 @@
             <div class="row" id="search">
                 <div class="col-sm-12 col-lg-6" id="left-search">
                     <label><b>Search Asset #1</b></label><br>
-                        <input type="input" class="input" id="left-input" /><br>
+                        <input type="input" class="input" id="left-input" placeholder="Stock Ticker" /><br>
                         <select class="my-3" name="region" id="left-region">
                             <option value="0">Choose Region</option>
                             <option value="US">US - NYSE - NASDAQ - S&P500</option>
                             <option value="SAO">BR - B3 - BOVESPA</option>
                             <option value="LON">LON - LONDON - FTSE-100</option>
                         </select><br>
-                        <input type="button" class="btn btn-md btn-light my-2" value="Search Asset" id="left-button">
+                        <input type="button" class="btn btn-lg btn-light my-2" value="Search Asset" id="left-button">
                         <!-- <input type="checkbox" name="invested" data-bs-target="#ProductFormDialog" data-bs-toggle="modal" id="investedCheckbox1" > Are you invested in this asset? -->
-                        <div class="dropdown">
+                        <!-- <div class="dropdown">
                             <div class="dropdown-menu">
                                 <div class="dropdown-content results"></div>
                             </div>
-                        </div>
+                        </div> -->
                 </div>
                 <div class="col-sm-12 col-lg-6" id="right-search">
                     <label><b>Search Asset #2</b></label><br>
-                    <input type="input" class="input" id="right-input" /><br>
+                    <input type="input" class="input" id="right-input" placeholder="Stock Ticker" /><br>
                     <select name="region" class="my-3" id="right-region">
                         <option value="0">Choose Region</option>
                         <option value="US">US - NYSE - NASDAQ - S&P500</option>
                         <option value="SAO">BR - B3 - BOVESPA</option>
                         <option value="LON">LON - LONDON - FTSE-100</option>
                     </select><br>
-                        <input type="button" class="btn btn-md btn-light my-2" value="Search Asset" id="right-button"><br>
+                        <input type="button" class="btn btn-lg btn-light my-2" value="Search Asset" id="right-button"><br>
                         <!-- <input type="checkbox" name="invested" data-bs-target="#ProductFormDialog" data-bs-toggle="modal" id="investedCheckbox2" > Are you invested in this asset? -->
 
-                        <div class="dropdown">
+                        <!-- <div class="dropdown">
                             <div class="dropdown-menu">
                                 <div class="dropdown-content results"></div>
                             </div>
-                        </div>
+                        </div> -->
                 </div>
             </div>
             <div class="row" id="search-result">
                 <div class="col-sm-12 col-md-5" id="left-result">
-
+                    
                 </div>
                 <div class="col-md-2" id="buttons">
                     <input type="button" class="btn btn-md btn-primary" value="Save Comparison" id="saveButton" data-bs-target="#ProductFormDialog" data-bs-toggle="modal">
@@ -107,6 +116,38 @@
                 </div>
             </div>
         </div>
+        <footer class="bg-dark text-center text-white fixed-bottom">
+            <!-- Grid container -->
+            <div class="container p-4 pb-0">
+              <!-- Section: Social media -->
+              <section class="mb-4" id="footer-icons">
+                    
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-sm btn-floating m-1" href="#!" role="button"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+          
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-sm btn-floating m-1" href="#!" role="button"
+                  ><i class="fab fa-linkedin-in"></i
+                ></a>
+          
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-sm btn-floating m-1" href="#!" role="button"
+                  ><i class="fab fa-github"></i
+                ></a>
+              </section>
+              <!-- Section: Social media -->
+            </div>
+            <!-- Grid container -->
+          
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+              © 2020 Copyright:
+              <a class="text-white stox-footer" href="#">Sto<span>X</span></a>
+            </div>
+            <!-- Copyright -->
+        </footer>
     </section>
     
     
@@ -116,38 +157,7 @@
 
     <!-- ====================FOOTER=================== -->
 
-    <footer class="bg-dark text-center text-white">
-        <!-- Grid container -->
-        <div class="container p-4 pb-0">
-          <!-- Section: Social media -->
-          <section class="mb-4" id="footer-icons">
-                
-            <!-- Instagram -->
-            <a class="btn btn-outline-light btn-sm btn-floating m-1" href="#!" role="button"
-              ><i class="fab fa-instagram"></i
-            ></a>
-      
-            <!-- Linkedin -->
-            <a class="btn btn-outline-light btn-sm btn-floating m-1" href="#!" role="button"
-              ><i class="fab fa-linkedin-in"></i
-            ></a>
-      
-            <!-- Github -->
-            <a class="btn btn-outline-light btn-sm btn-floating m-1" href="#!" role="button"
-              ><i class="fab fa-github"></i
-            ></a>
-          </section>
-          <!-- Section: Social media -->
-        </div>
-        <!-- Grid container -->
-      
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-          © 2020 Copyright:
-          <a class="text-white stox-footer" href="#">Sto<span>X</span></a>
-        </div>
-        <!-- Copyright -->
-    </footer>
+    
 
 
 
@@ -159,8 +169,7 @@
         <div class="modal-content">
     
                 <div class="modal-header text-center bg-dark">
-                    <h4 class="modal-title col-11" id="productFormTitle">My Sto<span>X</span> - Personal Investment Details</h4>
-                    <button type="button" class="btn-close btn-light" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title col-12" id="productFormTitle">My Sto<span>X</span> - Personal Investment Details</h4>
                 </div>
     
                 
@@ -254,10 +263,11 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="financialOverviewTitle1"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title col-12" id="financialOverviewTitle1"></h5>
         </div>
-        <div class="modal-body" id="financialOverviewBody1">
+        <div class="modal-body">
+            <div id="financialOverviewBody1"></div>
+            <div id="financialOverviewTable1"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -272,10 +282,11 @@
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="financialOverviewTitle2"></h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h5 class="modal-title col-12" id="financialOverviewTitle2"></h5>
             </div>
-            <div class="modal-body" id="financialOverviewBody2">
+            <div class="modal-body">
+                <div id="financialOverviewBody2"></div>
+                <div id="financialOverviewTable2"></div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -306,7 +317,10 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0/9.14.0/auth0.min.js"></script>
+
     <!-- <script src="./assets/js/url.js"></script> -->
+    <script src="./assets/js/login/login.js" type="module"></script>
     <script src="./assets/js/events.js" type="module"></script>
     <!-- <script src="./assets/js/app.js"></script> -->
 

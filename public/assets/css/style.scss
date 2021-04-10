@@ -53,6 +53,21 @@ nav{
     }
 }
 
+#profileBtn{
+    display: none;
+    font-size: 1rem;
+    color: $primary-color;
+  }
+  
+  #loginBtn{
+      color: $primary-color;
+  }
+  
+  #logoutBtn{
+      display: none;
+      color: red;
+  }
+
 //===============================
 
 

@@ -2,12 +2,16 @@
 
 
 
-function createChart(data){
+function createChart(data, id = '', ticker = 'SP-500'){
     
     let timestamp= [];
     let close = []; 
     let xAxys;
+    console.log(id);
    
+    const ctx = document.getElementById(`myChart${id}`).getContext('2d');
+    
+    console.log(ctx);
 
     data.timestamp.forEach( time => {
         // console.log(time);
@@ -22,17 +26,16 @@ function createChart(data){
     })
 
     data.indicators.quote[0].close.forEach( price => {
-        close.push(Number(price.toFixed(0)));
+        close.push(Number(price.toFixed(2)));
     })
-
-    const ctx = document.getElementById('myChart').getContext('2d');
+    
 
     const myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: timestamp,
             datasets: [{
-                label: 'Daily SP-500 Chart',
+                label: `Daily ${ticker} Chart`,
                 data: close,
                 backgroundColor: [
                     'rgba(255, 255, 255, 1)',

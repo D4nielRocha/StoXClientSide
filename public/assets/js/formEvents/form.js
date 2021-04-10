@@ -20,11 +20,12 @@ function prepareSaveForm(data, meta, id){
   //creates new stox Object 
   
   let getFormValues = () => {
-  
+
       let time = Date.now();
       let today = new Date(time);
       let date = today.toISOString().slice(0,10);
-      let author = 'Daniel';
+      let author = sessionStorage.getItem('email');
+      
   
     return new Stox(
         document.getElementById('_id').value,

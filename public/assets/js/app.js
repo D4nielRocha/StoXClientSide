@@ -1,5 +1,8 @@
-import * as url from './url.js'
-import * as chartJS from './chart/chart.js'
+import * as url from './generalData/url.js';
+import * as chartJS from './chart/chart.js';
+import { displayUser } from './login/login.js';
+import { auth0WebAuth, auth0Authentication } from './auth/auth0-variables.js';
+
 
 let text = document.querySelector('#inputText');
 const tableDiv = document.getElementById('tableBody');
@@ -8,10 +11,10 @@ const newsDiv = document.getElementById('displayNews');
 // window.localStorage.clear();
 
 
-window.onload = () => {
+window.addEventListener('load', () => {
         getDataAsync();
-
-}   
+        document.getElementById('profileBtn').innerText = `${sessionStorage.getItem('email')}`;
+});   
         
 // Function to fetch url and get data parsed 
 async function getDataAsync(){
@@ -47,7 +50,7 @@ async function getDataAsync(){
             let trendingSlider = JSON.parse(localStorage.getItem('slider'));
             let chart = JSON.parse(localStorage.getItem('chart'));
             let localMovers = JSON.parse(localStorage.getItem('movers'));
-            console.log(localMovers);
+            // console.log(localMovers);
 
             displayNews(newsLocal);
             createIndexYahooTable(tableLocal);
@@ -65,7 +68,7 @@ async function getDataAsync(){
         let trendingSlider = JSON.parse(localStorage.getItem('slider'));
         let chart = JSON.parse(localStorage.getItem('chart'));
         let movers = JSON.parse(localStorage.getItem('movers'));
-        console.log(movers);
+        // console.log(movers);
 
         // console.log(`this is the chart`);
         // console.log(chart);
@@ -101,8 +104,8 @@ async function negativeNumber(){
 
 
     
-    console.log(array);
-    for(let j = 0; j <= array.length; j++){
+    // console.log(array);
+    for(let j = 0; j <= array.length-1; j++){
         let percentage = array[j].cells[4];
         let change = array[j].cells[5];
         let previousClose = array[j].cells[2];
@@ -194,7 +197,7 @@ async function displayNews(data){
 
 
 function createIndexYahooTable(tableData){ 
-    console.log(tableData);
+    // console.log(tableData);
     
         for(let i = 0; i < tableData.length ; i++){
             let tr = document.createElement('tr');

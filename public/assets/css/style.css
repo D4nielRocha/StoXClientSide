@@ -32,6 +32,21 @@ nav .navbar-brand span {
   color: #ffae18;
 }
 
+#profileBtn {
+  display: none;
+  font-size: 1rem;
+  color: #ffae18;
+}
+
+#loginBtn {
+  color: #ffae18;
+}
+
+#logoutBtn {
+  display: none;
+  color: red;
+}
+
 #content {
   margin-top: 0.1rem;
   height: 105vh;
