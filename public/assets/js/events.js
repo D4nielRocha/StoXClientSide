@@ -29,15 +29,15 @@ const fetchData = async (ticker, side, region = '') => {
       //Fetch Data
       const dailyData = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}${region}&apikey=${url.ALPHA_API_KEY}`);
       const companySummary = await fetch(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${url.ALPHA_API_KEY}`);
-      // const chart = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=${ticker}&range=1mo&region=US`, url.headers);
+      const chart = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=${ticker}&range=1mo&region=US`, url.headers);
 
       //Parsing Data (JSON)
       const dailyDataJson = await dailyData.json();
       const companySummaryJson = await companySummary.json();
-      // const chartJson = await chart.json();
+      const chartJson = await chart.json();
       // console.log(`this is the chartJson`, chartJson);
       //Preparing data for chart function
-      // const chartData = chartJson.chart.result[0];
+      const chartData = chartJson.chart.result[0];
       // console.log(`this is the chartData`, chartData);
        //Access Key values in json object 
        let fData = dailyDataJson['Time Series (Daily)'];
@@ -66,7 +66,7 @@ const fetchData = async (ticker, side, region = '') => {
           leftResult.innerHTML += createSummaryButton(id); 
           overviewModal(companySummaryJson, id);
           // leftResult.innerHTML += `<canvas id="myChart${id}"></canvas>`
-          // chartJS.createChart(chartData, id, ticker);
+          chartJS.createChart(chartData, id, ticker);
         }
     } else if( side == 'right') {
         id = 2;
@@ -77,7 +77,7 @@ const fetchData = async (ticker, side, region = '') => {
             rightResult.innerHTML += createSummaryButton(id);
             overviewModal(companySummaryJson, id);
             // rightResult.innerHTML += `<canvas id="myChart${id}"></canvas>`
-            // chartJS.createChart(chartData, id, ticker);
+            chartJS.createChart(chartData, id, ticker);
           }
     }}catch(err){
         console.log('ERRORRRRRR' + err);
