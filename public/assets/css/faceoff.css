@@ -102,6 +102,7 @@ nav .navbar-brand {
   height: 80vh;
   margin-top: 2rem;
   text-align: center;
+  margin-bottom: 5rem;
 }
 
 #search-result #right-result, #search-result #left-result {

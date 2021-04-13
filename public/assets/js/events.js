@@ -5,6 +5,7 @@ import * as formEvent from './formEvents/form.js';
 import { displayUser } from './login/login.js';
 import { auth0WebAuth, auth0Authentication } from './auth/auth0-variables.js';
 import * as chartJS from './chart/chart.js';
+import { checkSession, checkStatus } from './auth/jwtAuth.js';
 
 
 
@@ -25,19 +26,31 @@ const rightRegion = document.getElementById('right-region');
 //functin to fetch data from API 
 const fetchData = async (ticker, side, region = '') => {
     let id;
+    let companySummary;
+    let chart;
+    let companySummaryJson;
+    let chartJson;
+    let chartData;
+
+
     try{
       //Fetch Data
       const dailyData = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}${region}&apikey=${url.ALPHA_API_KEY}`);
-      const companySummary = await fetch(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${url.ALPHA_API_KEY}`);
-      const chart = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=${ticker}&range=1mo&region=US`, url.headers);
+
+      if(region == ''){
+        companySummary = await fetch(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${url.ALPHA_API_KEY}`);
+        chart = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=${ticker}&range=1mo&region=US`, url.headers);
+        companySummaryJson = await companySummary.json();
+        chartJson = await chart.json();
+        chartData = chartJson.chart.result[0];
+      }
+       
 
       //Parsing Data (JSON)
       const dailyDataJson = await dailyData.json();
-      const companySummaryJson = await companySummary.json();
-      const chartJson = await chart.json();
+
       // console.log(`this is the chartJson`, chartJson);
-      //Preparing data for chart function
-      const chartData = chartJson.chart.result[0];
+      //Preparing data for chart function 
       // console.log(`this is the chartData`, chartData);
        //Access Key values in json object 
        let fData = dailyDataJson['Time Series (Daily)'];
@@ -65,7 +78,7 @@ const fetchData = async (ticker, side, region = '') => {
         if(region == ''){
           leftResult.innerHTML += createSummaryButton(id); 
           overviewModal(companySummaryJson, id);
-          // leftResult.innerHTML += `<canvas id="myChart${id}"></canvas>`
+          leftResult.innerHTML += `<canvas id="myChart${id}"></canvas>`
           chartJS.createChart(chartData, id, ticker);
         }
     } else if( side == 'right') {
@@ -76,7 +89,7 @@ const fetchData = async (ticker, side, region = '') => {
           if(region == ''){
             rightResult.innerHTML += createSummaryButton(id);
             overviewModal(companySummaryJson, id);
-            // rightResult.innerHTML += `<canvas id="myChart${id}"></canvas>`
+            rightResult.innerHTML += `<canvas id="myChart${id}"></canvas>`
             chartJS.createChart(chartData, id, ticker);
           }
     }}catch(err){
@@ -202,16 +215,22 @@ let backgroundComparison = (id) => {
 
 let saveStox = async () => {
 
-  let newStox = formEvent.getFormValues();
+  if(checkStatus()){
+    let newStox = formEvent.getFormValues();
 
-  if(newStox){
-
-    const result = await createNewStox(newStox);
-    console.log(result);
-    formEvent.resetSearch();
+    if(newStox){
+  
+      const result = await createNewStox(newStox);
+      console.log(result);
+      formEvent.resetSearch();
+    }
+  
+    document.getElementById('productForm').reset()
+  } else {
+    alert('You need to be logged in to do that!');
   }
 
-  document.getElementById('productForm').reset()
+  
 
 
 }
@@ -248,8 +267,9 @@ let createNewStox = async (stox) => {
 let createSummaryButton = (id) => {
   console.log(id);
   return `<button type="button" class="btn btn-md btn-light" data-bs-toggle="modal" data-bs-target="#financialOverview${id}">Financial Overview</button>
-          <canvas id="myChart${id}"></canvas>`
+          `
 }
+/* <canvas id="myChart${id}"></canvas> */
 
 
 function overviewModal(data, id){
@@ -308,7 +328,7 @@ let hideSpinner = () => {
 
 //Calls saveStox function to make a POST request and create a new StoX 
 document.getElementById('saveStox').addEventListener('click', () => {
-  saveStox();
+    saveStox(); 
 })
 
 
