@@ -7,11 +7,9 @@ function createChart(data, id = '', ticker = 'SP-500'){
     let timestamp= [];
     let close = []; 
     let xAxys;
-    console.log(id);
    
     const ctx = document.getElementById(`myChart${id}`).getContext('2d');
     
-    console.log(ctx);
 
     data.timestamp.forEach( time => {
         // console.log(time);
@@ -38,7 +36,7 @@ function createChart(data, id = '', ticker = 'SP-500'){
                 label: `Daily ${ticker} Chart`,
                 data: close,
                 backgroundColor: [
-                    'rgba(255, 255, 255, 1)',
+                    'rgba(255, 255, 255, 0)',
                 ],
                 borderColor: [
                     'rgb(255, 115, 0)',
@@ -89,6 +87,7 @@ function createChart(data, id = '', ticker = 'SP-500'){
                 }],
                 yAxes: [{
                   display: true,
+                  position: 'right',
                   gridLines: {
                     display: false
                   },

@@ -23,6 +23,8 @@
 
       //charts
       const urlCharts = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=%5EGSPC&range=1mo&region=US";
+      const nasdaqUrl = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=%5EIXIC&range=1mo&region=US";
+      const dowUrl = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=%5EDJI&range=1mo&region=US";
 
       const urlMovers = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-movers?region=US&lang=en-US&start=0";
        
@@ -68,6 +70,8 @@
         url,
         urlNews,
         urlCharts,
+        nasdaqUrl,
+        dowUrl,
         headers,
         marketURL,
         NEWS_API,

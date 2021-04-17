@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,500;0,600;1,400&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css");
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -8,6 +9,7 @@
 body {
   overflow-x: hidden;
   font-family: 'Fira Sans Condensed', sans-serif;
+  height: auto;
 }
 
 .container {
@@ -30,6 +32,10 @@ nav .navbar-brand {
 
 nav .navbar-brand span {
   color: #ffae18;
+}
+
+#navbarNav {
+  z-index: 1;
 }
 
 #profileBtn {
@@ -326,8 +332,8 @@ hr {
             transform: translate3d(0, 0, 0);
   }
   100% {
-    -webkit-transform: translate3d(-80%, 0, 0);
-            transform: translate3d(-80%, 0, 0);
+    -webkit-transform: translate3d(-75%, 0, 0);
+            transform: translate3d(-75%, 0, 0);
   }
 }
 
@@ -337,9 +343,13 @@ hr {
             transform: translate3d(0, 0, 0);
   }
   100% {
-    -webkit-transform: translate3d(-80%, 0, 0);
-            transform: translate3d(-80%, 0, 0);
+    -webkit-transform: translate3d(-75%, 0, 0);
+            transform: translate3d(-75%, 0, 0);
   }
+}
+
+.carousel-control-prev-icon::after, .carousel-control-next-icon::after {
+  content: none;
 }
 
 .chart {
@@ -349,9 +359,9 @@ hr {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -359,6 +369,21 @@ hr {
 
 .chart #chart-row {
   width: 100%;
+}
+
+.chart #chart-row .carousel-inner .active {
+  -webkit-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+.chart #chart-row .carousel-control-prev {
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.chart #chart-row .carousel-control-next {
+  -webkit-transform: translateX(50%);
+          transform: translateX(50%);
 }
 
 .chart #video-row {
@@ -374,7 +399,6 @@ hr {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  width: 50%;
   text-align: center;
 }
 
@@ -382,29 +406,102 @@ hr {
   margin-bottom: 1rem;
 }
 
+.chart #video-row #video iframe {
+  width: 50%;
+}
+
 .stox-footer span {
   color: #ffae18;
+}
+
+@media screen and (max-width: 1024px) {
+  .navbar-nav .nav-item {
+    font-size: 1rem;
+  }
+  #video-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 100%;
+  }
+  #video-row #video-text {
+    width: 100%;
+  }
+  #video-row #video-text h2 {
+    font-size: 1.2rem;
+  }
+  #video-row #video {
+    width: 100%;
+  }
+  #video-row #video iframe {
+    padding: 0;
+    width: 100%;
+    height: 80%;
+  }
+  #mainRow table {
+    font-size: 0.8rem;
+  }
+  #mainRow #comparison_link svg {
+    height: 32.5vw;
+  }
+  .ticker-checkout {
+    height: 4vh;
+  }
+  .ticker-checkout .checkout-title {
+    font-size: 0.7rem;
+    text-align: center;
+  }
+  #displayDiv {
+    height: 4vh;
+  }
+  #displayDiv .ticker-item {
+    font-size: 0.65rem;
+  }
+  #sideBar #news .news-wrapper a {
+    font-size: 0.7rem;
+  }
+  #sideBar #news .news-wrapper .news-image img {
+    width: 40%;
+    height: 60%;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .body {
     overflow: scroll;
+    width: 100vw;
+  }
+  .navbar {
+    height: 9vh;
   }
   #mainRow {
+    width: 100vw;
     height: 50vh;
+    margin-top: .5rem;
   }
   #mainRow #comparison_link {
-    height: 100%;
+    height: 50%;
     background-color: white;
   }
   #mainRow #comparison_link svg {
-    height: 48vw;
+    height: 60vw;
   }
   #mainRow #comparison_link div {
     height: auto;
   }
-  #mainRow #table {
-    display: none;
+  #mainRow table {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
   }
   #sidebar {
     display: -webkit-box;
@@ -415,23 +512,29 @@ hr {
         -ms-flex-direction: row;
             flex-direction: row;
   }
+  .ticker-checkout {
+    height: 4vh;
+  }
+  .ticker-checkout .checkout-title {
+    font-size: 0.5rem;
+    text-align: center;
+  }
+  #displayDiv {
+    height: 4vh;
+  }
+  #displayDiv .ticker-item {
+    font-size: 0.6rem;
+  }
+  #chart-row {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 
-@media screen and (max-width: 990px) {
-  #mainRow {
-    height: 100%;
-  }
-  #mainRow #comparison-link {
-    height: 100%;
-  }
-  #mainRow #comparison-link svg {
-    height: 50vw;
-  }
-  #mainRow div {
-    height: 100%;
-  }
-  #mainRow #table {
-    display: none;
+@media screen and (max-width: 576px) {
+  #mainRow table {
+    font-size: 0.7rem;
   }
 }
 /*# sourceMappingURL=style.css.map */

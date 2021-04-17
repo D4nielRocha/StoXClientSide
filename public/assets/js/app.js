@@ -12,6 +12,9 @@ const newsDiv = document.getElementById('displayNews');
 
 
 window.addEventListener('load', () => {
+
+        // updateData(localStorage.getItem('dataExpiration'));
+
         getDataAsync();
         document.getElementById('profileBtn').innerText = `${sessionStorage.getItem('email')}`;
 });   
@@ -19,7 +22,7 @@ window.addEventListener('load', () => {
 // Function to fetch url and get data parsed 
 async function getDataAsync(){
 
-    if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider') || !localStorage.getItem('chart') || !localStorage.getItem('movers')){
+    if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider') || !localStorage.getItem('chart') || !localStorage.getItem('movers') || !localStorage.getItem('nasdaqChart') || !localStorage.getItem('dowChart')){
         
         try{
             
@@ -27,21 +30,27 @@ async function getDataAsync(){
             const table =  fetch(url.trendURL, url.headers);
             const trending =  fetch(url.trendURL, url.headers);
             const spChart =  fetch(url.urlCharts, url.headers);
+            const nasdaqCharts = fetch(url.nasdaqUrl, url.headers);
+            const dowCharts = fetch(url.dowUrl, url.headers);
             const movers = fetch(url.urlMovers, url.headers);
-            const results = Promise.all([news, table,trending,spChart, movers]).then( async ([news, table, trending, spChart, movers]) => {
+            const results = Promise.all([news, table,trending,spChart, nasdaqCharts, dowCharts, movers]).then( async ([news, table, trending, spChart, nasdaqChart, dowChart, movers]) => {
                 const newsJson = await news.json();
                 const tableJson = await table.json();
                 const trendingJson = await trending.json();
                 const chartJson = await spChart.json();
+                const nasdaqJson = await nasdaqChart.json();
+                const dowJson = await dowChart.json();
                 const moversJson = await movers.json();
-                return [newsJson, tableJson, trendingJson, chartJson, moversJson];
+                return [newsJson, tableJson, trendingJson, chartJson, nasdaqJson, dowJson, moversJson];
             }).then( dataApi => {
                 console.log(dataApi);
                 localStorage.setItem('slider', JSON.stringify(dataApi[2].finance.result[0].quotes));
                 localStorage.setItem('news', JSON.stringify(dataApi[0].articles));
                 localStorage.setItem('table', JSON.stringify(dataApi[1].finance.result[0].quotes));   
                 localStorage.setItem('chart', JSON.stringify(dataApi[3].chart.result[0])); 
-                localStorage.setItem('movers', JSON.stringify(dataApi[4])); 
+                localStorage.setItem('nasdaqChart', JSON.stringify(dataApi[4].chart.result[0])); 
+                localStorage.setItem('dowChart', JSON.stringify(dataApi[5].chart.result[0])); 
+                localStorage.setItem('movers', JSON.stringify(dataApi[6])); 
 
             })
 
@@ -49,13 +58,16 @@ async function getDataAsync(){
             let tableLocal = JSON.parse(localStorage.getItem('table'));
             let trendingSlider = JSON.parse(localStorage.getItem('slider'));
             let chart = JSON.parse(localStorage.getItem('chart'));
+            let nasdaq = JSON.parse(localStorage.getItem('nasdaqChart'));
+            let dow = JSON.parse(localStorage.getItem('dowChart'));
             let localMovers = JSON.parse(localStorage.getItem('movers'));
             // console.log(localMovers);
-
             displayNews(newsLocal);
             createIndexYahooTable(tableLocal);
             populateSlider(trendingSlider)
-            chartJS.createChart(chart);
+            chartJS.createChart(chart, 1);
+            chartJS.createChart(nasdaq, 2, 'NASDAQ');
+            chartJS.createChart(dow, 3, 'DOW JONES');
             negativeNumber();
 
             }catch(err){
@@ -67,8 +79,11 @@ async function getDataAsync(){
         let tableLocal = JSON.parse(localStorage.getItem('table'));
         let trendingSlider = JSON.parse(localStorage.getItem('slider'));
         let chart = JSON.parse(localStorage.getItem('chart'));
+        let nasdaq = JSON.parse(localStorage.getItem('nasdaqChart'));
+        let dow = JSON.parse(localStorage.getItem('dowChart'));
         let movers = JSON.parse(localStorage.getItem('movers'));
         // console.log(movers);
+        // console.log(tableLocal);
 
         // console.log(`this is the chart`);
         // console.log(chart);
@@ -77,7 +92,9 @@ async function getDataAsync(){
         displayNews(newsLocal);
         createIndexYahooTable(tableLocal);
         populateSlider(trendingSlider);
-        chartJS.createChart(chart);
+        chartJS.createChart(chart, 1);
+        chartJS.createChart(nasdaq, 2, 'NASDAQ');
+        chartJS.createChart(dow, 3, 'DOW JONES');
         negativeNumber();
 
         console.log('LocalStorage is already Up To Date!');
@@ -186,7 +203,7 @@ async function displayNews(data){
                                     <img src="${data[i].urlToImage}" alt="${data[i].title.slice(0,15)}">
                                     </div>
                                     <div class="news-content col-7">
-                                        <a href="${data[i].url}">${data[i].title}</a>
+                                        <a target="_blank" href="${data[i].url}">${data[i].title}</a>
                                         <hr class="my-2">
                                     </div>
                                 </div>
@@ -220,7 +237,26 @@ function createIndexYahooTable(tableData){
 }
 
 
-
+let updateData = (localExpiration) => {
+    
+    if(!localExpiration){
+        let date = new Date();
+        let expDate = new Date(date.getTime() + 60*60000);
+        console.log(`this is the new expDate`, expDate);
+        localStorage.setItem('dataExpiration', expDate);
+    } else {
+        let localExp = Date.parse(localExpiration);
+        // console.log(localExp);
+        let localDate = new Date(localExp);
+        // console.log(localDate);
+        console.log(new Date() < localDate);
+        console.log(new Date(), localDate);
+        if(new Date() < localDate){
+            localStorage.clear();
+            console.log(`localstorage clear!`);
+        }
+    }
+}
 
 
 
