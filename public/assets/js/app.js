@@ -27,7 +27,7 @@ async function getDataAsync(){
 
     console.log('data async triggered');
 
-    if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider') || !localStorage.getItem('chart') || !localStorage.getItem('movers') || !localStorage.getItem('nasdaqChart') || !localStorage.getItem('dowChart')){
+    // if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider') || !localStorage.getItem('chart') || !localStorage.getItem('movers') || !localStorage.getItem('nasdaqChart') || !localStorage.getItem('dowChart')){
         
         try{
             
@@ -40,6 +40,7 @@ async function getDataAsync(){
             const movers = fetch(url.urlMovers, url.headers);
             const results = Promise.all([news, table,trending,spChart, nasdaqCharts, dowCharts, movers]).then( async ([news, table, trending, spChart, nasdaqChart, dowChart, movers]) => {
                 const newsJson = await news.json();
+                console.log(`this is the newsJson`, newsJson);
                 const tableJson = await table.json();
                 const trendingJson = await trending.json();
                 const chartJson = await spChart.json();
@@ -78,32 +79,32 @@ async function getDataAsync(){
             }catch(err){
                 console.log(err);
             }
-    }else {
+    // }else {
 
-        // let newsLocal = JSON.parse(localStorage.getItem('news'));
-        let tableLocal = JSON.parse(localStorage.getItem('table'));
-        let trendingSlider = JSON.parse(localStorage.getItem('slider'));
-        let chart = JSON.parse(localStorage.getItem('chart'));
-        let nasdaq = JSON.parse(localStorage.getItem('nasdaqChart'));
-        let dow = JSON.parse(localStorage.getItem('dowChart'));
-        let movers = JSON.parse(localStorage.getItem('movers'));
-        // console.log(movers);
-        // console.log(tableLocal);
+        // // let newsLocal = JSON.parse(localStorage.getItem('news'));
+        // let tableLocal = JSON.parse(localStorage.getItem('table'));
+        // let trendingSlider = JSON.parse(localStorage.getItem('slider'));
+        // let chart = JSON.parse(localStorage.getItem('chart'));
+        // let nasdaq = JSON.parse(localStorage.getItem('nasdaqChart'));
+        // let dow = JSON.parse(localStorage.getItem('dowChart'));
+        // let movers = JSON.parse(localStorage.getItem('movers'));
+        // // console.log(movers);
+        // // console.log(tableLocal);
 
-        // console.log(`this is the chart`);
-        // console.log(chart);
+        // // console.log(`this is the chart`);
+        // // console.log(chart);
 
 
-        // displayNews(newsLocal);
-        createIndexYahooTable(tableLocal);
-        populateSlider(trendingSlider);
-        chartJS.createChart(chart, 1);
-        chartJS.createChart(nasdaq, 2, 'NASDAQ');
-        chartJS.createChart(dow, 3, 'DOW JONES');
-        negativeNumber();
+        // // displayNews(newsLocal);
+        // createIndexYahooTable(tableLocal);
+        // populateSlider(trendingSlider);
+        // chartJS.createChart(chart, 1);
+        // chartJS.createChart(nasdaq, 2, 'NASDAQ');
+        // chartJS.createChart(dow, 3, 'DOW JONES');
+        // negativeNumber();
 
-        console.log('LocalStorage is already Up To Date!');
-    }
+        // console.log('LocalStorage is already Up To Date!');
+    // }
 
   
 }
