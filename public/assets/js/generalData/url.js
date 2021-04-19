@@ -15,7 +15,7 @@
         url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/news/v2/get-details',
         params: {uuid: '9803606d-a324-3864-83a8-2bd621e6ccbd', region: 'US'},
         headers: {
-          'x-rapidapi-key': '8f6042bc97msha003fe69e6bb4f4p105aabjsna64480f53e4c',
+          'x-rapidapi-key': '69cdd731d7mshb69784c2a6313b4p1c5444jsnb4f2c4a294ac',
           'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
         }
       };
@@ -34,7 +34,7 @@
     const headers = {
             "method": "GET",
             "headers": {
-                "x-rapidapi-key": "8f6042bc97msha003fe69e6bb4f4p105aabjsna64480f53e4c",
+                "x-rapidapi-key": "69cdd731d7mshb69784c2a6313b4p1c5444jsnb4f2c4a294ac",
                     "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
             }};
 
