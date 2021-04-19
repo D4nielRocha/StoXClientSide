@@ -249,7 +249,7 @@ let saveStox = async () => {
 
 let createNewStox = async (stox) => {
 
-  const url = `http://localhost:8080/faceoff`;
+  const url = `${dataFetch.BASE_URL}`;
 
   let httpMethod = 'POST';
 
