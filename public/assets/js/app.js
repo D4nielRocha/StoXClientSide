@@ -13,7 +13,7 @@ const newsDiv = document.getElementById('displayNews');
 
 window.addEventListener('load', () => {
 
-        // updateData(localStorage.getItem('dataExpiration'));
+        updateData(localStorage.getItem('dataExpiration'));
 
         getDataAsync();
         document.getElementById('profileBtn').innerText = `${sessionStorage.getItem('email')}`;
