@@ -2,6 +2,7 @@ import * as url from './generalData/url.js';
 import * as chartJS from './chart/chart.js';
 import { displayUser } from './login/login.js';
 import { auth0WebAuth, auth0Authentication } from './auth/auth0-variables.js';
+import { BASE_URL } from './generalData/fetchData.js';
 
 
 let text = document.querySelector('#inputText');
@@ -30,7 +31,7 @@ async function getDataAsync(){
         
         try{
             
-            const news =  fetch(url.NEWS_API);
+            const news =  fetch(BASE_URL);
             const table =  fetch(url.trendURL, url.headers);
             const trending =  fetch(url.trendURL, url.headers);
             const spChart =  fetch(url.urlCharts, url.headers);
@@ -49,7 +50,7 @@ async function getDataAsync(){
             }).then( dataApi => {
                 console.log(dataApi);
                 localStorage.setItem('slider', JSON.stringify(dataApi[2].finance.result[0].quotes));
-                localStorage.setItem('news', JSON.stringify(dataApi[0].articles));
+                // localStorage.setItem('news', JSON.stringify(dataApi[0].articles));
                 localStorage.setItem('table', JSON.stringify(dataApi[1].finance.result[0].quotes));   
                 localStorage.setItem('chart', JSON.stringify(dataApi[3].chart.result[0])); 
                 localStorage.setItem('nasdaqChart', JSON.stringify(dataApi[4].chart.result[0])); 
@@ -58,7 +59,7 @@ async function getDataAsync(){
 
             })
 
-            let newsLocal = JSON.parse(localStorage.getItem('news'));
+            // let newsLocal = JSON.parse(localStorage.getItem('news'));
             let tableLocal = JSON.parse(localStorage.getItem('table'));
             let trendingSlider = JSON.parse(localStorage.getItem('slider'));
             let chart = JSON.parse(localStorage.getItem('chart'));
@@ -66,7 +67,7 @@ async function getDataAsync(){
             let dow = JSON.parse(localStorage.getItem('dowChart'));
             let localMovers = JSON.parse(localStorage.getItem('movers'));
             // console.log(localMovers);
-            displayNews(newsLocal);
+            // displayNews(newsLocal);
             createIndexYahooTable(tableLocal);
             populateSlider(trendingSlider)
             chartJS.createChart(chart, 1);
@@ -79,7 +80,7 @@ async function getDataAsync(){
             }
     }else {
 
-        let newsLocal = JSON.parse(localStorage.getItem('news'));
+        // let newsLocal = JSON.parse(localStorage.getItem('news'));
         let tableLocal = JSON.parse(localStorage.getItem('table'));
         let trendingSlider = JSON.parse(localStorage.getItem('slider'));
         let chart = JSON.parse(localStorage.getItem('chart'));
@@ -93,7 +94,7 @@ async function getDataAsync(){
         // console.log(chart);
 
 
-        displayNews(newsLocal);
+        // displayNews(newsLocal);
         createIndexYahooTable(tableLocal);
         populateSlider(trendingSlider);
         chartJS.createChart(chart, 1);
