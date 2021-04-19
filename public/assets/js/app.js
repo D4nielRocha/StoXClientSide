@@ -31,7 +31,7 @@ async function getDataAsync(){
         
         try{
             
-            const news =  fetch(BASE_URL);
+            const news =  fetch(`${BASE_URL}/faceoff`);
             const table =  fetch(url.trendURL, url.headers);
             const trending =  fetch(url.trendURL, url.headers);
             const spChart =  fetch(url.urlCharts, url.headers);
