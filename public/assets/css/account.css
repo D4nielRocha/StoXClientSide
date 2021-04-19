@@ -22,6 +22,14 @@ body {
   max-height: 100vh;
 }
 
+a {
+  text-decoration: none;
+}
+
+#navbarNav {
+  z-index: 2;
+}
+
 nav {
   font-size: 1.25rem;
   height: 6vh;
@@ -136,6 +144,16 @@ footer {
           animation: zoomIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
+#footer-icons a {
+  font-size: 1.3rem;
+  border: none;
+}
+
+.stox-footer span {
+  color: #ffae18;
+  text-decoration: none;
+}
+
 @-webkit-keyframes unfoldIn {
   0% {
     -webkit-transform: scaleY(0.005) scaleX(0.005);
@@ -237,6 +255,30 @@ footer {
   100% {
     -webkit-transform: scale(0);
             transform: scale(0);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .user-content #stoxs .stox-item {
+    font-size: 1rem;
+    height: 50vh;
+    width: 25vw;
+    padding: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .user-content #stoxs .stox-item {
+    font-size: 0.9rem;
+    height: 50vh;
+    width: 35vw;
+    padding: 0rem;
+  }
+  .navbar-dark .navbar-toggler, .navbar-light .navbar-toggler {
+    border: none;
+  }
+  .navbar {
+    height: 9vh;
   }
 }
 /*# sourceMappingURL=account.css.map */

@@ -49,7 +49,7 @@ let displayStox = (data) => {
 
     let stox =  ` <div class="stox-item col-2">
                 <h4>${item.asset1_name} X ${item.asset2_name}</h4>
-                <p>Created by: <span id="author">${author}</span> on ${item._date}</p>
+                <p>Created by: <span id="author">${author}</span><br>${item._date}</p>
                 <div class="row stox-content">
                     <div class="col-6">
                         <p>Closing Price <br> $${item.asset1_closing.toFixed(2)}</p>
@@ -131,8 +131,8 @@ let displaySingleStox = async (data) => {
 window.addEventListener('load', () => {
     let author = sessionStorage.getItem('email');
     console.log(author);
-    if(author == null){
-        alert('Please login to access your stoX');
+    if(!author){
+        document.getElementById('loginBtn').click();
     } else {
         document.getElementById('profileBtn').innerText = `${author}`;
         getUserStox(author);

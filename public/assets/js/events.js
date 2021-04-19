@@ -71,7 +71,6 @@ const fetchData = async (ticker, side, region = '') => {
 
     if(side == 'left'){
         id = 1; 
-        // console.log(`this is the financeArray`,financeArray);
         leftResult.innerHTML = displayResult(financeArray, data, id);
         backgroundComparison(id);
         formEvent.prepareSaveForm(financeArray, data, id);
@@ -143,7 +142,7 @@ leftBtn.addEventListener('click', () => {
 })
 
 
-const displayResult = (data, meta, id) => {
+const displayResult = (data, meta, id, ) => {
     hideSpinner();
     console.log(data);
     return `<h1 id="asset${id}">${meta[1]}</h1>

@@ -26,6 +26,10 @@ span{
     color: $primary-color;
 }
 
+a{
+    text-decoration: none;
+}
+
 
 .container{
     max-width: 1440px;
@@ -45,6 +49,11 @@ nav{
         // }
     }
 }
+
+#navbarNav{
+    z-index: 1;
+}
+
 
 #faceoff{
     position: relative;
@@ -126,8 +135,8 @@ nav{
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
-        height: 100%;
+        justify-content: center;
+        height: fit-content;
 
         #saveButton{
             margin-bottom: 5rem;
@@ -204,7 +213,9 @@ nav{
 
 #footer-icons{
     a{
-        font-size: 1rem;
+        font-size: 1.3rem;
+        border: none;
+        // height: 100%;
     }
 }
 
@@ -262,3 +273,61 @@ nav{
     color: red;
 }
 
+
+@media screen and(max-width: 1024px){
+    #search-result{
+
+        height: fit-content;
+        margin-bottom: 5rem;
+
+        #left-result, #right-result, canvas{
+            margin: 3rem 0;
+        }
+
+        #buttons{
+            // width: 100%;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            // margin-bottom: 3rem;
+            
+                #saveButton, #resetContent{
+                    margin-bottom: 0;
+                }
+        }
+
+    }
+
+}
+
+
+
+@media screen and(max-width: 768px){
+
+    .navbar-dark .navbar-toggler, .navbar-light .navbar-toggler{
+        border: none;
+    }
+
+    .navbar{
+        height: 9vh;
+    }
+
+    
+
+    #myChart1, #myChart2{
+        margin: 2rem 0;
+    }
+
+    #buttons{
+        width: 100%;
+    }
+    
+
+}
+
+
+@media screen and(max-width: 576px){
+    #search input[type=input]{
+        width: 80%;
+    }
+}

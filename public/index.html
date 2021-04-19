@@ -4,6 +4,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/imgs/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/imgs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/imgs/favicon-16x16.png">
+    <link rel="manifest" href="./assets/imgs/site.webmanifest">
+
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -87,14 +92,44 @@
             <div class="row g-2 text-center" id="content">
                 <div class="col-lg-8 col-md-12 bg-light" id="main-column">
                     <div class="row g-2 h-100" id="mainRow">
-                        <div class="col-lg-12 col-md-12" id="comparison_link">
-                            <h1>Stock Data</h1>
-                            <a class="btn" data-bs-placement="top" title="Go to Stock FaceOff" href="faceoff.html">X</a>
-                            <h1>Face Off</h1>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                                <polygon fill="rgb(255,255,255)" points="0,100 100,0 100,100"/>
-                              </svg>
+                      <div class="col-lg-12 col-md-12" id="comparison_link">
+                        <div id="step1" class="row">
+                          <div class="step-text col-xs-3">
+                            <h3>Step 1</h3>
+                            <p>Go to our faceoff page</p>
+                          </div>
+                          <img class="col-xs-9" src="./assets/imgs/step1.gif" alt="Step 1">
                         </div>
+                        <div id="step2" class="row">
+                          <div class="step-text col-xs-3">
+                            <h3>Step 2</h3>
+                            <p>Search and Compare Assets</p>
+                          </div>
+                          <img class="col-lg-9" src="./assets/imgs/step2.gif" alt="Step 2">
+                        </div>
+                        <div id="step3" class="row">
+                          <div class="step-text col-lg-3">
+                            <h3>Step 3</h3>
+                            <p>Save your Stox</p>
+                          </div>
+                          <img class="col-lg-9" src="./assets/imgs/step3.gif" alt="Step 3">
+                        </div>
+                        <div id="step4" class="row">
+                          <div class="step-text col-lg-3">
+                            <h3>Step 4</h3>
+                            <p>See your saved stox</p>
+                          </div>
+                          <img class="col-lg-9" src="./assets/imgs/step4.gif" alt="Step 4">
+                        </div>
+                          <h1>Stock Data</h1>
+                          <a class="btn" data-bs-placement="top" title="Go to Stock FaceOff" href="faceoff.html">X</a>
+                          <h1>Face Off</h1>
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                              <polygon fill="rgb(255,255,255)" points="0,100 100,0 100,100"/>
+                            </svg>
+                            <!-- <div id="step1">Step1</div> -->
+                      </div>
+                        
                         <div class="col-lg-12 bg-light table-responsive" id="table">
                             <table class="table table-hover">
                                 <thead>
@@ -115,7 +150,7 @@
                 </div>
               <div class="col-lg-4 col-md-12 col-sm-12 bg-light" id="side-column">
                     <div class="row g-2" id="sideBar">
-                      <div class="col-lg-12 col-sm-6" id="news">
+                      <div class="col-lg-12 col-sm-12" id="news">
                       </div>
                     </div>
 
@@ -213,6 +248,26 @@
 
         <!-- ==================== FOOTER =================== -->
 
+        <!-- ==================== WALKTHROUGH MODAL  =================== -->
+
+  <!-- <div class="modal fade" id="stoxWalkthrough" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="stoxSteps" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title col-12 text-center text-white" id="stoxSteps">Sto<span>X</span> Walkthrough</h5>
+        </div>
+        <div class="modal-body" id="modalBody">
+           <div class="step-wrapper">
+             <div id="step1">Step1</div>
+             <div id="step2">Step2</div>
+             <div id="step3">Step3</div>
+             <div id="step4">Step4</div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
 
       
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
@@ -221,7 +276,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script>
+
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
     

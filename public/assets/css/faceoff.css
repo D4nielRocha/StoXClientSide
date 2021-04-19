@@ -33,6 +33,10 @@ span {
   color: #ffae18;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   max-width: 1440px;
   max-height: auto;
@@ -45,6 +49,10 @@ nav {
 
 nav .navbar-brand {
   font-size: 2rem;
+}
+
+#navbarNav {
+  z-index: 1;
 }
 
 #faceoff {
@@ -136,10 +144,12 @@ nav .navbar-brand {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 #search-result #buttons #saveButton {
@@ -198,7 +208,8 @@ nav .navbar-brand {
 }
 
 #footer-icons a {
-  font-size: 1rem;
+  font-size: 1.3rem;
+  border: none;
 }
 
 .stox-footer span {
@@ -248,5 +259,53 @@ nav .navbar-brand {
 #logoutBtn {
   display: none;
   color: red;
+}
+
+@media screen and (max-width: 1024px) {
+  #search-result {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin-bottom: 5rem;
+  }
+  #search-result #left-result, #search-result #right-result, #search-result canvas {
+    margin: 3rem 0;
+  }
+  #search-result #buttons {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  #search-result #buttons #saveButton, #search-result #buttons #resetContent {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-dark .navbar-toggler, .navbar-light .navbar-toggler {
+    border: none;
+  }
+  .navbar {
+    height: 9vh;
+  }
+  #myChart1, #myChart2 {
+    margin: 2rem 0;
+  }
+  #buttons {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #search input[type=input] {
+    width: 80%;
+  }
 }
 /*# sourceMappingURL=faceoff.css.map */

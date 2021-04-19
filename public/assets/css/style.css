@@ -21,6 +21,10 @@ body {
   display: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 nav {
   font-size: 1.25rem;
   height: 6vh;
@@ -35,7 +39,7 @@ nav .navbar-brand span {
 }
 
 #navbarNav {
-  z-index: 1;
+  z-index: 100000;
 }
 
 #profileBtn {
@@ -85,6 +89,58 @@ nav .navbar-brand span {
       -ms-flex-align: center;
           align-items: center;
   border-bottom: 2px solid lightgrey;
+}
+
+#content #mainRow #comparison_link #step1, #content #mainRow #comparison_link #step2, #content #mainRow #comparison_link #step3, #content #mainRow #comparison_link #step4 {
+  color: white;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ff9d2f), to(#ff6126));
+  background-image: linear-gradient(#ff9d2f, #ff6126);
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+}
+
+#content #mainRow #comparison_link #step1 .step-text, #content #mainRow #comparison_link #step2 .step-text, #content #mainRow #comparison_link #step3 .step-text, #content #mainRow #comparison_link #step4 .step-text {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#content #mainRow #comparison_link #step1 img, #content #mainRow #comparison_link #step2 img, #content #mainRow #comparison_link #step3 img, #content #mainRow #comparison_link #step4 img {
+  padding: 1rem;
+}
+
+#content #mainRow #comparison_link #step1 {
+  z-index: 10000;
+}
+
+#content #mainRow #comparison_link #step2 {
+  z-index: 1000;
+}
+
+#content #mainRow #comparison_link #step3 {
+  z-index: 100;
+}
+
+#content #mainRow #comparison_link #step4 {
+  z-index: 10;
 }
 
 #content #mainRow #comparison_link h1, #content #mainRow #comparison_link a {
@@ -229,6 +285,11 @@ hr {
           animation: ticker-kf 20s linear infinite;
 }
 
+.ticker-display:hover {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+
 .ticker-item {
   color: white;
   border-right: 1px outset #ffae18;
@@ -308,7 +369,7 @@ hr {
           align-items: center;
 }
 
-.tutorial #step-row #step1, .tutorial #step-row #step2, .tutorial #step-row #step3 {
+.tutorial #step-row #step1, .tutorial #step-row #step2, .tutorial #step-row #step3, .tutorial #step-row #step4 {
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -368,7 +429,7 @@ hr {
 }
 
 .chart #chart-row {
-  width: 100%;
+  width: 90%;
 }
 
 .chart #chart-row .carousel-inner .active {
@@ -394,24 +455,68 @@ hr {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
   text-align: center;
 }
 
-.chart #video-row #video {
-  margin-bottom: 1rem;
-}
-
 .chart #video-row #video iframe {
-  width: 50%;
+  width: 80%;
 }
 
 .stox-footer span {
   color: #ffae18;
+}
+
+#footer-icons a {
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 0;
+}
+
+#stoxSteps span {
+  color: #ffae18;
+}
+
+#modalBody {
+  padding: 0;
+}
+
+#modalBody .step-wrapper {
+  height: 50vh;
+  margin: 0;
+  width: 100%;
+}
+
+#modalBody .step-wrapper #step1, #modalBody .step-wrapper #step2, #modalBody .step-wrapper #step3, #modalBody .step-wrapper #step4 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  text-align: center;
+  margin: 0;
+}
+
+#modalBody .step-wrapper #step1 {
+  z-index: 100000;
+  background-color: #ff9d2f;
+}
+
+#modalBody .step-wrapper #step2 {
+  z-index: 10000;
+  background-color: #2fff63;
+}
+
+#modalBody .step-wrapper #step3 {
+  z-index: 1000;
+  background-color: #322fff;
+}
+
+#modalBody .step-wrapper #step4 {
+  background-color: #ff2f2f;
 }
 
 @media screen and (max-width: 1024px) {
@@ -439,14 +544,6 @@ hr {
   }
   #video-row #video-text h2 {
     font-size: 1.2rem;
-  }
-  #video-row #video {
-    width: 100%;
-  }
-  #video-row #video iframe {
-    padding: 0;
-    width: 100%;
-    height: 80%;
   }
   #mainRow table {
     font-size: 0.8rem;
@@ -484,22 +581,51 @@ hr {
   .navbar {
     height: 9vh;
   }
-  #mainRow {
-    width: 100vw;
-    height: 50vh;
-    margin-top: .5rem;
+  #content {
+    overflow-y: auto;
+    height: 150vh;
   }
-  #mainRow #comparison_link {
-    height: 50%;
+  #content #mainRow {
+    width: 100vw;
+  }
+  #content #mainRow #comparison_link {
+    height: 55%;
     background-color: white;
   }
-  #mainRow #comparison_link svg {
-    height: 60vw;
+  #content #mainRow #comparison_link svg {
+    height: 94.5vw;
   }
-  #mainRow #comparison_link div {
-    height: auto;
+  #content #mainRow #comparison_link a {
+    font-size: 12rem;
   }
-  #mainRow table {
+  #content #mainRow #comparison_link #step1 .step-text, #content #mainRow #comparison_link #step2 .step-text, #content #mainRow #comparison_link #step3 .step-text, #content #mainRow #comparison_link #step4 .step-text {
+    height: 20%;
+    font-size: 1.2rem;
+  }
+  #content #mainRow #comparison_link #step1 .step-text h3, #content #mainRow #comparison_link #step2 .step-text h3, #content #mainRow #comparison_link #step3 .step-text h3, #content #mainRow #comparison_link #step4 .step-text h3 {
+    font-size: 2.5rem;
+  }
+  #content #mainRow #comparison_link #step1 img, #content #mainRow #comparison_link #step2 img, #content #mainRow #comparison_link #step3 img, #content #mainRow #comparison_link #step4 img {
+    width: 100%;
+    height: 50%;
+    padding: 0rem;
+  }
+  #content #mainRow #comparison_link #step1 #step1, #content #mainRow #comparison_link #step2 #step1, #content #mainRow #comparison_link #step3 #step1, #content #mainRow #comparison_link #step4 #step1 {
+    z-index: 10000;
+  }
+  #content #mainRow #comparison_link #step1 #step2, #content #mainRow #comparison_link #step2 #step2, #content #mainRow #comparison_link #step3 #step2, #content #mainRow #comparison_link #step4 #step2 {
+    z-index: 1000;
+  }
+  #content #mainRow #comparison_link #step1 #step3, #content #mainRow #comparison_link #step2 #step3, #content #mainRow #comparison_link #step3 #step3, #content #mainRow #comparison_link #step4 #step3 {
+    z-index: 100;
+  }
+  #content #mainRow #comparison_link #step1 #step4, #content #mainRow #comparison_link #step2 #step4, #content #mainRow #comparison_link #step3 #step4, #content #mainRow #comparison_link #step4 #step4 {
+    z-index: 10;
+  }
+  #content #mainRow #table {
+    height: 50%;
+  }
+  #content #mainRow #table table {
     margin-top: 0.5rem;
     font-size: 0.9rem;
   }
@@ -511,6 +637,16 @@ hr {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
+  }
+  #sidebar #news {
+    margin-top: 6rem;
+  }
+  #sidebar #news .news-wrapper .news-content a {
+    font-size: 0.9rem;
+  }
+  #sidebar #news .news-wrapper .news-image img {
+    width: 50%;
+    height: 75%;
   }
   .ticker-checkout {
     height: 4vh;
@@ -533,8 +669,35 @@ hr {
 }
 
 @media screen and (max-width: 576px) {
-  #mainRow table {
+  #content {
+    margin-bottom: 0;
+  }
+  #content #main-column {
+    margin-bottom: -20rem;
+  }
+  #content #main-column #mainRow #comparison_link {
+    height: 50%;
+  }
+  #content #main-column #mainRow #comparison_link svg {
+    height: 116vw;
+  }
+  #content #main-column #mainRow #table {
+    height: 50%;
+    overflow: scroll;
+  }
+  #content #main-column #mainRow #table table {
     font-size: 0.7rem;
+  }
+  #content #sidebar #news {
+    -webkit-transform: translateY(30%);
+            transform: translateY(30%);
+  }
+  #content #sidebar #news .news-wrapper .news-content a {
+    font-size: 0.9rem;
+  }
+  #content #sidebar #news .news-wrapper .news-image img {
+    width: 50%;
+    height: 75%;
   }
 }
 /*# sourceMappingURL=style.css.map */

@@ -17,6 +17,8 @@ window.addEventListener('load', () => {
 
         getDataAsync();
         document.getElementById('profileBtn').innerText = `${sessionStorage.getItem('email')}`;
+        // $('#stoxWalkthrough').modal('show');
+        // document.getElementById('stoxWalkthrough').focus();
 });   
         
 // Function to fetch url and get data parsed 
@@ -258,6 +260,14 @@ let updateData = (localExpiration) => {
     }
 }
 
+
+
+const tl = gsap.timeline({defaults: {ease: 'power1.out'}});
+
+tl.fromTo('#step1', {y: '0%'}, {x: '-110%', delay: 3, duration: 4, stagger: 0.25}), '-=2';
+tl.fromTo('#step2', {x: '0%'}, {x: '-110%', delay: 4, duration: 4, stagger: 0.25}), '-=2';
+tl.fromTo('#step3', {x: '0%'}, {x: '-110%', delay: 5, duration: 4, stagger: 0.25}), '-=2';
+tl.fromTo('#step4', {x: '0%'}, {x: '-110%', delay: 2, duration: 4, stagger: 0.25}), '-=2';
 
 
 
