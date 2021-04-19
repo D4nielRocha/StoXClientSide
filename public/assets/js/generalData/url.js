@@ -49,7 +49,7 @@
 
       //===================NEWS API ======================================//
 
-      const NEWS_API = `http://newsapi.org/v2/top-headlines?sources=business-insider&apiKey=3d286b585e694be39fcdfd24d4856f2e`;
+      const NEWS_API = `https://newsapi.org/v2/top-headlines?sources=business-insider&apiKey=3d286b585e694be39fcdfd24d4856f2e`;
 
 
       //===================ALPHA ADVANTAGE API ======================================//
