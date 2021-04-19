@@ -44,12 +44,12 @@
 
       //======================MARKETSTACK ===================================//
 
-      const marketURL = `http://api.marketstack.com/v1/eod?access_key=8ab519ff412561125ca0729e24df2b3c&symbols=MSFT`;
+      const marketURL = `https://api.marketstack.com/v1/eod?access_key=8ab519ff412561125ca0729e24df2b3c&symbols=MSFT`;
 
 
       //===================NEWS API ======================================//
 
-      const NEWS_API = `https://newsapi.org/v2/top-headlines?sources=business-insider&apiKey=3d286b585e694be39fcdfd24d4856f2e`;
+      const NEWS_API = `http://newsapi.org/v2/top-headlines?sources=business-insider&apiKey=3d286b585e694be39fcdfd24d4856f2e`;
 
 
       //===================ALPHA ADVANTAGE API ======================================//
