@@ -70,8 +70,14 @@ const fetchData = async (ticker, side, region = '') => {
        let financeArray = Object.values(fData);
 
     if(side == 'left'){
-        id = 1; 
-        leftResult.innerHTML = displayResult(financeArray, data, id);
+        id = 1;
+        if(region == ''){
+          leftResult.innerHTML = displayResult(financeArray, data, id, 'USD');
+        } else if (region == '.SAO'){
+          leftResult.innerHTML = displayResult(financeArray, data, id, 'R$');
+        } else if (region == '.LON'){
+          leftResult.innerHTML = displayResult(financeArray, data, id, '£');
+        }
         backgroundComparison(id);
         formEvent.prepareSaveForm(financeArray, data, id);
         if(region == ''){
@@ -82,7 +88,13 @@ const fetchData = async (ticker, side, region = '') => {
         }
     } else if( side == 'right') {
         id = 2;
-        rightResult.innerHTML = displayResult(financeArray, data, id);
+        if(region == ''){
+          rightResult.innerHTML = displayResult(financeArray, data, id, 'USD');
+        } else if (region == '.SAO'){
+          rightResult.innerHTML = displayResult(financeArray, data, id, 'R$');
+        } else if (region == '.LON'){
+          rightResult.innerHTML = displayResult(financeArray, data, id, '£');
+        }
         backgroundComparison(id);
         formEvent.prepareSaveForm(financeArray, data, id);  
           if(region == ''){
@@ -142,7 +154,7 @@ leftBtn.addEventListener('click', () => {
 })
 
 
-const displayResult = (data, meta, id, ) => {
+const displayResult = (data, meta, id, currency ) => {
     hideSpinner();
     console.log(data);
     return `<h1 id="asset${id}">${meta[1]}</h1>
@@ -157,7 +169,7 @@ const displayResult = (data, meta, id, ) => {
                 </div>
                 <div class="card text-black bg-stox mb-3">
                   <div class="card-body">
-                    <h5 class="card-title">DAILY OPEN</h5>
+                    <h5 class="card-title">DAILY OPEN in ${currency}</h5>
                     <p class="card-text" id="open${id}">
                       ${data[0]}
                     </p>
@@ -165,7 +177,7 @@ const displayResult = (data, meta, id, ) => {
                 </div>
                 <div class="card text-black mb-3" id="closeDiv${id}">
                   <div class="card-body">
-                    <h5 class="card-title">DAILY CLOSE</h5>
+                    <h5 class="card-title">DAILY CLOSE in ${currency}</h5>
                     <p class="card-text" id="close${id}">
                       ${data[4]}
                     </p>
@@ -173,7 +185,7 @@ const displayResult = (data, meta, id, ) => {
                 </div>
                 <div class="card text-black bg-stox mb-3">
                   <div class="card-body">
-                    <h5 class="card-title">INTRADAY - HIGH</h5>
+                    <h5 class="card-title">INTRADAY - HIGH in ${currency}</h5>
                     <p class="card-text">
                       ${data[2]}
                     </p>
@@ -181,7 +193,7 @@ const displayResult = (data, meta, id, ) => {
                 </div>
                 <div class="card text-black bg-stox mb-3">
                   <div class="card-body">
-                    <h5 class="card-title">INTRADAY - LOW</h5>
+                    <h5 class="card-title">INTRADAY - LOW in ${currency}</h5>
                     <p class="card-text">
                       ${data[3]}
                     </p>
@@ -265,7 +277,7 @@ let createNewStox = async (stox) => {
 
 let createSummaryButton = (id) => {
   console.log(id);
-  return `<button type="button" class="btn btn-md btn-light" data-bs-toggle="modal" data-bs-target="#financialOverview${id}">Financial Overview</button>
+  return `<button type="button" id="financialBtn" class="btn btn-md btn-outline-dark" data-bs-toggle="modal" data-bs-target="#financialOverview${id}">Financial Overview</button>
           `
 }
 /* <canvas id="myChart${id}"></canvas> */
