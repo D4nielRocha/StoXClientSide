@@ -24,6 +24,8 @@ window.addEventListener('load', () => {
 // Function to fetch url and get data parsed 
 async function getDataAsync(){
 
+    console.log('data async triggered');
+
     if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider') || !localStorage.getItem('chart') || !localStorage.getItem('movers') || !localStorage.getItem('nasdaqChart') || !localStorage.getItem('dowChart')){
         
         try{
