@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "https://stox-server.azurewebsites.net/";
 
 
 //get HHTP header for requests to the application
