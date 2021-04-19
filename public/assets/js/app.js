@@ -39,7 +39,7 @@ async function getDataAsync(){
             const dowCharts = fetch(url.dowUrl, url.headers);
             const movers = fetch(url.urlMovers, url.headers);
             const results = Promise.all([news, table,trending,spChart, nasdaqCharts, dowCharts, movers]).then( async ([news, table, trending, spChart, nasdaqChart, dowChart, movers]) => {
-                const newsJson = await news.json();
+                // const newsJson = await news.json();
                 const tableJson = await table.json();
                 const trendingJson = await trending.json();
                 const chartJson = await spChart.json();
