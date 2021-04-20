@@ -281,4 +281,20 @@ footer {
     height: 9vh;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .user-content #stoxs .stox-item {
+    font-size: 0.8rem;
+    height: 25%;
+  }
+  .user-content #stoxs .stox-item h4 {
+    font-size: 0.8rem;
+  }
+  .user-content #stoxs .stox-item .stox-content {
+    display: none;
+  }
+  .user-content #stoxs .stox-item button {
+    font-size: 0.3rem;
+  }
+}
 /*# sourceMappingURL=account.css.map */

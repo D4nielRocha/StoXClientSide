@@ -14,7 +14,7 @@ const newsDiv = document.getElementById('displayNews');
 
 window.addEventListener('load', () => {
 
-        updateData(localStorage.getItem('dataExpiration'));
+        // updateData(localStorage.getItem('dataExpiration'));
 
         getDataAsync();
         document.getElementById('profileBtn').innerText = `${sessionStorage.getItem('email')}`;
@@ -25,13 +25,13 @@ window.addEventListener('load', () => {
 // Function to fetch url and get data parsed 
 async function getDataAsync(){
 
-    console.log('data async triggered');
+    // console.log('data async triggered');
 
-    // if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider') || !localStorage.getItem('chart') || !localStorage.getItem('movers') || !localStorage.getItem('nasdaqChart') || !localStorage.getItem('dowChart')){
+    if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider') || !localStorage.getItem('chart') || !localStorage.getItem('movers') || !localStorage.getItem('nasdaqChart') || !localStorage.getItem('dowChart')){
         
         try{
             
-            const news =  fetch(`${BASE_URL}/faceoff`);
+            const news =  fetch(url.NEWS_API);
             const table =  fetch(url.trendURL, url.headers);
             const trending =  fetch(url.trendURL, url.headers);
             const spChart =  fetch(url.urlCharts, url.headers);
@@ -51,7 +51,7 @@ async function getDataAsync(){
             }).then( dataApi => {
                 console.log(dataApi);
                 localStorage.setItem('slider', JSON.stringify(dataApi[2].finance.result[0].quotes));
-                // localStorage.setItem('news', JSON.stringify(dataApi[0].articles));
+                localStorage.setItem('news', JSON.stringify(dataApi[0].articles));
                 localStorage.setItem('table', JSON.stringify(dataApi[1].finance.result[0].quotes));   
                 localStorage.setItem('chart', JSON.stringify(dataApi[3].chart.result[0])); 
                 localStorage.setItem('nasdaqChart', JSON.stringify(dataApi[4].chart.result[0])); 
@@ -60,7 +60,7 @@ async function getDataAsync(){
 
             })
 
-            // let newsLocal = JSON.parse(localStorage.getItem('news'));
+            let newsLocal = JSON.parse(localStorage.getItem('news'));
             let tableLocal = JSON.parse(localStorage.getItem('table'));
             let trendingSlider = JSON.parse(localStorage.getItem('slider'));
             let chart = JSON.parse(localStorage.getItem('chart'));
@@ -68,7 +68,7 @@ async function getDataAsync(){
             let dow = JSON.parse(localStorage.getItem('dowChart'));
             let localMovers = JSON.parse(localStorage.getItem('movers'));
             // console.log(localMovers);
-            // displayNews(newsLocal);
+            displayNews(newsLocal);
             createIndexYahooTable(tableLocal);
             populateSlider(trendingSlider)
             chartJS.createChart(chart, 1);
@@ -79,32 +79,32 @@ async function getDataAsync(){
             }catch(err){
                 console.log(err);
             }
-    // }else {
+    }else {
 
-        // // let newsLocal = JSON.parse(localStorage.getItem('news'));
-        // let tableLocal = JSON.parse(localStorage.getItem('table'));
-        // let trendingSlider = JSON.parse(localStorage.getItem('slider'));
-        // let chart = JSON.parse(localStorage.getItem('chart'));
-        // let nasdaq = JSON.parse(localStorage.getItem('nasdaqChart'));
-        // let dow = JSON.parse(localStorage.getItem('dowChart'));
-        // let movers = JSON.parse(localStorage.getItem('movers'));
-        // // console.log(movers);
-        // // console.log(tableLocal);
+        let newsLocal = JSON.parse(localStorage.getItem('news'));
+        let tableLocal = JSON.parse(localStorage.getItem('table'));
+        let trendingSlider = JSON.parse(localStorage.getItem('slider'));
+        let chart = JSON.parse(localStorage.getItem('chart'));
+        let nasdaq = JSON.parse(localStorage.getItem('nasdaqChart'));
+        let dow = JSON.parse(localStorage.getItem('dowChart'));
+        let movers = JSON.parse(localStorage.getItem('movers'));
+        // console.log(movers);
+        // console.log(tableLocal);
 
-        // // console.log(`this is the chart`);
-        // // console.log(chart);
+        // console.log(`this is the chart`);
+        // console.log(chart);
 
 
-        // // displayNews(newsLocal);
-        // createIndexYahooTable(tableLocal);
-        // populateSlider(trendingSlider);
-        // chartJS.createChart(chart, 1);
-        // chartJS.createChart(nasdaq, 2, 'NASDAQ');
-        // chartJS.createChart(dow, 3, 'DOW JONES');
-        // negativeNumber();
+        displayNews(newsLocal);
+        createIndexYahooTable(tableLocal);
+        populateSlider(trendingSlider);
+        chartJS.createChart(chart, 1);
+        chartJS.createChart(nasdaq, 2, 'NASDAQ');
+        chartJS.createChart(dow, 3, 'DOW JONES');
+        negativeNumber();
 
-        // console.log('LocalStorage is already Up To Date!');
-    // }
+        console.log('LocalStorage is already Up To Date!');
+    }
 
   
 }

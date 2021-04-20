@@ -18,7 +18,6 @@ $carousel-transition-duration: 2s;
 
 body{
     overflow-x: hidden;
-    // font-family: 'Merriweather', serif;
     font-family: 'Fira Sans Condensed', sans-serif;
     height: auto;
 }
@@ -26,7 +25,6 @@ body{
 .container{
     max-width: 1440px;
     max-height: 100vh;
-    // background-color: white;
 }
 
 ::-webkit-scrollbar{
@@ -49,7 +47,6 @@ nav{
     
     .navbar-brand{
         font-size: 2rem;
-        // margin-bottom: 2rem;
 
         span{
             color: $primary-color;
@@ -118,7 +115,6 @@ nav{
                     justify-content: center;
                     align-items: center;
                     position: absolute;
-                    // background-color: lightcoral;
 
                     .step-text{
                         height: 100%;
@@ -576,9 +572,6 @@ hr{
             
             #mainRow{
                 width: 100vw;
-                // height: fit-content;
-                // margin-top: .5rem;
-                // margin-bottom: -10rem;
         
             #comparison_link{
                 height: 55%;
@@ -631,9 +624,7 @@ hr{
                 height: 50%;
                     table{
                         margin-top: 0.5rem;
-                        font-size: 0.9rem;
-                        // width: fit-content;
-                        // height: auto;
+                        font-size: 0.9rem;                       
                     }
                 }
             
@@ -669,7 +660,6 @@ hr{
     .ticker-checkout{
         height: 4vh;
         .checkout-title{
-            // padding: 1rem;
             font-size: 0.5rem;
             text-align: center;
         }
@@ -701,11 +691,9 @@ hr{
         #main-column{
             
             margin-bottom: -20rem;
-            // height: 80vh;
 
             #mainRow{
 
-                // height: 50vh;
 
                 #comparison_link{
                     height: 50%;
@@ -718,7 +706,6 @@ hr{
                 #table{
                     height: 50%;
                     overflow: scroll;
-                    // margin-top: -18rem;
 
                     table{
                         font-size: 0.7rem;
@@ -730,7 +717,6 @@ hr{
         }
 
         #sidebar{
-            // overflow: auto;
             #news{
                 transform: translateY(30%);
                 .news-wrapper{
@@ -748,20 +734,88 @@ hr{
                     }
                 }
             }
-    
-           
+
         }
     }
 
 
-    
-
-  
-
-    
 
 }
 
+
+@media screen and (max-width: 450px){
+
+    .ticker-checkout{
+        height: 3vh;
+        width: 20%;
+
+        .checkout-title{
+            font-size: 0.3rem;
+            text-align: center;
+        }
+    }
+    
+    
+    #displayDiv{
+        height: 3vh;
+        .ticker-item{
+            width: 25%;
+            font-size: 0.5rem;
+        }
+    }
+#content{
+    #main-column{
+        #mainRow{
+            #table{
+                width: 95%;
+                table{
+                    font-size: 0.5rem;
+                }
+            }
+        }
+    }
+
+    #sidebar{
+        #news{
+            transform: translateY(40%);
+            .news-wrapper{
+                .news-content{
+                    a{
+                        font-size: 0.7rem;
+                    }
+                }
+                .news-image{
+                    img{
+                        width: 35%;
+                        height: 50%;
+                    }
+                    
+                }
+            }
+        }
+
+    }
+}
+
+
+    .chart{
+
+        height: 40vh;
+
+        #chart-row{
+            .carousel-inner{
+                .carousel-item{ 
+
+                    #myChart1, #myChart2, #myChart3{
+                        margin-top: 2rem;
+                        min-height: 200px;
+                    }
+                }
+            }
+    
+        }
+    }
+}
 
 
 

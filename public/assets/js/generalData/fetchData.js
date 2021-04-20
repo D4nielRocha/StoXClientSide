@@ -1,4 +1,5 @@
-const BASE_URL = "https://stox-server.azurewebsites.net/";
+// const BASE_URL = "https://stox-server.azurewebsites.net/";
+const BASE_URL = "http://localhost:8080";
 
 
 //get HHTP header for requests to the application

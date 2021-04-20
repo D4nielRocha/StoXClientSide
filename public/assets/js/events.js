@@ -233,6 +233,7 @@ let saveStox = async () => {
   
       const result = await createNewStox(newStox);
       console.log(result);
+      alert('StoX Saved. Go to the account page to check out your stox');
       formEvent.resetSearch();
     }
   
@@ -249,7 +250,8 @@ let saveStox = async () => {
 
 let createNewStox = async (stox) => {
 
-  const url = `${dataFetch.BASE_URL}/faceoff`;
+  const url = `http://localhost:8080/faceoff`
+  // const url = `${dataFetch.BASE_URL}/faceoff`;
 
   let httpMethod = 'POST';
 

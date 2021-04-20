@@ -700,4 +700,46 @@ hr {
     height: 75%;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .ticker-checkout {
+    height: 3vh;
+    width: 20%;
+  }
+  .ticker-checkout .checkout-title {
+    font-size: 0.3rem;
+    text-align: center;
+  }
+  #displayDiv {
+    height: 3vh;
+  }
+  #displayDiv .ticker-item {
+    width: 25%;
+    font-size: 0.5rem;
+  }
+  #content #main-column #mainRow #table {
+    width: 95%;
+  }
+  #content #main-column #mainRow #table table {
+    font-size: 0.5rem;
+  }
+  #content #sidebar #news {
+    -webkit-transform: translateY(40%);
+            transform: translateY(40%);
+  }
+  #content #sidebar #news .news-wrapper .news-content a {
+    font-size: 0.7rem;
+  }
+  #content #sidebar #news .news-wrapper .news-image img {
+    width: 35%;
+    height: 50%;
+  }
+  .chart {
+    height: 40vh;
+  }
+  .chart #chart-row .carousel-inner .carousel-item #myChart1, .chart #chart-row .carousel-inner .carousel-item #myChart2, .chart #chart-row .carousel-inner .carousel-item #myChart3 {
+    margin-top: 2rem;
+    min-height: 200px;
+  }
+}
 /*# sourceMappingURL=style.css.map */
