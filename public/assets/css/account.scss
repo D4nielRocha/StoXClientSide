@@ -85,6 +85,11 @@ nav{
             margin: 1% 0.5rem;
             font-size: 1.1rem;
             font-weight: 400;
+
+            .card-inner{
+              transition: transform 0.8s;
+              transform-style: preserve-3d;
+            }
             
 
             #buttons{

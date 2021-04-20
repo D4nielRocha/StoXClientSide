@@ -29,7 +29,7 @@ document.getElementById('logoutBtn').addEventListener('click', event => {
     event.preventDefault();
 
     sessionStorage.clear();
-    auth0WebAuth.logout({returnTo: location.href});
+    auth0WebAuth.logout({returnTo: 'http://localhost:3000/index.html'});
     console.log('Logged Out');
 }, false);
 
