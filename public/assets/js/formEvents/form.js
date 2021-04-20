@@ -13,6 +13,9 @@ function prepareSaveForm(data, meta, id){
     rightInput.value = '';
     leftResult.innerHTML = '';
     rightResult.innerHTML = '';
+    document.getElementById('left-region').value = 0;
+    document.getElementById('right-region').value = 0;
+    
   }
   
   
