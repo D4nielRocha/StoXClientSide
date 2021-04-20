@@ -48,24 +48,13 @@ const fetchData = async (ticker, side, region = '') => {
 
       //Parsing Data (JSON)
       const dailyDataJson = await dailyData.json();
-
-      // console.log(`this is the chartJson`, chartJson);
-      //Preparing data for chart function 
-      // console.log(`this is the chartData`, chartData);
-       //Access Key values in json object 
        let fData = dailyDataJson['Time Series (Daily)'];
        let data = dailyDataJson['Meta Data'];
+       
        //Convert objects into Array
        fData = Object.values(fData)[0];
        data = Object.values(data);
-      //  let summary = Object.values(companySummaryJson);
-      //  console.log(`this is the object.entries`,  Object.entries(companySummaryJson));
-      //  console.log(`this is the data`, data[1], data[2]);
-      // console.log(`this is the companySummaryJson`, companySummaryJson);
-      // for(let [key, value] of Object.entries(companySummaryJson)){
-      //   // console.log(`${key}: ${value}`);
-      // }
-      // console.log(summary);
+
        //Convert first key of financial data object into Array
        let financeArray = Object.values(fData);
 

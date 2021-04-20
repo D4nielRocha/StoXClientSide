@@ -9,8 +9,6 @@ let text = document.querySelector('#inputText');
 const tableDiv = document.getElementById('tableBody');
 const newsDiv = document.getElementById('displayNews');
 
-// window.localStorage.clear();
-
 
 window.addEventListener('load', () => {
 
@@ -18,8 +16,7 @@ window.addEventListener('load', () => {
 
         getDataAsync();
         document.getElementById('profileBtn').innerText = `${sessionStorage.getItem('email')}`;
-        // $('#stoxWalkthrough').modal('show');
-        // document.getElementById('stoxWalkthrough').focus();
+
 });   
         
 // Function to fetch url and get data parsed 
@@ -40,7 +37,6 @@ async function getDataAsync(){
             const movers = fetch(url.urlMovers, url.headers);
             const results = Promise.all([news, table,trending,spChart, nasdaqCharts, dowCharts, movers]).then( async ([news, table, trending, spChart, nasdaqChart, dowChart, movers]) => {
                 const newsJson = await news.json();
-                console.log(`this is the newsJson`, newsJson);
                 const tableJson = await table.json();
                 const trendingJson = await trending.json();
                 const chartJson = await spChart.json();
@@ -60,53 +56,39 @@ async function getDataAsync(){
 
             })
 
-            let newsLocal = JSON.parse(localStorage.getItem('news'));
-            let tableLocal = JSON.parse(localStorage.getItem('table'));
-            let trendingSlider = JSON.parse(localStorage.getItem('slider'));
-            let chart = JSON.parse(localStorage.getItem('chart'));
-            let nasdaq = JSON.parse(localStorage.getItem('nasdaqChart'));
-            let dow = JSON.parse(localStorage.getItem('dowChart'));
-            let localMovers = JSON.parse(localStorage.getItem('movers'));
-            // console.log(localMovers);
-            displayNews(newsLocal);
-            createIndexYahooTable(tableLocal);
-            populateSlider(trendingSlider)
-            chartJS.createChart(chart, 1);
-            chartJS.createChart(nasdaq, 2, 'NASDAQ');
-            chartJS.createChart(dow, 3, 'DOW JONES');
-            negativeNumber();
+            loadData();
 
             }catch(err){
                 console.log(err);
             }
     }else {
-
-        let newsLocal = JSON.parse(localStorage.getItem('news'));
-        let tableLocal = JSON.parse(localStorage.getItem('table'));
-        let trendingSlider = JSON.parse(localStorage.getItem('slider'));
-        let chart = JSON.parse(localStorage.getItem('chart'));
-        let nasdaq = JSON.parse(localStorage.getItem('nasdaqChart'));
-        let dow = JSON.parse(localStorage.getItem('dowChart'));
-        let movers = JSON.parse(localStorage.getItem('movers'));
-        // console.log(movers);
-        // console.log(tableLocal);
-
-        // console.log(`this is the chart`);
-        // console.log(chart);
-
-
-        displayNews(newsLocal);
-        createIndexYahooTable(tableLocal);
-        populateSlider(trendingSlider);
-        chartJS.createChart(chart, 1);
-        chartJS.createChart(nasdaq, 2, 'NASDAQ');
-        chartJS.createChart(dow, 3, 'DOW JONES');
-        negativeNumber();
-
+        loadData();
         console.log('LocalStorage is already Up To Date!');
+
     }
 
   
+}
+
+
+
+let loadData = () => {
+
+    let newsLocal = JSON.parse(localStorage.getItem('news'));
+    let tableLocal = JSON.parse(localStorage.getItem('table'));
+    let trendingSlider = JSON.parse(localStorage.getItem('slider'));
+    let chart = JSON.parse(localStorage.getItem('chart'));
+    let nasdaq = JSON.parse(localStorage.getItem('nasdaqChart'));
+    let dow = JSON.parse(localStorage.getItem('dowChart'));
+    let movers = JSON.parse(localStorage.getItem('movers'));
+
+    displayNews(newsLocal);
+    createIndexYahooTable(tableLocal);
+    populateSlider(trendingSlider);
+    chartJS.createChart(chart, 1);
+    chartJS.createChart(nasdaq, 2, 'NASDAQ');
+    chartJS.createChart(dow, 3, 'DOW JONES');
+    negativeNumber();
 }
 
 
@@ -123,10 +105,7 @@ async function negativeNumber(){
             array.push(row[0]);
     }
 
-    // console.log(row);
-
-
-    
+  
     // console.log(array);
     for(let j = 0; j <= array.length-1; j++){
         let percentage = array[j].cells[4];
@@ -255,9 +234,9 @@ let updateData = (localExpiration) => {
         // console.log(localExp);
         let localDate = new Date(localExp);
         // console.log(localDate);
-        console.log(new Date() < localDate);
+        console.log(new Date() > localDate);
         console.log(new Date(), localDate);
-        if(new Date() < localDate){
+        if(new Date() > localDate){ 
             localStorage.clear();
             console.log(`localstorage clear!`);
         }
