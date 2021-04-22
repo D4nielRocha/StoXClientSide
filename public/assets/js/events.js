@@ -230,10 +230,6 @@ let saveStox = async () => {
   } else {
     alert('You need to be logged in to do that!');
   }
-
-  
-
-
 }
 
 

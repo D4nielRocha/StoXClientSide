@@ -22,8 +22,7 @@ window.addEventListener('load', () => {
 // Function to fetch url and get data parsed 
 async function getDataAsync(){
 
-    // console.log('data async triggered');
-
+    //check if local storage contains any of the following data, before fetching new data from APIs
     if(!localStorage.getItem('news') || !localStorage.getItem('table') || !localStorage.getItem('slider') || !localStorage.getItem('chart') || !localStorage.getItem('movers') || !localStorage.getItem('nasdaqChart') || !localStorage.getItem('dowChart')){
         
         try{
@@ -224,19 +223,28 @@ function createIndexYahooTable(tableData){
 
 let updateData = (localExpiration) => {
     
+    //check local storage for expiration item 
+    //if there`s no expiration time in local storage
     if(!localExpiration){
         let date = new Date();
+        //set expDate to one hour ahead of current time
         let expDate = new Date(date.getTime() + 60*60000);
         console.log(`this is the new expDate`, expDate);
+        //store expDate in local storage
         localStorage.setItem('dataExpiration', expDate);
     } else {
+        //if there`s already an expiration time in local storage
+        //parse the data from local storage
         let localExp = Date.parse(localExpiration);
         // console.log(localExp);
         let localDate = new Date(localExp);
         // console.log(localDate);
         console.log(new Date() > localDate);
         console.log(new Date(), localDate);
+        //compare current time with expiration time from local storage
+        //if current time is greater than expiration time
         if(new Date() > localDate){ 
+            //clear local storage
             localStorage.clear();
             console.log(`localstorage clear!`);
         }

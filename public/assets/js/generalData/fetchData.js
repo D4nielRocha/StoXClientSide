@@ -53,7 +53,6 @@ let getDataAsync = async (url, init = fetchInit()) => {
 
 }
 
-
 export {
     BASE_URL,
     fetchInit,
