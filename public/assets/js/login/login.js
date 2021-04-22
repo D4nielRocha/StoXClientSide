@@ -35,10 +35,18 @@ document.getElementById('logoutBtn').addEventListener('click', event => {
 
 document.getElementById('profileBtn').addEventListener('click', async event => {
     event.preventDefault();
+
     auth0Authentication.userInfo(getAccessToken(), (err, usrInfo) => {
         console.log(usrInfo);
         sessionStorage.setItem('email', usrInfo.email);
-    });    
+        document.getElementById('profileDisplay').innerHTML = `<img src="${usrInfo.picture}" alt="profile Picture">
+                                                                <h2>${usrInfo.nickname}</h2>
+                                                                <p>${usrInfo.email}</p>
+                                                                `;
+        // document.getElementById('profileDisplay').classList.remove('profileHide');                                   
+        
+    });  
+    
 }, false);
 
 

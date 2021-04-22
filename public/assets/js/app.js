@@ -10,11 +10,11 @@ const tableDiv = document.getElementById('tableBody');
 const newsDiv = document.getElementById('displayNews');
 
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
 
         // updateData(localStorage.getItem('dataExpiration'));
-
-        getDataAsync();
+        
+        await getDataAsync();
         document.getElementById('profileBtn').innerText = `${sessionStorage.getItem('email')}`;
 
 });   
@@ -52,10 +52,9 @@ async function getDataAsync(){
                 localStorage.setItem('nasdaqChart', JSON.stringify(dataApi[4].chart.result[0])); 
                 localStorage.setItem('dowChart', JSON.stringify(dataApi[5].chart.result[0])); 
                 localStorage.setItem('movers', JSON.stringify(dataApi[6])); 
-
+                loadData();
             })
 
-            loadData();
 
             }catch(err){
                 console.log(err);
