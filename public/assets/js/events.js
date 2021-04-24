@@ -337,6 +337,10 @@ document.getElementById('resetContent').addEventListener('click', () => {
 
 window.addEventListener('load', ()=>{
   document.getElementById('profileBtn').innerText = `${sessionStorage.getItem('email')}`;
+
+  if(sessionStorage.getItem('email') == "d4niel_rocha@icloud.com"){
+        document.getElementById('adminButton').classList.remove('d-none');
+    }  
 })
 
 

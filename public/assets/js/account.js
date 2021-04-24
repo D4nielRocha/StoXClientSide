@@ -2,6 +2,8 @@ import * as url from './generalData/fetchData.js';
 import * as stoxData from './accountSection/stoxData.js';
 import { displayUser } from './login/login.js';
 import { auth0WebAuth, auth0Authentication } from './auth/auth0-variables.js';
+import { getAccessToken } from './auth/jwtAuth.js'
+// import { saveUser } from './accountSection/stoxData.js'
 
 
 
@@ -48,9 +50,13 @@ let displayStox = (data) => {
 
 
     let stox =  ` <div class="stox-item col-2">
-                    <h4>${item.asset1_name} <span>X</span> ${item.asset2_name}</h4>
-                    <p>Created by: <span id="author">${author}</span><br>${item._date}</p>
-                 
+                    <div class="stox-text">
+                        <h4>${item.asset1_name} <span>X</span> ${item.asset2_name}</h4>
+                        <p>Created by: <span id="author">${author}</span><br>${item._date}</p>
+                    </div>
+
+                    <span id="X">X</span>
+                    
                     <div id="buttons"> 
                         <button class="btn btn-sm btn-primary seeMoreButton" data-bs-toggle="modal" data-bs-target="#stoxDetailsModal" type="button" id="${item._id}">See More</button>
                         <button class="btn btn-sm btn-danger deleteButton"  id="${item._id}" type="button">Delete</button>            
@@ -118,6 +124,7 @@ let displaySingleStox = async (data) => {
 
 
 
+
 window.addEventListener('load', () => {
     let author = sessionStorage.getItem('email');
     console.log(author);
@@ -127,6 +134,20 @@ window.addEventListener('load', () => {
         document.getElementById('profileBtn').innerText = `${author}`;
         getUserStox(author);
     }
+
+    if(sessionStorage.getItem('email') == "d4niel_rocha@icloud.com"){
+        document.getElementById('adminButton').classList.remove('d-none');
+    }  
+    // auth0Authentication.userInfo(getAccessToken(), (err, usrInfo) => {
+    //     document.getElementById('profileInfo').innerHTML = `<img src="${usrInfo.picture}" alt="profile Picture">
+    //                                                                 <p>Name: ${usrInfo.nickname}</p>
+    //                                                                 <p>Email: ${usrInfo.email}</p>
+    //                                                                 <button type="button" class="btn btn-sm btn-light" id="saveUserBtn"">Save User</button>`
+    //     document.getElementById('saveUserBtn').addEventListener('click', () => {
+    //         saveUser(usrInfo);
+    //     })
+                                                                    
+    // });
 
 });
 

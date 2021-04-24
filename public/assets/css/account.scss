@@ -46,20 +46,7 @@ nav{
         }
     }
 
-    #profileDisplay{
-      background-color: rgba(37, 37, 37, 0.815);
-      color: white;
-      height: 40vh;
-      width: 30vh;
-      position: absolute;
-      top: 0;
-      right: 11%;
-      transform: translateY(-100%);
-      transition: all 1s;
-    }
-
-    
-
+   
     #profileBtn{
       display: none;
       font-size: 1rem;
@@ -76,7 +63,103 @@ nav{
     }
 }
 
+#profileDisplay{
+  background-color: rgba(37, 37, 37, 0.815);
+  color: white;
+  min-height: 45vh;
+  height: auto;
+  width: 25vw;
+  position: absolute;
+  top: 6%;
+  right: 0;
+  transition: all 0.5s;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 
+    #profileInfo{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      
+
+      p{
+
+        font-size: 1rem;
+
+        span{
+          color: $primary-color;
+          margin-left: 0.5rem;
+        }
+      }
+    }
+
+    #profileInput{
+      height: 50%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      margin-bottom: 1.5rem;
+
+      p{
+        font-size: 1rem;
+        font-weight: 400;
+
+        span{
+          color: $primary-color;
+          margin-left: 1rem;
+        }
+      }
+
+
+
+      .form-input{
+        // background-color: lightcoral;
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+
+        input[type="text"]{
+          border: none;
+          border-bottom: 1px solid white;
+          background-color: transparent;
+          margin: 0.3rem 0;
+          width: 75%;
+          color: white;
+          // font-weight: 400;
+
+          &:focus{
+            border: none;
+          }
+        }
+  
+        label{
+          margin-top: 1rem;
+        }
+      }
+
+      
+    }
+
+    button{
+      margin-bottom: 2rem;
+    }
+
+  img{
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+  }
+}
+
+.hidden{
+  transform: translateX(100%);
+}
 
 .user-content{
     display: flex;
@@ -92,8 +175,9 @@ nav{
 
 
         .stox-item{
+            background-color: rgba(0, 0, 0, 0.596);
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            background-image: linear-gradient(#ff9d2f, #ff6126);
+            background-image: linear-gradient(#ff9e2fc7, #ff6026c7);
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -106,17 +190,33 @@ nav{
             z-index: 1;
             height: 35vh;
 
-            h4{
-              font-size: 1.8rem;
-              color: white;
-              // font-weight: 700;
+            #X{
+              font-size: 8rem;
+              transform: translateY(-15%);
             }
 
-            p{
-              position: relative;
-              left: 0;
-              top: 0;
+            .stox-text{
+
+              display: flex;
+              flex-direction: column;
+              height: 30%;
+              justify-content: space-between;
+              width: 100%;
+              // background-color: lightcoral;
+
+              h4{
+                font-size: 1.8rem;
+                color: white;
+                // font-weight: 700;
+              }
+  
+              p{
+                font-size: 0.9rem;
+                width: 100%;
+              }
             }
+
+           
             svg{
               position: absolute;
                 left: 0;
@@ -247,6 +347,12 @@ footer{
 
   @media screen and (max-width:1024px){
 
+    #profileDisplay{
+      height: 30vh;
+      width: 30vw;
+    }
+
+    
     .user-content{
       #stoxs{
         .stox-item{
@@ -262,10 +368,10 @@ footer{
       }
 
     }
+    
   }
 
   @media screen and (max-width:768px){
-
     .user-content{
       #stoxs{
         .stox-item{
@@ -273,6 +379,32 @@ footer{
           height: 30vh;
           width: 20vw;
           padding: 0rem;
+
+          #X{
+            font-size: 4.5rem;
+            // transform: translateY(-15%);
+          }
+
+          .stox-text{
+
+            display: flex;
+            flex-direction: column;
+            height: 30%;
+            justify-content: space-between;
+            width: 100%;
+            // background-color: lightcoral;
+
+            h4{
+              font-size: 1.3rem;
+              color: white;
+              // font-weight: 700;
+            }
+
+            p{
+              font-size: 0.7rem;
+              width: 100%;
+            }
+          }
 
           svg{
             height: 34vw;
@@ -305,6 +437,17 @@ footer{
     .user-content{
       #stoxs{
         .stox-item{
+
+          
+          .stox-text{
+
+            h4{
+              font-size: 0.9rem;
+              color: white;
+              // font-weight: 700;
+            }
+
+          }
           svg{
               height: 45vw;
             }
@@ -328,20 +471,40 @@ footer{
         .stox-item{
           font-size: 0.8rem;
           height: 25vh;
-          width: 18.5vw;
+          width: 20vw;
+
+          #X{
+            font-size: 3rem;
+            transform: translateY(-20%);
+          }
+
+          .stox-text{
+
+            display: flex;
+            flex-direction: column;
+            height: 30%;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 10000;
+            // background-color: lightcoral;
+
+            h4{
+              font-size: 0.7rem;
+              color: white;
+              // font-weight: 700;
+            }
+
+            p{
+              font-size: 0.6rem;
+              width: 100%;
+              display: none;
+            }
+          }
 
           svg{
-            height: 48.5vw;
+            height: 46.5vw;
           }
             
-            h4{
-              font-size: 0.6rem;
-              margin-top: 1rem;
-            }
-
-            p, span{
-              font-size: 0.7rem;
-            }
             .stox-content{
               display: none;
             }

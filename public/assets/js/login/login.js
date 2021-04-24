@@ -1,5 +1,8 @@
 import { auth0WebAuth, auth0Authentication } from '../auth/auth0-variables.js';
 import { getAccessToken, checkSession, saveAuthResult, checkStatus } from '../auth/jwtAuth.js';
+import { saveUser, getSavedUser, updateUser } from '../userSection/userForm.js';
+import { User } from '../model/userModel.js'
+// import {prepareNewUser} from '../formEvents/form.js'
 
 
 
@@ -17,7 +20,6 @@ function toggleLinks(loggedIn){
 }
 
 
-
 document.getElementById('loginBtn').addEventListener('click', event => {
     event.preventDefault();
 
@@ -33,19 +35,40 @@ document.getElementById('logoutBtn').addEventListener('click', event => {
     console.log('Logged Out');
 }, false);
 
+
 document.getElementById('profileBtn').addEventListener('click', async event => {
     event.preventDefault();
-
-    auth0Authentication.userInfo(getAccessToken(), (err, usrInfo) => {
-        console.log(usrInfo);
+    document.getElementById('profileDisplay').classList.toggle('hidden'); 
+    await auth0Authentication.userInfo(getAccessToken(), (err, usrInfo) => {
+        // console.log(usrInfo);
         sessionStorage.setItem('email', usrInfo.email);
-        document.getElementById('profileDisplay').innerHTML = `<img src="${usrInfo.picture}" alt="profile Picture">
-                                                                <h2>${usrInfo.nickname}</h2>
-                                                                <p>${usrInfo.email}</p>
-                                                                `;
-        // document.getElementById('profileDisplay').classList.remove('profileHide');                                   
-        
-    });  
+        sessionStorage.setItem('nickname', usrInfo.nickname);
+        document.getElementById('profileInfo').innerHTML = `<img src="${usrInfo.picture}" alt="profile Picture">
+                                                            <p>Username: <span>${usrInfo.nickname}</span> </p>
+                                                            <p>Email: <span>${usrInfo.email}</span> </p>`
+
+    });
+
+    //check if user already has been updated previously
+    let isSaved = await getSavedUser();
+    console.log(`this is the isSaved`, isSaved)
+
+    if(isSaved[0].firstName){
+        // document.getElementById('profileInput').style.display = "none";
+        document.getElementById('saveUserBtn').style.display = "none";
+        document.getElementById('profileInput').innerHTML = `   <p><strong>First Name</strong>: <span>${isSaved[0].firstName}</span> </p>
+                                                                <p><strong>Last Name</strong>: <span>${isSaved[0].lastName}</span> </p>
+                                                                <p><strong>Phone</strong>: <span>${isSaved[0].phone}</span> </p>`;
+
+    } else {
+        document.getElementById('saveUserBtn').addEventListener('click', () => {
+            let updatedUser = prepareUpdateUser();
+            updateUser(updatedUser);
+            alert(`User Succesfully Updated!`);
+            document.getElementById('profileDisplay').classList.toggle('hidden');
+        })
+    }
+       
     
 }, false);
 
@@ -55,7 +78,22 @@ function displayUser(user){
     sessionStorage.setItem('nickname', user.idTokenPayload.nickname);
     sessionStorage.setItem('email', user.idTokenPayload.email);
     document.getElementById('profileBtn').innerText = `Logged in as: ${user.idTokenPayload.nickname}`;
+   
 }
+
+
+
+let prepareUpdateUser = () => {
+
+    return new User(
+        sessionStorage.getItem('nickname'),
+        sessionStorage.getItem('email'),
+        document.getElementById('firstName').value,
+        document.getElementById('lastName').value,
+        document.getElementById('phone').value
+    )
+  }
+
 
 
 window.addEventListener('load', event => {
@@ -66,6 +104,10 @@ window.addEventListener('load', event => {
             toggleLinks(true);
             console.log(`this is the result`, result);
             displayUser(result);
+            saveUser(result.idTokenPayload);
+            if(result.idTokenPayload.email == "d4niel_rocha@icloud.com"){
+                document.getElementById('adminButton').classList.remove('d-none');
+            }            
         }
     });
     toggleLinks(checkStatus());

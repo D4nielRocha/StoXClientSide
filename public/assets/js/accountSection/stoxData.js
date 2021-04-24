@@ -16,7 +16,6 @@ let deleteStox = async (id) => {
     }
 }
 
-
 export  {
     deleteStox
 }

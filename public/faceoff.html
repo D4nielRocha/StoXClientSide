@@ -42,6 +42,9 @@
                     <a class="nav-link" href="account.html">MyStox</a>
                 </li>
                 <li class="nav-item mx-3">
+                  <a class="nav-link d-none" href="admin.html" id="adminButton">Admin Section</a>
+                </li>
+                <li class="nav-item mx-3">
                   <a class="nav-link" href="#" id="loginBtn">Login</a>
                 </li>
                 <li class="nav-item mx-3">
@@ -55,6 +58,26 @@
             </div>
         </nav>
     </div>
+
+    <div id="profileDisplay" class="hidden">
+        <div id="profileInfo"></div>
+        <div id="profileInput">
+          <div class="form-input">
+            <label for="firstName">First Name</label>
+            <input type="text" name="firstName" id="firstName" placeholder="First Name">
+          </div>
+          <div class="form-input">
+            <label for="lastName">Last Name</label>
+            <input type="text" name="lastName" id="lastName" placeholder="Last Name">
+          </div>
+          <div class="form-input">
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" id="phone" placeholder="Phone Number">
+          </div>
+        </div>
+        <button type="button" class="btn btn-sm btn-light" id="saveUserBtn">Update User Profile</button>
+      </div>
+
     <!-- ====================NAVBAR=================== -->
 
     <!-- ====================MAIN CONTENT=================== -->
@@ -76,7 +99,7 @@
                             <option value="SAO">BR - B3 - BOVESPA</option>
                             <option value="LON">LON - LONDON - FTSE-100</option>
                         </select><br>
-                        <input type="button" class="btn btn-lg btn-light my-2" value="Search Asset" id="left-button">
+                        <input type="button" class="btn btn-md btn-outline-dark my-2" value="Search Asset" id="left-button">
                         <!-- <input type="checkbox" name="invested" data-bs-target="#ProductFormDialog" data-bs-toggle="modal" id="investedCheckbox1" > Are you invested in this asset? -->
                         <!-- <div class="dropdown">
                             <div class="dropdown-menu">
@@ -93,7 +116,7 @@
                         <option value="SAO">BR - B3 - BOVESPA</option>
                         <option value="LON">LON - LONDON - FTSE-100</option>
                     </select><br>
-                        <input type="button" class="btn btn-lg btn-light my-2" value="Search Asset" id="right-button"><br>
+                        <input type="button" class="btn btn-md btn-outline-dark my-2" value="Search Asset" id="right-button"><br>
                         <!-- <input type="checkbox" name="invested" data-bs-target="#ProductFormDialog" data-bs-toggle="modal" id="investedCheckbox2" > Are you invested in this asset? -->
 
                         <!-- <div class="dropdown">

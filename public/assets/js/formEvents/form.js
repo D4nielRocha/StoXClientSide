@@ -9,13 +9,13 @@ function prepareSaveForm(data, meta, id){
   
   //resets stox search
   let resetSearch = () => {
-    leftInput.value = '';
-    rightInput.value = '';
-    leftResult.innerHTML = '';
-    rightResult.innerHTML = '';
-    document.getElementById('left-region').value = 0;
-    document.getElementById('right-region').value = 0;
-    
+    // leftInput.value = '';
+    // rightInput.value = '';
+    // leftResult.innerHTML = '';
+    // rightResult.innerHTML = '';
+    // document.getElementById('left-region').value = 0;
+    // document.getElementById('right-region').value = 0;
+    location.reload();
   }
   
   
@@ -123,7 +123,7 @@ function invested(){
 export {
     prepareSaveForm,
     resetSearch,
-    getFormValues    
+    getFormValues,
 }
 
 // module.exports = {

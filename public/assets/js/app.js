@@ -13,7 +13,9 @@ const newsDiv = document.getElementById('displayNews');
 window.addEventListener('load', async () => {
 
         // updateData(localStorage.getItem('dataExpiration'));
-        
+        if(sessionStorage.getItem('email') == "d4niel_rocha@icloud.com"){
+            document.getElementById('adminButton').classList.remove('d-none');
+        }  
         await getDataAsync();
         document.getElementById('profileBtn').innerText = `${sessionStorage.getItem('email')}`;
 

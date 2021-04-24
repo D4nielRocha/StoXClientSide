@@ -43,20 +43,6 @@ nav .navbar-brand span {
   color: #ffae18;
 }
 
-nav #profileDisplay {
-  background-color: rgba(37, 37, 37, 0.815);
-  color: white;
-  height: 40vh;
-  width: 30vh;
-  position: absolute;
-  top: 0;
-  right: 11%;
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
-  -webkit-transition: all 1s;
-  transition: all 1s;
-}
-
 nav #profileBtn {
   display: none;
   font-size: 1rem;
@@ -70,6 +56,127 @@ nav #loginBtn {
 nav #logoutBtn {
   display: none;
   color: red;
+}
+
+#profileDisplay {
+  background-color: rgba(37, 37, 37, 0.815);
+  color: white;
+  min-height: 45vh;
+  height: auto;
+  width: 25vw;
+  position: absolute;
+  top: 6%;
+  right: 0;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  z-index: 100000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+#profileDisplay #profileInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#profileDisplay #profileInfo p {
+  font-size: 1rem;
+}
+
+#profileDisplay #profileInfo p span {
+  color: #ffae18;
+  margin-left: 0.5rem;
+}
+
+#profileDisplay #profileInput {
+  height: 50%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-bottom: 1.5rem;
+}
+
+#profileDisplay #profileInput p {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+#profileDisplay #profileInput p span {
+  color: #ffae18;
+  margin-left: 1rem;
+}
+
+#profileDisplay #profileInput .form-input {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#profileDisplay #profileInput .form-input input[type="text"] {
+  border: none;
+  border-bottom: 1px solid white;
+  background-color: transparent;
+  margin: 0.3rem 0;
+  width: 75%;
+  color: white;
+}
+
+#profileDisplay #profileInput .form-input input[type="text"]:focus {
+  border: none;
+}
+
+#profileDisplay #profileInput .form-input label {
+  margin-top: 1rem;
+}
+
+#profileDisplay button {
+  margin-bottom: 2rem;
+}
+
+#profileDisplay img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+}
+
+.hidden {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
 }
 
 .user-content {
@@ -91,10 +198,11 @@ nav #logoutBtn {
 }
 
 .user-content #stoxs .stox-item {
+  background-color: rgba(0, 0, 0, 0.596);
   -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
           box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ff9d2f), to(#ff6126));
-  background-image: linear-gradient(#ff9d2f, #ff6126);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ff9e2fc7), to(#ff6026c7));
+  background-image: linear-gradient(#ff9e2fc7, #ff6026c7);
   text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -117,15 +225,35 @@ nav #logoutBtn {
   height: 35vh;
 }
 
-.user-content #stoxs .stox-item h4 {
+.user-content #stoxs .stox-item #X {
+  font-size: 8rem;
+  -webkit-transform: translateY(-15%);
+          transform: translateY(-15%);
+}
+
+.user-content #stoxs .stox-item .stox-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 30%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+}
+
+.user-content #stoxs .stox-item .stox-text h4 {
   font-size: 1.8rem;
   color: white;
 }
 
-.user-content #stoxs .stox-item p {
-  position: relative;
-  left: 0;
-  top: 0;
+.user-content #stoxs .stox-item .stox-text p {
+  font-size: 0.9rem;
+  width: 100%;
 }
 
 .user-content #stoxs .stox-item svg {
@@ -308,6 +436,10 @@ footer {
 }
 
 @media screen and (max-width: 1024px) {
+  #profileDisplay {
+    height: 30vh;
+    width: 30vw;
+  }
   .user-content #stoxs .stox-item {
     font-size: 1rem;
     height: 40vh;
@@ -326,6 +458,31 @@ footer {
     width: 20vw;
     padding: 0rem;
   }
+  .user-content #stoxs .stox-item #X {
+    font-size: 4.5rem;
+  }
+  .user-content #stoxs .stox-item .stox-text {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: 30%;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    width: 100%;
+  }
+  .user-content #stoxs .stox-item .stox-text h4 {
+    font-size: 1.3rem;
+    color: white;
+  }
+  .user-content #stoxs .stox-item .stox-text p {
+    font-size: 0.7rem;
+    width: 100%;
+  }
   .user-content #stoxs .stox-item svg {
     height: 34vw;
   }
@@ -341,6 +498,10 @@ footer {
 }
 
 @media screen and (max-width: 576px) {
+  .user-content #stoxs .stox-item .stox-text h4 {
+    font-size: 0.9rem;
+    color: white;
+  }
   .user-content #stoxs .stox-item svg {
     height: 45vw;
   }
@@ -353,17 +514,39 @@ footer {
   .user-content #stoxs .stox-item {
     font-size: 0.8rem;
     height: 25vh;
-    width: 18.5vw;
+    width: 20vw;
+  }
+  .user-content #stoxs .stox-item #X {
+    font-size: 3rem;
+    -webkit-transform: translateY(-20%);
+            transform: translateY(-20%);
+  }
+  .user-content #stoxs .stox-item .stox-text {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: 30%;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    width: 100%;
+    z-index: 10000;
+  }
+  .user-content #stoxs .stox-item .stox-text h4 {
+    font-size: 0.7rem;
+    color: white;
+  }
+  .user-content #stoxs .stox-item .stox-text p {
+    font-size: 0.6rem;
+    width: 100%;
+    display: none;
   }
   .user-content #stoxs .stox-item svg {
-    height: 48.5vw;
-  }
-  .user-content #stoxs .stox-item h4 {
-    font-size: 0.6rem;
-    margin-top: 1rem;
-  }
-  .user-content #stoxs .stox-item p, .user-content #stoxs .stox-item span {
-    font-size: 0.7rem;
+    height: 46.5vw;
   }
   .user-content #stoxs .stox-item .stox-content {
     display: none;
