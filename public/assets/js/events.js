@@ -74,6 +74,9 @@ const fetchData = async (ticker, side, region = '') => {
           overviewModal(companySummaryJson, id);
           leftResult.innerHTML += `<canvas id="myChart${id}"></canvas>`
           chartJS.createChart(chartData, id, ticker);
+        } else {
+          leftResult.innerHTML += `<a href="https://www.marketwatch.com/investing/stock/${ticker}" target="_blank" type="button" class="btn btn-md btn-outline-dark" >Click here for more financial details about ${ticker}</a>
+                                    <span>by MarketWatch</span>`
         }
     } else if( side == 'right') {
         id = 2;
@@ -91,6 +94,9 @@ const fetchData = async (ticker, side, region = '') => {
             overviewModal(companySummaryJson, id);
             rightResult.innerHTML += `<canvas id="myChart${id}"></canvas>`
             chartJS.createChart(chartData, id, ticker);
+          } else {
+            rightResult.innerHTML += `<a href="https://www.marketwatch.com/investing/stock/${ticker}" target="_blank" type="button" class="btn btn-md btn-outline-dark" >Click here for more financial details about ${ticker}</a>
+                                      <span>by MarketWatch</span>`
           }
     }}catch(err){
         console.log('Error:' + err);

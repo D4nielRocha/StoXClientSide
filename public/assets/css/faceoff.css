@@ -228,7 +228,8 @@ nav .navbar-brand {
 }
 
 #search-result {
-  height: 80vh;
+  min-height: 100vh;
+  height: auto;
   margin-top: 2rem;
   text-align: center;
   margin-bottom: 5rem;
@@ -247,6 +248,12 @@ nav .navbar-brand {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+}
+
+#search-result #right-result span, #search-result #left-result span {
+  color: green;
+  -webkit-text-decoration: wavy;
+          text-decoration: wavy;
 }
 
 #search-result #right-result .spinner-border, #search-result #left-result .spinner-border {
