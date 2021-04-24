@@ -787,6 +787,9 @@ hr {
         -ms-flex-pack: center;
             justify-content: center;
   }
+  #profileDisplay {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 576px) {

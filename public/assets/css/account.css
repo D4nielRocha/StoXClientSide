@@ -219,7 +219,6 @@ nav #logoutBtn {
           align-items: center;
   margin: 1% 0.5rem;
   font-size: 1.1rem;
-  font-weight: 400;
   position: relative;
   z-index: 1;
   height: 35vh;
@@ -246,9 +245,17 @@ nav #logoutBtn {
   width: 100%;
 }
 
+.user-content #stoxs .stox-item .stox-text span {
+  margin: 0 0.3rem;
+}
+
 .user-content #stoxs .stox-item .stox-text h4 {
   font-size: 1.8rem;
   color: white;
+}
+
+.user-content #stoxs .stox-item .stox-text h4 span {
+  color: black;
 }
 
 .user-content #stoxs .stox-item .stox-text p {
@@ -300,10 +307,19 @@ footer {
 }
 
 #stoxDetailsModal #modalBody {
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin-top: 2rem;
+  font-size: 1.1rem;
+  margin-top: 1rem;
   height: auto;
+}
+
+#stoxDetailsModal #modalBody p {
+  color: #e49709;
+}
+
+#stoxDetailsModal #modalBody p span {
+  font-size: 1.3rem;
+  color: black;
+  margin: 0 0.3rem;
 }
 
 #stoxDetailsModal .modal-title {
@@ -440,11 +456,27 @@ footer {
     height: 30vh;
     width: 30vw;
   }
+  #stoxDetailsModal .modal-dialog {
+    -webkit-transform: translateX(-25%);
+            transform: translateX(-25%);
+    position: relative;
+    top: 25;
+    width: 50vw;
+  }
   .user-content #stoxs .stox-item {
     font-size: 1rem;
     height: 40vh;
     width: 20vw;
     padding: 0.5rem;
+  }
+  .user-content #stoxs .stox-item .stox-text h4 {
+    font-size: 1.4rem;
+  }
+  .user-content #stoxs .stox-item .stox-text p {
+    font-size: 0.8rem;
+  }
+  .user-content #stoxs .stox-item #X {
+    font-size: 6.5rem;
   }
   .user-content #stoxs .stox-item svg {
     height: 34vw;
@@ -476,18 +508,24 @@ footer {
     width: 100%;
   }
   .user-content #stoxs .stox-item .stox-text h4 {
-    font-size: 1.3rem;
-    color: white;
+    font-size: 1.2rem;
   }
   .user-content #stoxs .stox-item .stox-text p {
     font-size: 0.7rem;
-    width: 100%;
   }
   .user-content #stoxs .stox-item svg {
     height: 34vw;
   }
   .user-content #stoxs .stox-item button {
     font-size: 0.6rem;
+  }
+  #profileDisplay {
+    display: none;
+  }
+  #stoxDetailsModal .modal-dialog {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    top: 40;
   }
   .navbar-dark .navbar-toggler, .navbar-light .navbar-toggler {
     border: none;
@@ -508,13 +546,35 @@ footer {
   .user-content #stoxs .stox-item button {
     font-size: 0.5rem;
   }
+  #stoxDetailsModal .modal-dialog {
+    width: 60vw;
+  }
+  #stoxDetailsModal .modal-dialog .modal-header h5 {
+    font-size: 1.3rem;
+  }
+  #stoxDetailsModal .modal-dialog #modalBody {
+    font-size: 1rem;
+  }
+  #stoxDetailsModal .modal-dialog #modalBody p {
+    color: #e49709;
+  }
+  #stoxDetailsModal .modal-dialog #modalBody p span {
+    font-size: 1rem;
+    margin: 0 0.3rem;
+  }
+  #stoxDetailsModal .modal-dialog .modal-title {
+    font-size: 2rem;
+  }
+  #stoxDetailsModal .modal-dialog .modal-title span {
+    color: #ffae18;
+  }
 }
 
 @media screen and (max-width: 450px) {
   .user-content #stoxs .stox-item {
     font-size: 0.8rem;
     height: 25vh;
-    width: 20vw;
+    width: 30vw;
   }
   .user-content #stoxs .stox-item #X {
     font-size: 3rem;
@@ -543,17 +603,38 @@ footer {
   .user-content #stoxs .stox-item .stox-text p {
     font-size: 0.6rem;
     width: 100%;
-    display: none;
   }
   .user-content #stoxs .stox-item svg {
     height: 46.5vw;
   }
-  .user-content #stoxs .stox-item .stox-content {
-    display: none;
-  }
   .user-content #stoxs .stox-item button {
     font-size: 0.4rem;
     padding: 0.2rem;
+  }
+  #stoxDetailsModal .modal-dialog {
+    width: 80vw;
+    height: 75vh;
+    -webkit-transform: translateX(10%);
+            transform: translateX(10%);
+  }
+  #stoxDetailsModal .modal-dialog .modal-header h5 {
+    font-size: 0.8rem;
+  }
+  #stoxDetailsModal .modal-dialog #modalBody {
+    font-size: 0.8rem;
+  }
+  #stoxDetailsModal .modal-dialog #modalBody p {
+    color: #e49709;
+  }
+  #stoxDetailsModal .modal-dialog #modalBody p span {
+    font-size: 0.8rem;
+    margin: 0 0.3rem;
+  }
+  #stoxDetailsModal .modal-dialog .modal-title {
+    font-size: 0.8rem;
+  }
+  #stoxDetailsModal .modal-dialog .modal-title span {
+    color: #ffae18;
   }
 }
 /*# sourceMappingURL=account.css.map */

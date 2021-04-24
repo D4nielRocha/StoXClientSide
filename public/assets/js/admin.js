@@ -1,7 +1,9 @@
 const app = Vue.createApp({
     
     mounted:function(){
-        this.getUsers();
+        if(this.checkAdmin()){
+            this.getUsers();
+        }
     },
 
     data(){
@@ -66,6 +68,16 @@ const app = Vue.createApp({
                 console.log(err);
             }
         
+        },
+        checkAdmin(){
+            document.getElementById('profileBtn').innerText = `${sessionStorage.getItem('email')}`;
+            if(sessionStorage.getItem('email') == "d4niel_rocha@icloud.com"){
+                document.getElementById('adminButton').classList.remove('d-none');
+                return true;
+            }
+
+            return false;
+             
         }
         
         

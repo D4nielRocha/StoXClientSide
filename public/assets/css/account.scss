@@ -185,7 +185,7 @@ nav{
             align-items: center;
             margin: 1% 0.5rem;
             font-size: 1.1rem;
-            font-weight: 400;
+            // font-weight: 400;
             position: relative;
             z-index: 1;
             height: 35vh;
@@ -204,9 +204,18 @@ nav{
               width: 100%;
               // background-color: lightcoral;
 
+              span{
+                // color: black;
+                margin: 0 0.3rem;
+              }
+
               h4{
                 font-size: 1.8rem;
                 color: white;
+
+                span{
+                  color: black;
+                }
                 // font-weight: 700;
               }
   
@@ -250,7 +259,6 @@ nav{
 }
 
 
-
 footer{
     position: relative;
     bottom: 0;
@@ -262,10 +270,22 @@ footer{
 #stoxDetailsModal{
 
   #modalBody{
-    font-size: 1.2rem;
-    font-weight: 300;
-    margin-top: 2rem;
+    font-size: 1.1rem;
+    margin-top: 1rem;
     height: auto;
+
+    
+  p{
+
+    color: rgb(228, 151, 9);
+
+    span{
+      font-size: 1.3rem;
+      color: black;
+      margin: 0 0.3rem;
+    }
+  }
+    
 
   }
   .modal-title{
@@ -346,12 +366,22 @@ footer{
 
 
   @media screen and (max-width:1024px){
+    
 
     #profileDisplay{
       height: 30vh;
       width: 30vw;
     }
 
+    #stoxDetailsModal{
+      
+      .modal-dialog{
+        transform: translateX(-25%);
+        position: relative;
+        top: 25;
+        width: 50vw;
+      }
+    }
     
     .user-content{
       #stoxs{
@@ -360,6 +390,23 @@ footer{
           height: 40vh;
           width: 20vw;
           padding: 0.5rem;
+
+          .stox-text{
+            h4{
+              font-size: 1.4rem;
+            }
+
+            p{
+              font-size: 0.8rem;
+            }
+          }
+
+          #X{
+            font-size: 6.5rem;
+          }
+          // span{
+          //   font-size: 0.5rem;
+          // }
 
           svg{
             height: 34vw;
@@ -395,14 +442,11 @@ footer{
             // background-color: lightcoral;
 
             h4{
-              font-size: 1.3rem;
-              color: white;
-              // font-weight: 700;
+              font-size: 1.2rem;
             }
 
             p{
               font-size: 0.7rem;
-              width: 100%;
             }
           }
 
@@ -416,6 +460,20 @@ footer{
         }
       }
 
+    }
+
+    #profileDisplay{
+      display: none;
+    }
+
+    #stoxDetailsModal{
+      
+      .modal-dialog{
+        transform: translateX(0);
+        // position: relative;
+        top: 40;
+        // width: 50vw;
+      }
     }
 
  
@@ -437,7 +495,7 @@ footer{
     .user-content{
       #stoxs{
         .stox-item{
-
+            
           
           .stox-text{
 
@@ -461,6 +519,46 @@ footer{
 
     }
 
+    
+
+    #stoxDetailsModal{
+      
+      .modal-dialog{
+       width: 60vw;
+
+        .modal-header{
+          h5{
+            font-size: 1.3rem;
+          }
+        }
+
+       #modalBody{
+        font-size: 1rem;
+        
+      p{
+    
+        color: rgb(228, 151, 9);
+    
+        span{
+          font-size: 1rem;
+          margin: 0 0.3rem;
+          // color: black;
+        }
+      }
+        
+    
+      }
+      .modal-title{
+        font-size: 2rem;
+          span{
+            color: $primary-color;
+          }
+      }
+
+
+      }
+    }
+
   }
 
 
@@ -471,7 +569,7 @@ footer{
         .stox-item{
           font-size: 0.8rem;
           height: 25vh;
-          width: 20vw;
+          width: 30vw;
 
           #X{
             font-size: 3rem;
@@ -497,7 +595,7 @@ footer{
             p{
               font-size: 0.6rem;
               width: 100%;
-              display: none;
+              // display: none;
             }
           }
 
@@ -506,7 +604,7 @@ footer{
           }
             
             .stox-content{
-              display: none;
+              // display: none;
             }
             button{ 
               font-size: 0.4rem;
@@ -516,6 +614,47 @@ footer{
         }
       }
 
+    }
+
+
+    #stoxDetailsModal{
+      
+      .modal-dialog{
+       width: 80vw;
+       height: 75vh;
+       transform: translateX(10%);
+
+        .modal-header{
+          h5{
+            font-size: 0.8rem;
+          }
+        }
+
+       #modalBody{
+        font-size: 0.8rem;
+        
+      p{
+    
+        color: rgb(228, 151, 9);
+    
+        span{
+          font-size: 0.8rem;
+          margin: 0 0.3rem;
+          // color: black;
+        }
+      }
+        
+    
+      }
+      .modal-title{
+        font-size: 0.8rem;
+          span{
+            color: $primary-color;
+          }
+      }
+
+
+      }
     }
 
   }

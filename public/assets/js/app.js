@@ -46,7 +46,7 @@ async function getDataAsync(){
                 const moversJson = await movers.json();
                 return [newsJson, tableJson, trendingJson, chartJson, nasdaqJson, dowJson, moversJson];
             }).then( dataApi => {
-                console.log(dataApi);
+                // console.log(dataApi);
                 localStorage.setItem('slider', JSON.stringify(dataApi[2].finance.result[0].quotes));
                 localStorage.setItem('news', JSON.stringify(dataApi[0].articles));
                 localStorage.setItem('table', JSON.stringify(dataApi[1].finance.result[0].quotes));   
@@ -230,7 +230,7 @@ let updateData = (localExpiration) => {
         let date = new Date();
         //set expDate to one hour ahead of current time
         let expDate = new Date(date.getTime() + 60*60000);
-        console.log(`this is the new expDate`, expDate);
+        // console.log(`this is the new expDate`, expDate);
         //store expDate in local storage
         localStorage.setItem('dataExpiration', expDate);
     } else {
@@ -240,8 +240,8 @@ let updateData = (localExpiration) => {
         // console.log(localExp);
         let localDate = new Date(localExp);
         // console.log(localDate);
-        console.log(new Date() > localDate);
-        console.log(new Date(), localDate);
+        // console.log(new Date() > localDate);
+        // console.log(new Date(), localDate);
         //compare current time with expiration time from local storage
         //if current time is greater than expiration time
         if(new Date() > localDate){ 

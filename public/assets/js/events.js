@@ -93,22 +93,19 @@ const fetchData = async (ticker, side, region = '') => {
             chartJS.createChart(chartData, id, ticker);
           }
     }}catch(err){
-        console.log('ERRORRRRRR' + err);
+        console.log('Error:' + err);
+        alert(`Sorry for the inconvenience! There was an error in the API - Stock data server. Please try your search again.`);
+        location.reload();
     };
 }
 
 
 
 const onSearchLeft = (value, region = '') => {
-  // console.log(value, region);
-    // console.log(event.target.value);
     fetchData(value, 'left', region);
 }
 
 const onSearchRight = (value, region = '') => {
-  // console.log(value, region);
-
-    // console.log(event.target.value);
     fetchData(value, 'right', region);
 }
 
@@ -145,7 +142,7 @@ leftBtn.addEventListener('click', () => {
 
 const displayResult = (data, meta, id, currency ) => {
     hideSpinner();
-    console.log(data);
+    // console.log(data);
     return `<h1 id="asset${id}">${meta[1]}</h1>
                   <h1>${meta[2]}</h1>
                   <div class="card text-black bg-stox mb-3">
@@ -198,7 +195,7 @@ let backgroundComparison = (id) => {
   const close = document.getElementById(`close${id}`);
   const closeDiv = document.getElementById(`closeDiv${id}`);
 
-  console.log(`this is the open.value`, open.innerText);
+  // console.log(`this is the open.value`, open.innerText);
 
   if(close.innerText < open.innerText){
     // closeDiv.classList.remove('bg-light') 
@@ -221,7 +218,7 @@ let saveStox = async () => {
     if(newStox){
   
       const result = await createNewStox(newStox);
-      console.log(result);
+      // console.log(result);
       alert('StoX Saved. Go to the account page to check out your stox');
       formEvent.resetSearch();
     }
@@ -263,7 +260,7 @@ let createNewStox = async (stox) => {
 
 
 let createSummaryButton = (id) => {
-  console.log(id);
+  // console.log(id);
   return `<button type="button" id="financialBtn" class="btn btn-md btn-outline-dark" data-bs-toggle="modal" data-bs-target="#financialOverview${id}">Financial Overview</button>
           `
 }

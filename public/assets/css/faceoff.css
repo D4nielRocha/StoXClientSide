@@ -422,6 +422,9 @@ nav .navbar-brand {
   #buttons {
     width: 100%;
   }
+  #profileDisplay {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 576px) {

@@ -101,19 +101,20 @@ let displaySingleStox = async (data) => {
                                                             <p>Created by: <span id="author">${author}</span> on ${data._date}</p>
                                                             <div class="row stox-content">
                                                                 <div class="col-6">
-                                                                    <p>Closing Price <br> $${data.asset1_closing.toFixed(2)}</p>
-                                                                    <p>Amount Invested <br>$${data.asset1_amount.toFixed(2)}</p>
-                                                                    <p>Price at buy <br>$${data.asset1_price.toFixed(2)}</p>
-                                                                    <p>Shares: <br>${data.asset1_shares}</p>
+                                                                    <p><span>Closing Price</span> <br> $${data.asset1_closing.toFixed(2)}</p>
+                                                                    <p><span>Amount Invested</span> <br>$${data.asset1_amount.toFixed(2)}</p>
+                                                                    <p><span>Price at buy</span> <br>$${data.asset1_price.toFixed(2)}</p>
+                                                                    <p><span>Shares:</span> <br>${data.asset1_shares}</p>
                                                                 </div>
                                                                 <div class="col-6">
-                                                                <p>Closing Price <br> $${data.asset2_closing.toFixed(2)}</p>
-                                                                <p>Amount Invested <br>$${data.asset2_amount.toFixed(2)}</p>
-                                                                <p>Price at buy <br>$${data.asset2_price.toFixed(2)}</p>
-                                                                <p>Shares: <br>${data.asset2_shares}</p>
+                                                                <p><span>Closing Price</span> <br> $${data.asset2_closing.toFixed(2)}</p>
+                                                                <p><span>Amount Invested</span> <br>$${data.asset2_amount.toFixed(2)}</p>
+                                                                <p><span>Price at buy</span> <br>$${data.asset2_price.toFixed(2)}</p>
+                                                                <p><span>Shares</span> <br>${data.asset2_shares}</p>
                                                                 <input type="hidden" name="_id" id="_id" value="${data._id}">
                                                                 </div>
                                                                 <div class="col-12" id="comment">
+                                                                <span>Comment</span><br>
                                                                     <p>${data.comment}</p>
                                                                 </div>
                                                             </div>     
@@ -138,17 +139,7 @@ window.addEventListener('load', () => {
     if(sessionStorage.getItem('email') == "d4niel_rocha@icloud.com"){
         document.getElementById('adminButton').classList.remove('d-none');
     }  
-    // auth0Authentication.userInfo(getAccessToken(), (err, usrInfo) => {
-    //     document.getElementById('profileInfo').innerHTML = `<img src="${usrInfo.picture}" alt="profile Picture">
-    //                                                                 <p>Name: ${usrInfo.nickname}</p>
-    //                                                                 <p>Email: ${usrInfo.email}</p>
-    //                                                                 <button type="button" class="btn btn-sm btn-light" id="saveUserBtn"">Save User</button>`
-    //     document.getElementById('saveUserBtn').addEventListener('click', () => {
-    //         saveUser(usrInfo);
-    //     })
-                                                                    
-    // });
-
+   
 });
 
 
