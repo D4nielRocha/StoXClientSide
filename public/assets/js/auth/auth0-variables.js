@@ -17,7 +17,8 @@ const auth0WebAuth = new auth0.WebAuth({
     domain: AUTH0_DOMAIN,
     clientID: AUTH0_CLIENT_ID,
     redirectUri: location.href,
-    responseType: "id_token token",
+    // responseType: "id_token token",
+    responseType: "id_token",
     audience: AUDIENCE
 });
 
