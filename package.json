@@ -4,6 +4,7 @@
   "description": "project StoX - Client Side ",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "mocha",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test"
   },
