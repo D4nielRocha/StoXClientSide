@@ -12,7 +12,6 @@ let getUserStox = async (author) => {
 
     try{
         const result = await url.getDataAsync(`${url.BASE_URL}/faceoff/${author}`);
-        // const json = await result.json();
         console.log(result);
         displayStox(result);
 
@@ -76,10 +75,6 @@ let displayStox = (data) => {
 
     const deleteBtn = document.getElementsByClassName('deleteButton');
     const seeMoreBtn = document.getElementsByClassName('seeMoreButton');
-    // const id = document.getElementById('_id').value;
-    // const myModal = document.getElementById('stoxDetailsModal');
-    // const closeModalBtn = document.getElementById('closeStoxModal');
-    // const author = document.getElementById('author').InnerText;
 
     for(let i = 0; i <= deleteBtn.length; i++){
         deleteBtn[i].addEventListener('click', deleteStox);
@@ -94,23 +89,28 @@ let displayStox = (data) => {
 let displaySingleStox = async (data) => {
 
     document.getElementById('stoxDetails').innerHTML = `${data.asset1_name} <span>X</span> ${data.asset2_name}`;
+    console.log(data);
 
     let author = data.author.substr(0, data.author.indexOf('@'));
+    let year = data._date.slice(0,4);
+    let month = data._date.slice(5,7);
+    let day = data._date.slice(8,10);
+    let date = `${day}/${month}/${year}`;
     
     document.getElementById('modalBody').innerHTML = ` <div class="stox-item text-center" id="stoxDetails">
-                                                            <p>Created by: <span id="author">${author}</span> on ${data._date}</p>
+                                                            <p>Created by: <span id="author">${author}</span> on ${date}</p>
                                                             <div class="row stox-content">
                                                                 <div class="col-6">
-                                                                    <p><span>Closing Price</span> <br> $${data.asset1_closing.toFixed(2)}</p>
-                                                                    <p><span>Amount Invested</span> <br>$${data.asset1_amount.toFixed(2)}</p>
-                                                                    <p><span>Price at buy</span> <br>$${data.asset1_price.toFixed(2)}</p>
-                                                                    <p><span>Shares:</span> <br>${data.asset1_shares}</p>
+                                                                    <p><span>Closing Price</span> <br> $${data.asset1_closing.$numberDecimal}</p>
+                                                                    <p><span>Amount Invested</span> <br>$${data.asset1_amount.$numberDecimal}</p>
+                                                                    <p><span>Price at buy</span> <br>$${data.asset1_price.$numberDecimal}</p>
+                                                                    <p><span>Shares:</span> <br>${data.asset1_shares.$numberDecimal}</p>
                                                                 </div>
                                                                 <div class="col-6">
-                                                                <p><span>Closing Price</span> <br> $${data.asset2_closing.toFixed(2)}</p>
-                                                                <p><span>Amount Invested</span> <br>$${data.asset2_amount.toFixed(2)}</p>
-                                                                <p><span>Price at buy</span> <br>$${data.asset2_price.toFixed(2)}</p>
-                                                                <p><span>Shares</span> <br>${data.asset2_shares}</p>
+                                                                <p><span>Closing Price</span> <br> $${data.asset2_closing.$numberDecimal}</p>
+                                                                <p><span>Amount Invested</span> <br>$${data.asset2_amount.$numberDecimal}</p>
+                                                                <p><span>Price at buy</span> <br>$${data.asset2_price.$numberDecimal}</p>
+                                                                <p><span>Shares</span> <br>${data.asset2_shares.$numberDecimal}</p>
                                                                 <input type="hidden" name="_id" id="_id" value="${data._id}">
                                                                 </div>
                                                                 <div class="col-12" id="comment">
@@ -152,18 +152,3 @@ export {
 
 
 
-{/* <div class="row stox-content">
-                    <div class="col-6">
-                        <p>Closing Price <br> $${item.asset1_closing.toFixed(2)}</p>
-                        <p>Amount Invested <br>$${item.asset1_amount.toFixed(2)}</p>
-                        <p>Price at buy <br>$${item.asset1_price.toFixed(2)}</p>
-                        <p>Shares: <br>${item.asset1_shares}</p>
-                    </div>
-                    <div class="col-6">
-                    <p>Closing Price <br> $${item.asset2_closing.toFixed(2)}</p>
-                    <p>Amount Invested <br>$${item.asset2_amount.toFixed(2)}</p>
-                    <p>Price at buy <br>$${item.asset2_price.toFixed(2)}</p>
-                    <p>Shares: <br>${item.asset2_shares}</p>
-                    <input type="hidden" name="_id" id="_id" value="${item._id}">
-                    </div>
-                </div> */}

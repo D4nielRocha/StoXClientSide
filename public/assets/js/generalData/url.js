@@ -64,7 +64,10 @@
 
 
 
-      const ALPHA_API_KEY = 'W3975TFRO13G7RVG';
+      // const ALPHA_API_KEY = 'W3975TFRO13G7RVG';
+      const ALPHA_API_KEY = 'GJ2SKYVDDAY3EAVJ';
+
+      // GJ2SKYVDDAY3EAVJ
 
       const ALPHA_DAILY_URL = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=${ALPHA_API_KEY}`;
       

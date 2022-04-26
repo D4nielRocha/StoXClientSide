@@ -53,15 +53,16 @@ document.getElementById('profileBtn').addEventListener('click', async event => {
     let isSaved = await getSavedUser();
     console.log(`this is the isSaved`, isSaved)
 
-    if(isSaved[0].firstName){
+    if(isSaved.firstName){
         // document.getElementById('profileInput').style.display = "none";
         document.getElementById('saveUserBtn').style.display = "none";
-        document.getElementById('profileInput').innerHTML = `   <p><strong>First Name</strong>: <span>${isSaved[0].firstName}</span> </p>
-                                                                <p><strong>Last Name</strong>: <span>${isSaved[0].lastName}</span> </p>
-                                                                <p><strong>Phone</strong>: <span>${isSaved[0].phone}</span> </p>`;
+        document.getElementById('profileInput').innerHTML = `   <p><strong>First Name</strong>: <span>${isSaved.firstName}</span> </p>
+                                                                <p><strong>Last Name</strong>: <span>${isSaved.lastName}</span> </p>
+                                                                <p><strong>Phone</strong>: <span>${isSaved.phone}</span> </p>`;
 
     } else {
         document.getElementById('saveUserBtn').addEventListener('click', () => {
+            // console.log(`clicked`);
             let updatedUser = prepareUpdateUser();
             updateUser(updatedUser);
             alert(`User Succesfully Updated!`);

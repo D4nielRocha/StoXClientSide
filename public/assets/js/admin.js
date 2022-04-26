@@ -35,8 +35,7 @@ const app = Vue.createApp({
             return new Headers ({
                 "Accept": "application/json", 
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + sessionStorage.getItem('accessToken')
-            });
+                "Authorization": "Bearer " + sessionStorage.getItem('accessToken')            });
         },
         fetchInit(httpMethod = 'GET', bodyContent = ''){
 

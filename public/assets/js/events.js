@@ -35,7 +35,8 @@ const fetchData = async (ticker, side, region = '') => {
 
     try{
       //Fetch Data
-      const dailyData = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}${region}&apikey=${url.ALPHA_API_KEY}`);
+      const dailyData = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}${region}&apikey=${url.ALPHA_API_KEY}`);
+                                    // https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AAPL&apikey=GJ2SKYVDDAY3EAVJ
 
       if(region == ''){
         companySummary = await fetch(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${url.ALPHA_API_KEY}`);
@@ -148,14 +149,14 @@ leftBtn.addEventListener('click', () => {
 
 const displayResult = (data, meta, id, currency ) => {
     hideSpinner();
-    // console.log(data);
+    console.log(data);
     return `<h1 id="asset${id}">${meta[1]}</h1>
                   <h1>${meta[2]}</h1>
                   <div class="card text-black bg-stox mb-3">
                   <div class="card-body">
                     <h5 class="card-title">DAILY VOLUME</h5>
                     <p class="card-text">
-                      ${data[5]}
+                      ${data[4]}
                     </p>
                   </div>
                 </div>
@@ -163,7 +164,7 @@ const displayResult = (data, meta, id, currency ) => {
                   <div class="card-body">
                     <h5 class="card-title">DAILY OPEN in ${currency}</h5>
                     <p class="card-text" id="open${id}">
-                      ${data[0]}
+                      ${parseFloat(data[0])}
                     </p>
                   </div>
                 </div>
@@ -171,7 +172,7 @@ const displayResult = (data, meta, id, currency ) => {
                   <div class="card-body">
                     <h5 class="card-title">DAILY CLOSE in ${currency}</h5>
                     <p class="card-text" id="close${id}">
-                      ${data[4]}
+                      ${parseFloat(data[3])}
                     </p>
                   </div>
                 </div>
@@ -179,7 +180,7 @@ const displayResult = (data, meta, id, currency ) => {
                   <div class="card-body">
                     <h5 class="card-title">INTRADAY - HIGH in ${currency}</h5>
                     <p class="card-text">
-                      ${data[2]}
+                      ${parseFloat(data[1])}
                     </p>
                   </div>
                 </div>
@@ -187,7 +188,7 @@ const displayResult = (data, meta, id, currency ) => {
                   <div class="card-body">
                     <h5 class="card-title">INTRADAY - LOW in ${currency}</h5>
                     <p class="card-text">
-                      ${data[3]}
+                      ${parseFloat(data[2])}
                     </p>
                   </div>
                 </div>`
